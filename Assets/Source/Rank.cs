@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Quinn
 {
-	public class Rank : MonoBehaviour
+	public class Rank : Space
 	{
 		[SerializeField]
 		private float CardStride = 3f;
@@ -15,34 +15,7 @@ namespace Quinn
 
 		private readonly List<Card> _cards = new();
 
-		public bool TakeCard(Card card)
-		{
-			if (card.IsHostile != IsHostile || card.Rank == this)
-			{
-				return false;
-			}
-
-			card.State = CardState.InPlay;
-
-			var slot = new GameObject($"Slot ({card.gameObject.name})");
-			slot.transform.SetParent(transform, false);
-
-			card.SetSlot(slot.transform);
-
-			if (card.Rank != null)
-			{
-				card.Rank._cards.Remove(card);
-				card.Rank.UpdateLayout();
-			}
-			card.Rank = this;
-
-			_cards.Add(card);
-			UpdateLayout();
-
-			return true;
-		}
-
-		public void UpdateLayout()
+		public override void UpdateLayout()
 		{
 			float offset = (_cards.Count - 1) * CardStride / 2f;
 
@@ -51,6 +24,31 @@ namespace Quinn
 				float x = (i * CardStride) - offset;
 				_cards[i].Slot.localPosition = new Vector3(x, 0f, 0f);
 			}
+		}
+
+		public override void RemoveCard(Card card)
+		{
+			_cards.Remove(card);
+		}
+
+		protected override bool OnTakeCard(Card card)
+		{
+			if (card.IsHostile != IsHostile || card.Space == this)
+			{
+				return false;
+			}
+
+			var slot = new GameObject($"Slot ({card.gameObject.name})");
+			slot.transform.SetParent(transform, false);
+
+			card.SetSlot(slot.transform);
+			card.State = CardState.InPlay;
+			card.Space = this;
+
+			_cards.Add(card);
+			UpdateLayout();
+
+			return true;
 		}
 	}
 }

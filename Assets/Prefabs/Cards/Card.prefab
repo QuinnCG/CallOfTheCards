@@ -233,7 +233,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 2
+  m_fontSizeMax: 2.2
   m_fontStyle: 32
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -446,6 +446,7 @@ MonoBehaviour:
   UnhoverEase: 21
   Shadow: {fileID: 5917874675546799745}
   HoverShadowOffset: {x: 2, y: -2}
+  HandHoveredHeight: 3.5
   IdleRotationMagnitude: 3
   IdleRotationFrequency: 0.7
   Outline: {fileID: 4775776513396371237}
@@ -741,7 +742,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 1.4
+  m_fontSizeMax: 1.6
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 1024

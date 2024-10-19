@@ -5,19 +5,24 @@ namespace Quinn
 {
 	public class Player : MonoBehaviour
 	{
-		[SerializeField, AssetsOnly]
+		[SerializeField, Required]
+		private Hand Hand;
+		[SerializeField, Required]
+		private Transform CardOrigin;
+		[SerializeField]
+		private float DrawInterval = 0.05f;
+
+		[SerializeField, AssetsOnly, Space]
 		private GameObject[] Deck;
 
-		[SerializeField]
-		private Rank DefaultRank;
-
-		private void Awake()
+		private async void Start()
 		{
-			var cards = DeckUtility.CreateDeckFromPrefabs(Deck);
+			var cards = DeckUtility.CreateDeckFromPrefabs(Deck, CardOrigin.position);
 			
 			foreach (var card in cards)
 			{
-				DefaultRank.TakeCard(card);
+				Hand.TakeCard(card);
+				await Awaitable.WaitForSecondsAsync(DrawInterval);
 			}
 		}
 	}

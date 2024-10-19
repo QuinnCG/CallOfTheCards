@@ -27,6 +27,8 @@ namespace Quinn
 		private Transform Shadow;
 		[SerializeField]
 		private Vector2 HoverShadowOffset = new(2f, -2f);
+		[SerializeField]
+		private float HandHoveredHeight = 2f;
 
 		[Space, SerializeField]
 		private float IdleRotationMagnitude = 3f;
@@ -47,7 +49,7 @@ namespace Quinn
 		public bool IsHostile { get; set; }
 
 		public Transform Slot { get; set; }
-		public Rank Rank { get; set; }
+		public Space Space { get; set; }
 
 		private Vector2 _dragPosVel;
 		private float _rotOffset;
@@ -61,7 +63,7 @@ namespace Quinn
 
 		private void Update()
 		{
-			Vector2 target;
+			Vector2 target = transform.position;
 
 			if (IsDragged)
 			{
@@ -75,7 +77,11 @@ namespace Quinn
 			}
 			else
 			{
-				target = Slot.position;
+				if (Slot != null)
+				{
+					target = Slot.position;
+				}
+
 				transform.rotation = GetIdleRotation();
 			}
 
@@ -85,6 +91,7 @@ namespace Quinn
 			UpdateShadow();
 
 			UpdateInFrontState();
+			UpdateHovered();
 
 			// TODO: Remove.
 			if (Input.GetKeyDown(KeyCode.Space))
@@ -149,8 +156,10 @@ namespace Quinn
 					Destroy(Slot.gameObject);
 				}
 
-				transform.parent = slot;
+				transform.SetParent(slot, true);
 				Slot = slot;
+
+				transform.localScale = Vector3.one;
 			}
 		}
 
@@ -210,6 +219,7 @@ namespace Quinn
 		private void UpdateShadow()
 		{
 			Shadow.localPosition = _shadowDefaultOffset + (IsHostile ? HoverShadowOffset : Vector2.zero);
+			Shadow.gameObject.SetActive(State is CardState.InPlay);
 		}
 
 		private Vector2 GetDraggedPosition()
@@ -239,6 +249,21 @@ namespace Quinn
 		private void UpdatePositionSmoothed(Vector2 target)
 		{
 			transform.position = Vector2.SmoothDamp(transform.position, target, ref _dragPosVel, DragTime);
+		}
+
+		private void UpdateHovered()
+		{
+			if (State is CardState.InHand)
+			{
+				if (IsHovered)
+				{
+					transform.localPosition = new Vector3(0f, HandHoveredHeight - Slot.localPosition.y, -5f);
+				}
+				else if (!IsDragged)
+				{
+					transform.localPosition = Vector3.zero;
+				}
+			}
 		}
 	}
 }
