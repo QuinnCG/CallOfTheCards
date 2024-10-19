@@ -13,6 +13,8 @@ namespace Quinn
 		[field: SerializeField]
 		public bool IsBackline { get; private set; }
 
+		public override Card[] Cards => _cards.ToArray();
+
 		private readonly List<Card> _cards = new();
 
 		public override void UpdateLayout()

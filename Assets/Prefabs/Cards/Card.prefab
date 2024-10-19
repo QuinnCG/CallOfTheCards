@@ -446,7 +446,7 @@ MonoBehaviour:
   UnhoverEase: 21
   Shadow: {fileID: 5917874675546799745}
   HoverShadowOffset: {x: 2, y: -2}
-  HandHoveredHeight: 3.5
+  HandHoveredHeight: 3.4
   IdleRotationMagnitude: 3
   IdleRotationFrequency: 0.7
   Outline: {fileID: 4775776513396371237}

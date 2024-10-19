@@ -26,7 +26,7 @@ namespace Quinn
 		{
 			if (Input.GetKeyDown(KeyCode.Space) && IsPlayersTurn)
 			{
-				Next();
+				Pass();
 			}
 		}
 
@@ -56,8 +56,6 @@ namespace Quinn
 				Phase = TurnPhase.Start;
 				IsPlayersTurn = !IsPlayersTurn;
 				OnTurnStart?.Invoke(IsPlayersTurn);
-
-				Debug.Log($"Turn Start: {IsPlayersTurn}.");
 			}
 			else
 			{
@@ -65,7 +63,9 @@ namespace Quinn
 			}
 			
 			OnPhaseStart?.Invoke(Phase);
-			Debug.Log($"Phase Start: {Phase}.");
+
+			var color = IsPlayersTurn ? "green" : "red";
+			Debug.Log($"<color={color}>Phase Start: {Phase}.</color>");
 		}
 
 		private static void PassAutoPhases()

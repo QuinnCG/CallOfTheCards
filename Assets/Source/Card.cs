@@ -40,9 +40,15 @@ namespace Quinn
 		[SerializeField]
 		private Material PlayableMat, UnplayableMat, ExhaustedMat;
 
+		[Space, SerializeField]
+		private int Cost = 1;
+		[SerializeField]
+		private int Damage = 1;
+
 		public bool IsHovered { get; private set; }
 		public bool IsDragged { get; private set; }
 		public bool IsAttacking { get; private set; }
+		public bool IsExhausted { get; private set; }
 
 		public CardState State { get; set; }
 
@@ -59,6 +65,8 @@ namespace Quinn
 		{
 			_rotOffset = Random.Range(0f, Mathf.PI * 100f);
 			_shadowDefaultOffset = Shadow.localPosition;
+
+			GameManager.OnTurnStart += _ => IsExhausted = false;
 		}
 
 		private void Update()
@@ -126,6 +134,23 @@ namespace Quinn
 			IsHovered = true;
 			IsDragged = false;
 
+			if (!GameManager.IsPlayersTurn || (GameManager.Phase is not TurnPhase.Command && State is CardState.InPlay))
+			{
+				return;
+			}
+
+			if (GameManager.Phase is TurnPhase.Command && IsExhausted)
+			{
+				return;
+			}
+
+			// TODO: Play spells.
+
+			if (!TryGetComponent(out Health _))
+			{
+				return;
+			}
+
 			Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			var colliders = Physics2D.OverlapPointAll(mousePos);
 
@@ -133,6 +158,15 @@ namespace Quinn
 			{
 				if (collider.TryGetComponent(out Rank rank))
 				{
+					if (State is CardState.InHand && !rank.IsBackline)
+					{
+						IsExhausted = true;
+					}
+					else if (State is CardState.InPlay)
+					{
+						IsExhausted = true;
+					}
+
 					rank.TakeCard(this);
 					break;
 				}
@@ -157,33 +191,55 @@ namespace Quinn
 			}
 		}
 
-		public void AttackTarget(Vector2 target, float duration)
+		public void AttackTarget(Health health, float duration)
 		{
 			IsDragged = false;
 			IsHovered = false;
 
 			IsAttacking = true;
 
-			transform.DOMove(target, duration)
-				.SetEase(Ease.InBack)
-				.SetLoops(2, LoopType.Yoyo)
-				.onComplete += () => IsAttacking = false;
+			var seq = DOTween.Sequence();
+			var tween1 = transform.DOMove(health.transform.position, duration)
+				.SetEase(Ease.InBack);
+			tween1.onComplete += () =>
+			{
+				health.Damage(Damage);
+			};
+
+			var tween2 = transform.DOMove(transform.position, duration)
+				.SetEase(Ease.OutBack);
+
+			seq.Join(tween1);
+			seq.Join(tween2);
+
+			seq.onComplete += () =>
+			{
+				IsAttacking = false;
+			};
 		}
 
 		public bool CanCommand()
 		{
-			// TODO: Implement.
-			return true;
+			return State is CardState.InPlay && GameManager.Phase == TurnPhase.Command && !IsExhausted;
 		}
 
 		public bool CanPlay()
 		{
-			// TODO: Implement.
-			return true;
+			return State is CardState.InHand && GameManager.Phase == TurnPhase.Play;
 		}
 
 		private bool GetShouldOutline()
 		{
+			if (State == CardState.InPlay && GameManager.Phase != TurnPhase.Command)
+			{
+				return false;
+			}
+
+			if (State is CardState.InHand && GameManager.Phase != TurnPhase.Play)
+			{
+				return false;
+			}
+
 			if (State is CardState.InHand or CardState.InPlay)
 			{
 				return IsHovered || IsDragged || CanPlay() || CanCommand();
@@ -199,7 +255,7 @@ namespace Quinn
 
 			if (State is not (CardState.InLibrary or CardState.InDiscard))
 			{
-				if (State == CardState.InPlay)
+				if (State == CardState.InPlay && GameManager.Phase == TurnPhase.Command)
 				{
 					Outline.material = CanCommand() ? PlayableMat : ExhaustedMat;
 				}

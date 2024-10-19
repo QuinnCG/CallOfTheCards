@@ -14,6 +14,7 @@ namespace Quinn
 		[SerializeField]
 		private float CardZOffset = 0.05f;
 
+		public override Card[] Cards => _cards.ToArray();
 		private readonly List<Card> _cards = new();
 
 		public override void RemoveCard(Card card)

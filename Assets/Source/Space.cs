@@ -5,6 +5,8 @@ namespace Quinn
 {
 	public abstract class Space : MonoBehaviour
 	{
+		public abstract Card[] Cards { get; }
+
 		public bool TakeCard(Card card)
 		{
 			var previousSpace = card.Space;
