@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayableOutline
+  m_Name: ExhaustedOutline
   m_Shader: {fileID: -6465566751694194690, guid: 39dfecaf3f70c8c478d2c8a89eccc36e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -60,6 +60,6 @@ Material:
     - _QueueOffset: 0
     - _Radius: 0.04
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Color: {r: 0.5169811, g: 0.5169811, b: 0.5169811, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
