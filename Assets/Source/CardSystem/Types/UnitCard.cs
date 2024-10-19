@@ -20,7 +20,7 @@ namespace Quinn.CardSystem.Types
 
 		protected override void OnPlay()
 		{
-			LayoutManager.Instance.MoveToPile(this, LayoutManager.Instance.DiscardSpace, true);
+			
 		}
 
 		public void Heal(int amount)
