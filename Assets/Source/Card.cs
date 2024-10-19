@@ -92,12 +92,6 @@ namespace Quinn
 
 			UpdateInFrontState();
 			UpdateHovered();
-
-			// TODO: Remove.
-			if (Input.GetKeyDown(KeyCode.Space))
-			{
-				AttackTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.5f);
-			}
 		}
 
 		public void OnPointerEnter(PointerEventData eventData)
