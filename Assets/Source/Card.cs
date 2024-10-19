@@ -4,6 +4,7 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 namespace Quinn
 {
@@ -41,7 +42,7 @@ namespace Quinn
 		public bool IsDragged { get; private set; }
 		public bool IsAttacking { get; private set; }
 
-		public bool InPlay { get; set; }
+		public CardState State { get; set; }
 
 		public bool IsHostile { get; set; }
 
@@ -64,9 +65,7 @@ namespace Quinn
 
 			if (IsDragged)
 			{
-				Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-				target = pos;
-
+				target = GetDraggedPosition();
 				transform.localRotation = Quaternion.identity;
 
 				if (Input.GetMouseButtonUp(0))
@@ -77,32 +76,15 @@ namespace Quinn
 			else
 			{
 				target = Slot.position;
-
-				float x = Mathf.Sin((Time.time + _rotOffset) * IdleRotationFrequency) * IdleRotationMagnitude;
-				float y = Mathf.Cos((Time.time + _rotOffset) * IdleRotationFrequency) * IdleRotationMagnitude;
-				float z = x;
-
-				transform.rotation = Quaternion.Euler(new Vector3(x, y, z));
+				transform.rotation = GetIdleRotation();
 			}
 
-			transform.position = Vector2.SmoothDamp(transform.position, target, ref _dragPosVel, DragTime);
+			UpdatePositionSmoothed(target);
 
-			bool shouldOutline = IsHovered || IsDragged || CanPlay() || CanCommand();
-			Outline.gameObject.SetActive(shouldOutline);
-			Shadow.localPosition = _shadowDefaultOffset + (shouldOutline ? HoverShadowOffset : Vector2.zero);
+			UpdateOutline();
+			UpdateShadow();
 
-			if (InPlay)
-			{
-				Outline.material = CanCommand() ? PlayableMat : ExhaustedMat;
-			}
-			else
-			{
-				Outline.material = CanPlay() ? PlayableMat : UnplayableMat;
-			}
-
-			var locPos = transform.localPosition;
-			locPos.z = IsDragged ? -1f : 0f;
-			transform.localPosition = locPos;
+			UpdateInFrontState();
 
 			// TODO: Remove.
 			if (Input.GetKeyDown(KeyCode.Space))
@@ -195,6 +177,68 @@ namespace Quinn
 		{
 			// TODO: Implement.
 			return true;
+		}
+
+		private bool GetShouldOutline()
+		{
+			if (State is CardState.InHand or CardState.InPlay)
+			{
+				return IsHovered || IsDragged || CanPlay() || CanCommand();
+			}
+
+			return false;
+		}
+
+		private void UpdateOutline()
+		{
+			bool shouldOutline = GetShouldOutline();
+			Outline.gameObject.SetActive(shouldOutline);
+
+			if (State is not (CardState.InLibrary or CardState.InDiscard))
+			{
+				if (State == CardState.InPlay)
+				{
+					Outline.material = CanCommand() ? PlayableMat : ExhaustedMat;
+				}
+				else
+				{
+					Outline.material = CanPlay() ? PlayableMat : UnplayableMat;
+				}
+			}
+		}
+
+		private void UpdateShadow()
+		{
+			Shadow.localPosition = _shadowDefaultOffset + (IsHostile ? HoverShadowOffset : Vector2.zero);
+		}
+
+		private Vector2 GetDraggedPosition()
+		{
+			Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			var target = pos;
+
+			return target;
+		}
+
+		private Quaternion GetIdleRotation()
+		{
+			float x = Mathf.Sin((Time.time + _rotOffset) * IdleRotationFrequency) * IdleRotationMagnitude;
+			float y = Mathf.Cos((Time.time + _rotOffset) * IdleRotationFrequency) * IdleRotationMagnitude;
+			float z = x;
+
+			return Quaternion.Euler(new Vector3(x, y, z));
+		}
+
+		private void UpdateInFrontState()
+		{
+			var locPos = transform.localPosition;
+			locPos.z = IsDragged ? -1f : 0f;
+			transform.localPosition = locPos;
+		}
+
+		private void UpdatePositionSmoothed(Vector2 target)
+		{
+			transform.position = Vector2.SmoothDamp(transform.position, target, ref _dragPosVel, DragTime);
 		}
 	}
 }

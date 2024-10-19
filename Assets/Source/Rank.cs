@@ -22,7 +22,7 @@ namespace Quinn
 				return false;
 			}
 
-			card.InPlay = true;
+			card.State = CardState.InPlay;
 
 			var slot = new GameObject($"Slot ({card.gameObject.name})");
 			slot.transform.SetParent(transform, false);

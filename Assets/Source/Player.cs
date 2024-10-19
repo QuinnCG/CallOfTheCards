@@ -13,11 +13,10 @@ namespace Quinn
 
 		private void Awake()
 		{
-			foreach (var prefab in Deck)
+			var cards = DeckUtility.CreateDeckFromPrefabs(Deck);
+			
+			foreach (var card in cards)
 			{
-				var instance = Instantiate(prefab);
-				var card = instance.GetComponent<Card>();
-
 				DefaultRank.TakeCard(card);
 			}
 		}
