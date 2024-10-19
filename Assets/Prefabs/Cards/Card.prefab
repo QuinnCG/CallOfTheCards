@@ -453,6 +453,22 @@ MonoBehaviour:
   PlayableMat: {fileID: 2100000, guid: e2e736f935df5f54a9caac6e7e8edb62, type: 2}
   UnplayableMat: {fileID: 2100000, guid: ab5025c5a59cc1c438f8babbf0b61415, type: 2}
   ExhaustedMat: {fileID: 2100000, guid: 14e7940e717c999448787ae38916e6cd, type: 2}
+  Cost: 1
+  Damage: 1
+  DragSound:
+    Guid:
+      Data1: 1132487272
+      Data2: 1138111993
+      Data3: 1339458466
+      Data4: -42096709
+    Path: event:/SFX/CardDrag
+  PlaceSound:
+    Guid:
+      Data1: -1636406020
+      Data2: 1326769881
+      Data3: 1534515097
+      Data4: -847658559
+    Path: event:/SFX/CardPlace
 --- !u!1 &6253348951556083293
 GameObject:
   m_ObjectHideFlags: 0

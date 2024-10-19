@@ -68,11 +68,12 @@ namespace Quinn
 			Debug.Log($"<color={color}>Phase Start: {Phase}.</color>");
 		}
 
-		private static void PassAutoPhases()
+		private static async void PassAutoPhases()
 		{
 			while (Phase is TurnPhase.Start or TurnPhase.Draw or TurnPhase.End)
 			{
 				Next();
+				await System.Threading.Tasks.Task.Yield();
 			}
 		}
 	}

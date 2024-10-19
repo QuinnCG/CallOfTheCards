@@ -5,6 +5,8 @@ namespace Quinn
 {
 	public class Opponent : MonoBehaviour
 	{
+		public static Opponent Instance { get; private set; }
+
 		[SerializeField, Required]
 		private Transform CardOrigin;
 		[SerializeField, Required]
@@ -13,6 +15,11 @@ namespace Quinn
 		private Health PlayerFace;
 		[SerializeField, AssetsOnly]
 		private GameObject[] Deck;
+
+		private void Awake()
+		{
+			Instance = this;
+		}
 
 		private void Start()
 		{

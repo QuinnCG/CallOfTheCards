@@ -1,10 +1,9 @@
 using DG.Tweening;
+using FMODUnity;
 using Sirenix.OdinInspector;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Quinn
 {
@@ -45,6 +44,12 @@ namespace Quinn
 		[SerializeField]
 		private int Damage = 1;
 
+		[Space, SerializeField]
+		private EventReference DragSound, PlaceSound;
+
+		[field: SerializeField]
+		public bool IsRanged { get; private set; }
+
 		public bool IsHovered { get; private set; }
 		public bool IsDragged { get; private set; }
 		public bool IsAttacking { get; private set; }
@@ -56,6 +61,7 @@ namespace Quinn
 
 		public Transform Slot { get; set; }
 		public Space Space { get; set; }
+		public bool IsPlayerOwner { get; set; }
 
 		private Vector2 _dragPosVel;
 		private float _rotOffset;
@@ -67,6 +73,19 @@ namespace Quinn
 			_shadowDefaultOffset = Shadow.localPosition;
 
 			GameManager.OnTurnStart += _ => IsExhausted = false;
+			GameManager.OnPhaseStart += phase =>
+			{
+				if (!IsExhausted && IsPlayerOwner == GameManager.IsPlayersTurn && phase == TurnPhase.End && Space is Rank rank && !rank.IsBackline)
+				{
+					var health = IsPlayerOwner ? Player.Instance.GetComponent<Health>() : Opponent.Instance.GetComponent<Health>();
+					AttackTarget(health, 0.5f);
+				}
+			};
+
+			GameManager.CanPassPhase += _ =>
+			{
+				return !IsAttacking;
+			};
 		}
 
 		private void Update()
@@ -93,7 +112,10 @@ namespace Quinn
 				transform.rotation = GetIdleRotation();
 			}
 
-			UpdatePositionSmoothed(target);
+			if (!IsAttacking)
+			{
+				UpdatePositionSmoothed(target);
+			}
 
 			UpdateOutline();
 			UpdateShadow();
@@ -139,6 +161,11 @@ namespace Quinn
 				return;
 			}
 
+			if (GameManager.Phase is not TurnPhase.Play && State is CardState.InHand)
+			{
+				return;
+			}
+
 			if (GameManager.Phase is TurnPhase.Command && IsExhausted)
 			{
 				return;
@@ -158,17 +185,31 @@ namespace Quinn
 			{
 				if (collider.TryGetComponent(out Rank rank))
 				{
-					if (State is CardState.InHand && !rank.IsBackline)
+					if (State is CardState.InHand)
 					{
-						IsExhausted = true;
+						if (!rank.IsBackline)
+						{
+							IsExhausted = true;
+						}
+
+						RuntimeManager.PlayOneShot(PlaceSound, transform.position);
 					}
-					else if (State is CardState.InPlay)
+					else if (State is CardState.InPlay && rank != Space)
 					{
 						IsExhausted = true;
+						RuntimeManager.PlayOneShot(DragSound, transform.position);
 					}
 
 					rank.TakeCard(this);
 					break;
+				}
+				else if (collider.TryGetComponent(out Card card))
+				{
+					if (card.IsHostile && card.Space is Rank x && !x.IsBackline && (IsRanged || (Space is Rank y && !y.IsBackline)))
+					{
+						IsExhausted = true;
+						AttackTarget(card.GetComponent<Health>(), 0.5f);
+					}
 				}
 			}
 		}
@@ -216,6 +257,8 @@ namespace Quinn
 			{
 				IsAttacking = false;
 			};
+
+			seq.Play();
 		}
 
 		public bool CanCommand()
