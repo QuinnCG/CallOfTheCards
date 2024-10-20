@@ -523,10 +523,8 @@ MonoBehaviour:
     Path: event:/SFX/CardDraw
   Deck:
   - {fileID: 8367731364300479539, guid: 32c05466c62c88e46a68f2c3584a8806, type: 3}
-  - {fileID: 2489766232747090301, guid: f691967ed4f30a04dac659ecb9625949, type: 3}
   - {fileID: 8367731364300479539, guid: 32c05466c62c88e46a68f2c3584a8806, type: 3}
   - {fileID: 8367731364300479539, guid: 32c05466c62c88e46a68f2c3584a8806, type: 3}
-  - {fileID: 2489766232747090301, guid: f691967ed4f30a04dac659ecb9625949, type: 3}
 --- !u!4 &390414658
 Transform:
   m_ObjectHideFlags: 0

@@ -239,6 +239,11 @@ namespace Quinn
 
 			IsAttacking = true;
 
+			if (Slot != null)
+			{
+				transform.position = Slot.position;
+			}
+
 			var seq = DOTween.Sequence();
 			var tween1 = transform.DOMove(health.transform.position, duration)
 				.SetEase(Ease.InBack);
