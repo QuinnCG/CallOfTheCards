@@ -108,9 +108,18 @@ namespace Quinn
 
 			bool anyAttacked = false;
 
-			if (HumanRank.Cards.Count > 0)
+			foreach (var card in AIRank.Cards)
 			{
-				foreach (var card in AIRank.Cards)
+				if (card.CanAttackPlayer())
+				{
+					await card.AttackPlayer(Human.Instance);
+
+					if (card.IsExausted)
+					{
+						anyAttacked = true;
+					}
+				}
+				else if (HumanRank.Cards.Count > 0)
 				{
 					int index = Random.Range(0, HumanRank.Cards.Count);
 					var target = HumanRank.Cards[index];
@@ -125,21 +134,6 @@ namespace Quinn
 					if (HumanRank.Cards.Count == 0)
 					{
 						break;
-					}
-				}
-			}
-			else
-			{
-				foreach (var card in AIRank.Cards)
-				{
-					if (await card.AttackPlayer(Human.Instance))
-					{
-						await Awaitable.WaitForSecondsAsync(0.2f);
-
-						if (card.IsExausted)
-						{
-							anyAttacked = true;
-						}
 					}
 				}
 			}

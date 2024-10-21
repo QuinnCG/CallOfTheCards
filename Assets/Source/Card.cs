@@ -10,7 +10,7 @@ namespace Quinn
 {
 	public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler
 	{
-		[SerializeField]
+		[SerializeField, BoxGroup("UI")]
 		private float MoveTime = 0.2f;
 
 		[field: SerializeField, BoxGroup("Stats")]
@@ -19,6 +19,8 @@ namespace Quinn
 		public int BaseDP { get; private set; } = 3;
 		[field: SerializeField, BoxGroup("Stats")]
 		public int BaseHP { get; private set; } = 3;
+		[SerializeField, BoxGroup("Stats")]
+		private bool IsRanged;
 
 		public Space Space { get; private set; }
 		public Transform Slot { get; private set; }
@@ -165,7 +167,7 @@ namespace Quinn
 
 		public async Awaitable<bool> AttackPlayer(Player player)
 		{
-			if (CanAttack())
+			if (CanAttackPlayer())
 			{
 				OnAttackPlayer?.Invoke(player);
 
@@ -182,6 +184,11 @@ namespace Quinn
 		public bool CanAttack()
 		{
 			return !IsExausted && TurnManager.IsHumanTurn == IsOwnerHuman;
+		}
+		public bool CanAttackPlayer()
+		{
+			var opposingCards = IsOwnerHuman ? Rank.AI.Cards : Rank.Human.Cards;
+			return CanAttack() && (opposingCards.Count == 0 || IsRanged);
 		}
 
 		public bool CanAfford(int mana)
@@ -211,19 +218,18 @@ namespace Quinn
 			// Can only drop dragged cards on your turn.
 			if (TurnManager.IsHumanTurn)
 			{
-				if (Space is Hand)
+				if (Space is Hand hand)
 				{
 					if (!CanAfford(Human.Instance.Mana))
 					{
 						return;
 					}
 
-					Human.Instance.ConsumeMana(Cost);
-
 					var rank = GetRankAtCursor();
 					if (rank != null && rank.Take(this))
 					{
-						return;
+						Human.Instance.ConsumeMana(Cost);
+						DOVirtual.DelayedCall(0.1f, () => hand.Layout());
 					}
 				}
 				else if (Space is Rank)

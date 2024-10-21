@@ -979,7 +979,7 @@ MonoBehaviour:
   Deck:
   - {fileID: 3369738609977719185, guid: fcc432ab3e8c1a14f8893e5e06461a38, type: 3}
   - {fileID: 3369738609977719185, guid: fcc432ab3e8c1a14f8893e5e06461a38, type: 3}
-  - {fileID: 3369738609977719185, guid: fcc432ab3e8c1a14f8893e5e06461a38, type: 3}
+  - {fileID: 1824729253579824553, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
   - {fileID: 4279907647332564631, guid: b348b138ef2e1db46a98e13dc7427eaa, type: 3}
 --- !u!1001 &1610580481
 PrefabInstance:
