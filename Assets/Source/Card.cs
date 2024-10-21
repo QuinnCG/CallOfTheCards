@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
+using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -24,15 +25,18 @@ namespace Quinn
 		public int HP { get; private set; }
 
 		public bool IsAttacking { get; private set; }
+		public bool IsExausted { get; private set; }
+
 		public bool IsDragging { get; private set; }
 		public bool IsHovered { get; private set; }
 		public bool IsOwnerHuman { get; set; }
 
 		private Vector3 _moveVel;
 
-		void Awake()
+		private void Start()
 		{
 			HP = BaseHP;
+			TurnManager.OnTurnStart += OnTurnStart;
 		}
 
 		private void Update()
@@ -83,6 +87,16 @@ namespace Quinn
 
 		public void SetSpace(Space space, Transform slot)
 		{
+			if (Space == space)
+			{
+				return;
+			}
+
+			if (space is Rank)
+			{
+				IsExausted = true;
+			}
+
 			Space = space;
 
 			if (Slot != null)
@@ -109,23 +123,44 @@ namespace Quinn
 		{
 			// Can only drag cards you own.
 			// You can't drop them if its not your turn but you can still drag them.
-			if (IsOwnerHuman)
+			if (IsOwnerHuman && !IsAttacking)
 			{
 				IsHovered = false;
 				IsDragging = true;
 			}
 		}
 
-		public async Awaitable AttackCard(Card card)
+		public async Awaitable<bool> AttackCard(Card card)
 		{
-			await PlayAttackAnimation(card.transform.position);
-			card.TakeDamage(BaseDP);
+			if (CanAttack() && card.IsOwnerHuman != IsOwnerHuman)
+			{
+				IsExausted = true;
+				await PlayAttackAnimation(card.transform.position);
+				card.TakeDamage(BaseDP);
+
+				return true;
+			}
+
+			return false;
 		}
 
-		public async Awaitable AttackPlayer(Player player)
+		public async Awaitable<bool> AttackPlayer(Player player)
 		{
-			await PlayAttackAnimation(player.AttackPoint.position);
-			player.TakeDamage(BaseDP);
+			if (CanAttack())
+			{
+				IsExausted = true;
+				await PlayAttackAnimation(player.AttackPoint.position);
+				player.TakeDamage(BaseDP);
+
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool CanAttack()
+		{
+			return !IsExausted && TurnManager.IsHumanTurn == IsOwnerHuman;
 		}
 
 		private async Awaitable PlayAttackAnimation(Vector2 target)
@@ -162,7 +197,7 @@ namespace Quinn
 				if (Space is Rank)
 				{
 					var card = GetCardAtCursor();
-					if (card != null)
+					if (card != null && CanAttack())
 					{
 						await Awaitable.WaitForSecondsAsync(0.5f);
 						await AttackCard(card);
@@ -208,6 +243,14 @@ namespace Quinn
 		private Collider2D[] GetCollidersAtCursor()
 		{
 			return Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+		}
+
+		private void OnTurnStart(bool humanTurn)
+		{
+			if (humanTurn == IsOwnerHuman)
+			{
+				IsExausted = false;
+			}
 		}
 	}
 }

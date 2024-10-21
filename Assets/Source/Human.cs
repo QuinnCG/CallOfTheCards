@@ -85,7 +85,10 @@ namespace Quinn
 
 				foreach (var card in Rank.Cards)
 				{
-					await card.AttackPlayer(AI.Instance);
+					if (await card.AttackPlayer(AI.Instance))
+					{
+						await Awaitable.WaitForSecondsAsync(0.2f);
+					}
 				}
 
 				await Awaitable.WaitForSecondsAsync(0.5f);

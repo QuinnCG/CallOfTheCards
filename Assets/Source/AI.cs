@@ -44,16 +44,20 @@ namespace Quinn
 				_maxMana++;
 				_mana = _maxMana;
 
-				await Awaitable.WaitForSecondsAsync(1f);
-
+				await Awaitable.WaitForSecondsAsync(0.5f);
 				Draw();
-				Play();
+
+				if (await Play())
+				{
+					await Awaitable.WaitForSecondsAsync(1f);
+				}
+
+				if (await Attack())
+				{
+					await Awaitable.WaitForSecondsAsync(1f);
+				}
 
 				await Awaitable.WaitForSecondsAsync(1f);
-
-				Attack();
-
-				await Awaitable.WaitForSecondsAsync(2f);
 				TurnManager.Pass();
 			}
 		}
@@ -64,9 +68,10 @@ namespace Quinn
 			_hand.Add(card);
 		}
 
-		private async void Play()
+		private async Awaitable<bool> Play()
 		{
 			var played = new HashSet<Card>();
+			bool playedAny = false;
 
 			foreach (var card in _hand)
 			{
@@ -76,34 +81,63 @@ namespace Quinn
 					AIRank.Take(SpawnCard(card.gameObject, CardOrigin.position));
 					played.Add(card);
 
+					playedAny = true;
 					await Awaitable.WaitForSecondsAsync(0.2f);
 				}
+			}
+
+			if (!playedAny)
+			{
+				return false;
 			}
 
 			foreach (var card in played)
 			{
 				_hand.Remove(card);
 			}
+
+			return true;
 		}
 
-		private async void Attack()
+		private async Awaitable<bool> Attack()
 		{
+			if (AIRank.Cards.Count == 0)
+			{
+				return false;
+			}
+
+			bool anyAttacked = false;
+
 			if (HumanRank.Cards.Count > 0)
 			{
 				foreach (var card in AIRank.Cards)
 				{
 					var target = HumanRank.Cards[Random.Range(0, HumanRank.Cards.Count - 1)];
 					await card.AttackCard(target);
+
+					if (!card.IsExausted)
+					{
+						anyAttacked = true;
+					}
 				}
 			}
 			else
 			{
 				foreach (var card in AIRank.Cards)
 				{
-					await card.AttackPlayer(Human.Instance);
-					await Awaitable.WaitForSecondsAsync(0.2f);
+					if (await card.AttackPlayer(Human.Instance))
+					{
+						await Awaitable.WaitForSecondsAsync(0.2f);
+
+						if (!card.IsExausted)
+						{
+							anyAttacked = true;
+						}
+					}
 				}
 			}
+
+			return anyAttacked;
 		}
 	}
 }
