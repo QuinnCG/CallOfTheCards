@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using FMODUnity;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Quinn
@@ -6,6 +7,9 @@ namespace Quinn
 	public class Human : Player
 	{
 		public static Human Instance { get; private set; }
+
+		[SerializeField, BoxGroup("SFX")]
+		private EventReference DrawSound, ShuffleSound;
 
 		[SerializeField, Required]
 		private Hand Hand;
@@ -23,7 +27,7 @@ namespace Quinn
 		public int MaxMana { get; private set; }
 		public int Mana { get; private set; }
 
-		public event System.Action OnManaReplenish;
+		public event System.Action<bool> OnManaReplenish;
 		public event System.Action<int> OnManaConsume;
 
 		private bool _isPassing;
@@ -37,6 +41,9 @@ namespace Quinn
 		{
 			TurnManager.OnTurnStart += OnTurnStart;
 
+			Audio.Play(ShuffleSound);
+			await Awaitable.WaitForSecondsAsync(0.5f);
+
 			for (int i = 0; i < DefaultHandSize; i++)
 			{
 				DrawCard();
@@ -46,10 +53,12 @@ namespace Quinn
 
 		private void Update()
 		{
+#if UNITY_EDITOR
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
 				Debug.Break();
 			}
+#endif
 
 			if (Input.GetKeyDown(KeyCode.Space) && TurnManager.IsHumanTurn)
 			{
@@ -76,6 +85,7 @@ namespace Quinn
 			card.IsOwnerHuman = true;
 
 			Hand.Take(card);
+			Audio.Play(DrawSound);
 		}
 
 		private void OnTurnStart(bool humanTurn)
@@ -89,10 +99,12 @@ namespace Quinn
 
 		private void UpdateManaPool()
 		{
+			bool maxUp = MaxMana < 10;
+
 			MaxMana = Mathf.Min(10, MaxMana + 1);
 			Mana = MaxMana;
 
-			OnManaReplenish?.Invoke();
+			OnManaReplenish?.Invoke(maxUp);
 		}
 
 		private async void Pass()

@@ -42,7 +42,7 @@ namespace Quinn
 			OpponentTurn.color = humanTurn ? OffTurn : OnTurn;
 		}
 
-		private async void OnManaReplenish()
+		private async void OnManaReplenish(bool maxIncreased)
 		{
 			foreach (var crystal in _usedCrystals)
 			{
@@ -52,14 +52,17 @@ namespace Quinn
 
 			_usedCrystals.Clear();
 
-			await Awaitable.WaitForSecondsAsync(0.1f * _chargedCrystals.Count - 1);
+			await Awaitable.WaitForSecondsAsync(0.1f * (_chargedCrystals.Count - 1));
 
 			// New crystal.
-			var instance = Instantiate(ManaCrystalPrefab).GetComponent<ManaCrystal>();
-			instance.transform.SetParent(Mana.transform, false);
-			_chargedCrystals.Add(instance);
+			if (maxIncreased)
+			{
+				var instance = Instantiate(ManaCrystalPrefab).GetComponent<ManaCrystal>();
+				instance.transform.SetParent(Mana.transform, false);
+				_chargedCrystals.Add(instance);
 
-			instance.Index = _chargedCrystals.Count - 1;
+				instance.Index = _chargedCrystals.Count - 1;
+			}
 		}
 
 		private void OnManaConsume(int amount)

@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using FMODUnity;
 using Sirenix.OdinInspector;
 using System;
 using System.Runtime.CompilerServices;
@@ -12,6 +13,9 @@ namespace Quinn
 	{
 		[SerializeField, BoxGroup("UI")]
 		private float MoveTime = 0.2f;
+
+		[SerializeField, BoxGroup("Audio")]
+		private EventReference PlaySound, HoverSound;
 
 		[field: SerializeField, BoxGroup("Stats")]
 		public int Cost { get; private set; } = 1;
@@ -125,11 +129,28 @@ namespace Quinn
 		public void OnPointerEnter(PointerEventData eventData)
 		{
 			IsHovered = true;
+			Audio.Play(HoverSound);
+
+			if (Space is Hand)
+			{
+				var locPos = Slot.localPosition;
+				locPos.y = 2.6f;
+				locPos.z = -6f;
+
+				Slot.SetLocalPositionAndRotation(locPos, Quaternion.identity);
+				transform.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutBack);
+			}
 		}
 
 		public void OnPointerExit(PointerEventData eventData)
 		{
 			IsHovered = false;
+
+			if (Space is Hand)
+			{
+				Space.Layout();
+				transform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutCubic);
+			}
 		}
 
 		public void OnDrag(PointerEventData eventData)
@@ -230,6 +251,8 @@ namespace Quinn
 					{
 						Human.Instance.ConsumeMana(Cost);
 						DOVirtual.DelayedCall(0.1f, () => hand.Layout());
+
+						Audio.Play(PlaySound);
 					}
 				}
 				else if (Space is Rank)

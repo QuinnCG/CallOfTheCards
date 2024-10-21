@@ -1032,8 +1032,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BaseLife: 20
-  IsHuman: 0
+  IsHuman: 1
   AttackPoint: {fileID: 1405317114}
+  DrawSound:
+    Guid:
+      Data1: -1704065112
+      Data2: 1283955043
+      Data3: 1357384325
+      Data4: 1106142243
+    Path: event:/SFX/CardDraw
+  ShuffleSound:
+    Guid:
+      Data1: 910470333
+      Data2: 1075969330
+      Data3: 404073351
+      Data4: -182280849
+    Path: event:/SFX/DeckShuffle
   Hand: {fileID: 2035468492}
   CardSpawn: {fileID: 576218140}
   DrawInterval: 0.07
@@ -1715,6 +1729,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 832575519}
+  - {fileID: 800003876}
   - {fileID: 330585546}
   - {fileID: 1363471613}
   - {fileID: 2035468491}
@@ -1724,4 +1739,3 @@ SceneRoots:
   - {fileID: 240096320}
   - {fileID: 1651681066}
   - {fileID: 81245040}
-  - {fileID: 800003876}

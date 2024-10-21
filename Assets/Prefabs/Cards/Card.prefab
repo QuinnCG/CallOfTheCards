@@ -367,9 +367,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveTime: 0.1
+  PlaySound:
+    Guid:
+      Data1: -1636406020
+      Data2: 1326769881
+      Data3: 1534515097
+      Data4: -847658559
+    Path: event:/SFX/CardPlace
+  HoverSound:
+    Guid:
+      Data1: 151084870
+      Data2: 1146172394
+      Data3: 2045620373
+      Data4: -873142676
+    Path: event:/SFX/CardTouch
   <Cost>k__BackingField: 3
   <BaseDP>k__BackingField: 3
   <BaseHP>k__BackingField: 3
+  IsRanged: 0
 --- !u!114 &3205983249751801607
 MonoBehaviour:
   m_ObjectHideFlags: 0
