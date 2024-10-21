@@ -75,7 +75,7 @@ namespace Quinn
 
 			foreach (var card in _hand)
 			{
-				if (card.Cost <= _mana)
+				if (card.CanAfford(_mana))
 				{
 					_maxMana -= card.Cost;
 					AIRank.Take(SpawnCard(card.gameObject, CardOrigin.position));
@@ -112,12 +112,19 @@ namespace Quinn
 			{
 				foreach (var card in AIRank.Cards)
 				{
-					var target = HumanRank.Cards[Random.Range(0, HumanRank.Cards.Count - 1)];
+					int index = Random.Range(0, HumanRank.Cards.Count - 1);
+					var target = HumanRank.Cards[index];
+
 					await card.AttackCard(target);
 
-					if (!card.IsExausted)
+					if (card.IsExausted)
 					{
 						anyAttacked = true;
+					}
+
+					if (HumanRank.Cards.Count == 0)
+					{
+						break;
 					}
 				}
 			}
@@ -129,7 +136,7 @@ namespace Quinn
 					{
 						await Awaitable.WaitForSecondsAsync(0.2f);
 
-						if (!card.IsExausted)
+						if (card.IsExausted)
 						{
 							anyAttacked = true;
 						}

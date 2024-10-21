@@ -210,8 +210,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291770748
+  m_fontColor: {r: 0.48713455, g: 0.2250267, b: 0.8113208, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -281,8 +281,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5295050199362945486}
-  - component: {fileID: 384422121633145143}
   - component: {fileID: 6384491130093565996}
+  - component: {fileID: 384422121633145143}
+  - component: {fileID: 3205983249751801607}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -306,22 +307,6 @@ Transform:
   - {fileID: 7722498432361312355}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &384422121633145143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824729253579824553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 769c2aad0c7ccfa44b5ae03a2e1fcdd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveTime: 0.1
-  <Cost>k__BackingField: 1
-  <BaseDP>k__BackingField: 3
-  <BaseHP>k__BackingField: 3
 --- !u!61 &6384491130093565996
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -368,6 +353,37 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.5, y: 3.5}
   m_EdgeRadius: 0
+--- !u!114 &384422121633145143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824729253579824553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 769c2aad0c7ccfa44b5ae03a2e1fcdd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveTime: 0.1
+  <Cost>k__BackingField: 3
+  <BaseDP>k__BackingField: 3
+  <BaseHP>k__BackingField: 3
+--- !u!114 &3205983249751801607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824729253579824553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91719cb6db6a8ee46ab74ee2edfe0a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DP: {fileID: 4684232503665585183}
+  HP: {fileID: 7310419636431381577}
+  Cost: {fileID: 6672861700185665677}
 --- !u!1 &2087984885208308800
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1113954063559941728}
   - component: {fileID: 8353486475412763968}
   m_Layer: 5
-  m_Name: Turn Marker
+  m_Name: TurnMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

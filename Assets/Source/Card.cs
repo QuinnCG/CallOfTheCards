@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -163,6 +164,11 @@ namespace Quinn
 			return !IsExausted && TurnManager.IsHumanTurn == IsOwnerHuman;
 		}
 
+		public bool CanAfford(int mana)
+		{
+			return mana >= Cost;
+		}
+
 		private async Awaitable PlayAttackAnimation(Vector2 target)
 		{
 			IsAttacking = true;
@@ -187,21 +193,26 @@ namespace Quinn
 			{
 				if (Space is Hand)
 				{
+					if (!CanAfford(Human.Instance.Mana))
+					{
+						return;
+					}
+
+					Human.Instance.ConsumeMana(Cost);
+
 					var rank = GetRankAtCursor();
 					if (rank != null && rank.Take(this))
 					{
 						return;
 					}
 				}
-
-				if (Space is Rank)
+				else if (Space is Rank)
 				{
 					var card = GetCardAtCursor();
 					if (card != null && CanAttack())
 					{
 						await Awaitable.WaitForSecondsAsync(0.5f);
 						await AttackCard(card);
-
 					}
 				}
 			}

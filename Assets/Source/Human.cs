@@ -23,6 +23,9 @@ namespace Quinn
 		public int MaxMana { get; private set; }
 		public int Mana { get; private set; }
 
+		public event System.Action OnManaReplenish;
+		public event System.Action<int> OnManaConsume;
+
 		private bool _isPassing;
 
 		private void Awake()
@@ -54,6 +57,19 @@ namespace Quinn
 			}
 		}
 
+		public bool ConsumeMana(int amount)
+		{
+			if (amount > Mana)
+			{
+				return false;
+			}
+
+			Mana -= amount;
+			OnManaConsume?.Invoke(amount);
+
+			return true;
+		}
+
 		private void DrawCard()
 		{
 			var card = SpawnCard(GetRandomPrefab(Deck), CardSpawn.position);
@@ -75,12 +91,22 @@ namespace Quinn
 		{
 			MaxMana = Mathf.Min(10, MaxMana + 1);
 			Mana = MaxMana;
+
+			OnManaReplenish?.Invoke();
 		}
 
 		private async void Pass()
 		{
 			if (!_isPassing)
 			{
+				foreach (var card in Rank.Cards)
+				{
+					if (card.IsAttacking)
+					{
+						return;
+					}
+				}
+
 				_isPassing = true;
 
 				foreach (var card in Rank.Cards)
