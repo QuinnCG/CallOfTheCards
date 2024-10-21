@@ -11,10 +11,14 @@ namespace Quinn
 {
 	public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler
 	{
+		private static bool IsAnyDragged;
+
 		[SerializeField, BoxGroup("UI")]
 		private float MoveTime = 0.2f;
 		[SerializeField, BoxGroup("UI"), Required]
 		private GameObject Outline;
+		[SerializeField, BoxGroup("UI"), Required]
+		private Transform Shadow;
 
 		[SerializeField, BoxGroup("Audio")]
 		private EventReference PlaySound, HoverSound;
@@ -56,13 +60,16 @@ namespace Quinn
 
 		private void Update()
 		{
+			// Use self transform as default.
 			transform.GetPositionAndRotation(out Vector3 targetPos, out Quaternion targetRot);
 
+			// use slot transform if available.
 			if (Slot != null)
 			{
 				Slot.GetPositionAndRotation(out targetPos, out targetRot);
 			}
 
+			// If dragging, move card to cursor.
 			if (IsDragging)
 			{
 				targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -70,17 +77,20 @@ namespace Quinn
 
 				targetRot = Quaternion.identity;
 
+				// If dragging and mouse up occurs, drop the card.
 				if (Input.GetMouseButtonUp(0))
 				{
 					OnDrop();
 				}
 			}
 
+			// As long as we aren't attacking, smoothly moved card to target transform.
 			if (!IsAttacking)
 			{
 				Vector3 smoothedPos = Vector3.SmoothDamp(transform.position, targetPos, ref _moveVel, MoveTime);
 				transform.SetPositionAndRotation(smoothedPos, targetRot);
 			}
+			// While attacking, move card in front of others.
 			else
 			{
 				Vector3 pos = transform.localPosition;
@@ -88,9 +98,66 @@ namespace Quinn
 				transform.localPosition = pos;
 			}
 
+			// While card is in a rank.
 			if (Space is Rank)
 			{
+				// Control outline visibility.
 				Outline.SetActive(IsOwnerHuman && TurnManager.IsHumanTurn && !IsExausted);
+
+				Vector2 offset = new Vector2(0.1f, -0.1f);
+				Shadow.localPosition = (IsHovered && !IsDragging) ? offset : Vector3.zero;
+			}
+		}
+
+		public void OnPointerEnter(PointerEventData eventData)
+		{
+			if (IsHovered || IsAnyDragged)
+				return;
+
+			IsHovered = true;
+
+			transform.DOScale(1.1f, 0.2f).SetEase(Ease.OutBack);
+			Audio.Play(HoverSound);
+
+			if (Space is Hand)
+			{
+				var locPos = Slot.localPosition;
+				locPos.y = 2.6f;
+				locPos.z = -6f;
+
+				Slot.SetLocalPositionAndRotation(locPos, Quaternion.identity);
+				transform.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutBack);
+			}
+		}
+
+		public void OnPointerExit(PointerEventData eventData)
+		{
+			if (!IsHovered || IsDragging)
+				return;
+
+			IsHovered = false;
+			transform.DOScale(1f, 0.2f).SetEase(Ease.OutCubic);
+
+			if (Space is Hand)
+			{
+				Space.Layout();
+				transform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutCubic);
+			}
+		}
+
+		public void OnDrag(PointerEventData eventData)
+		{
+			if (IsAnyDragged)
+				return;
+
+			// Can only drag cards you own.
+			// You can't drop them if its not your turn but you can still drag them.
+			if (IsOwnerHuman && !IsAttacking)
+			{
+				IsHovered = false;
+				IsDragging = true;
+
+				IsAnyDragged = true;
 			}
 		}
 
@@ -131,50 +198,6 @@ namespace Quinn
 
 			Slot = slot;
 			transform.SetParent(slot, true);
-		}
-
-		public void OnPointerEnter(PointerEventData eventData)
-		{
-			if (IsHovered)
-				return;
-
-			IsHovered = true;
-			Audio.Play(HoverSound);
-
-			if (Space is Hand && !IsDragging)
-			{
-				var locPos = Slot.localPosition;
-				locPos.y = 2.6f;
-				locPos.z = -6f;
-
-				Slot.SetLocalPositionAndRotation(locPos, Quaternion.identity);
-				transform.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutBack);
-			}
-		}
-
-		public void OnPointerExit(PointerEventData eventData)
-		{
-			if (!IsHovered)
-				return;
-
-			IsHovered = false;
-
-			if (Space is Hand && !IsDragging)
-			{
-				Space.Layout();
-				transform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutCubic);
-			}
-		}
-
-		public void OnDrag(PointerEventData eventData)
-		{
-			// Can only drag cards you own.
-			// You can't drop them if its not your turn but you can still drag them.
-			if (IsOwnerHuman && !IsAttacking)
-			{
-				IsHovered = false;
-				IsDragging = true;
-			}
 		}
 
 		public async Awaitable<bool> AttackCard(Card card)
@@ -252,7 +275,11 @@ namespace Quinn
 
 		private async void OnDrop()
 		{
+			if (!IsDragging)
+				return;
+
 			IsDragging = false;
+			IsAnyDragged = false;
 
 			// Can only drop dragged cards on your turn.
 			if (TurnManager.IsHumanTurn)
