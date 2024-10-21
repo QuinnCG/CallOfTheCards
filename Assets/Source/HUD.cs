@@ -36,6 +36,20 @@ namespace Quinn
 			Human.Instance.OnManaConsume += OnManaConsume;
 		}
 
+		private void Update()
+		{
+			if (TurnManager.IsHumanTurn)
+			{
+				MyTurn.transform.localScale = Vector3.one * GetSin(1f, 1.1f);
+				OpponentTurn.transform.localScale = Vector3.one * 0.8f;
+			}
+			else
+			{
+				OpponentTurn.transform.localScale = Vector3.one * GetSin(1f, 1.1f);
+				MyTurn.transform.localScale = Vector3.one * 0.8f;
+			}
+		}
+
 		private void OnTurnStart(bool humanTurn)
 		{
 			MyTurn.color = humanTurn ? OnTurn : OffTurn;
@@ -80,6 +94,14 @@ namespace Quinn
 				_chargedCrystals.Remove(crystal);
 				_usedCrystals.Add(crystal);
 			}
+		}
+
+		private float GetSin(float min, float max)
+		{
+			float t = Mathf.Sin(Time.time * 2f);
+			t = (t + 1f) / 2f;
+
+			return Mathf.Lerp(min, max, t);
 		}
 	}
 }

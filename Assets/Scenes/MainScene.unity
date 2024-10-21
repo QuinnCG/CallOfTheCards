@@ -906,8 +906,17 @@ MonoBehaviour:
   AIRank: {fileID: 2107712139}
   HumanRank: {fileID: 722243854}
   CardOrigin: {fileID: 1210509747}
+  DragSound:
+    Guid:
+      Data1: 1132487272
+      Data2: 1138111993
+      Data3: 1339458466
+      Data4: -42096709
+    Path: event:/SFX/CardDrag
   Deck:
+  - {fileID: 3369738609977719185, guid: fcc432ab3e8c1a14f8893e5e06461a38, type: 3}
   - {fileID: 1824729253579824553, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+  - {fileID: 3369738609977719185, guid: fcc432ab3e8c1a14f8893e5e06461a38, type: 3}
 --- !u!1 &1363471610
 GameObject:
   m_ObjectHideFlags: 0

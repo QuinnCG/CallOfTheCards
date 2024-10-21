@@ -1,6 +1,8 @@
 using Sirenix.OdinInspector;
 using TMPro;
+#if UNITY_EDITOR
 using UnityEditor.SceneManagement;
+#endif
 using UnityEngine;
 
 namespace Quinn

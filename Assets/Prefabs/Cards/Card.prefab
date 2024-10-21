@@ -153,7 +153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6208850709264168619
 RectTransform:
   m_ObjectHideFlags: 0
@@ -162,7 +162,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 338779953315372747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -444,6 +444,10 @@ MonoBehaviour:
   MoveTime: 0.1
   Outline: {fileID: 338779953315372747}
   Shadow: {fileID: 4626655450768579400}
+  DPText: {fileID: 4684232503665585183}
+  HPText: {fileID: 7310419636431381577}
+  HPHurtColor: {r: 1, g: 0.19433957, b: 0.19433957, a: 1}
+  StatBuffedColor: {r: 0.1641509, g: 0.4518949, b: 1, a: 1}
   PlaySound:
     Guid:
       Data1: -1636406020

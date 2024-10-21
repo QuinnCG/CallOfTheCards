@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using FMODUnity;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using System;
 using System.Runtime.CompilerServices;
 using TMPro;
@@ -19,9 +20,13 @@ namespace Quinn
 		private GameObject Outline;
 		[SerializeField, BoxGroup("UI"), Required]
 		private Transform Shadow;
+		[SerializeField, BoxGroup("UI"), Required]
+		private TextMeshProUGUI DPText, HPText;
+		[SerializeField, BoxGroup("UI")]
+		private Color HPHurtColor, StatBuffedColor;
 
 		[SerializeField, BoxGroup("Audio")]
-		private EventReference PlaySound, HoverSound;
+		private EventReference PlaySound, HoverSound, SpecialPlaySound;
 
 		[field: SerializeField, BoxGroup("Stats")]
 		public int Cost { get; private set; } = 1;
@@ -36,6 +41,7 @@ namespace Quinn
 		public Transform Slot { get; private set; }
 
 		public int HP { get; private set; }
+		public int DP { get; private set; }
 
 		public bool IsAttacking { get; private set; }
 		public bool IsExausted { get; private set; }
@@ -51,11 +57,15 @@ namespace Quinn
 		public event Action OnDie;
 
 		private Vector3 _moveVel;
+		private float _sinOffset;
 
 		private void Start()
 		{
 			HP = BaseHP;
+			DP = BaseDP;
+
 			TurnManager.OnTurnStart += OnTurnStart;
+			_sinOffset = UnityEngine.Random.value;
 		}
 
 		private void Update()
@@ -75,7 +85,9 @@ namespace Quinn
 				targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				targetPos.z = -10f;
 
-				targetRot = Quaternion.identity;
+				Vector2 delta = Input.mousePositionDelta;
+				delta = delta.Clamp(Vector2.one * -1f, Vector2.one);
+				targetRot = Quaternion.Euler(delta.y, delta.x, 0f);
 
 				// If dragging and mouse up occurs, drop the card.
 				if (Input.GetMouseButtonUp(0))
@@ -84,11 +96,24 @@ namespace Quinn
 				}
 			}
 
+			// Idle Animation.
+			if (Space is Rank && !IsDragging && !IsHovered)
+			{
+				targetRot = Quaternion.Euler(new Vector3()
+				{
+					x = Mathf.Sin(Time.time + _sinOffset) * 10f,
+					y = Mathf.Cos(Time.time + _sinOffset) * 10f,
+					z = Mathf.Sin(Time.time + _sinOffset) * 2f
+				});
+			}
+
 			// As long as we aren't attacking, smoothly moved card to target transform.
 			if (!IsAttacking)
 			{
 				Vector3 smoothedPos = Vector3.SmoothDamp(transform.position, targetPos, ref _moveVel, MoveTime);
-				transform.SetPositionAndRotation(smoothedPos, targetRot);
+				Quaternion smoothedRot = Quaternion.Slerp(transform.rotation, targetRot, 0.9f);
+
+				transform.SetPositionAndRotation(smoothedPos, smoothedRot);
 			}
 			// While attacking, move card in front of others.
 			else
@@ -161,10 +186,54 @@ namespace Quinn
 			}
 		}
 
+		private async void OnDrop()
+		{
+			if (!IsDragging)
+				return;
+
+			IsDragging = false;
+			IsAnyDragged = false;
+
+			OnPointerEnter(null);
+
+			// Can only drop dragged cards on your turn.
+			if (TurnManager.IsHumanTurn)
+			{
+				if (Space is Hand hand)
+				{
+					if (!CanAfford(Human.Instance.Mana))
+					{
+						return;
+					}
+
+					var rank = GetRankAtCursor();
+					if (rank != null && rank.Take(this))
+					{
+						Human.Instance.ConsumeMana(Cost);
+						DOVirtual.DelayedCall(0.1f, () => hand.Layout());
+
+						Audio.Play(PlaySound);
+						Audio.Play(SpecialPlaySound);
+					}
+				}
+				else if (Space is Rank)
+				{
+					var card = GetCardAtCursor();
+					if (card != null && CanAttack())
+					{
+						await Awaitable.WaitForSecondsAsync(0.5f);
+						await AttackCard(card);
+					}
+				}
+			}
+		}
+
 		public void TakeDamage(int amount)
 		{
 			HP -= amount;
 			OnTakeDamage?.Invoke(amount);
+
+			UpdateStatUI();
 
 			if (HP <= 0)
 			{
@@ -211,7 +280,7 @@ namespace Quinn
 
 				if (card != null)
 				{
-					card.TakeDamage(BaseDP);
+					card.TakeDamage(DP);
 				}
 
 				OnDamageCard?.Invoke(card);
@@ -230,7 +299,7 @@ namespace Quinn
 
 				IsExausted = true;
 				await PlayAttackAnimation(player.AttackPoint.position);
-				player.TakeDamage(BaseDP);
+				player.TakeDamage(DP);
 
 				return true;
 			}
@@ -258,6 +327,18 @@ namespace Quinn
 			Outline.SetActive(visible);
 		}
 
+		public void SetDP(int dp)
+		{
+			DP = dp;
+			UpdateStatUI();
+		}
+
+		public void Heal(int amount)
+		{
+			HP += amount;
+			UpdateStatUI();
+		}
+
 		private async Awaitable PlayAttackAnimation(Vector2 target)
 		{
 			IsAttacking = true;
@@ -271,45 +352,6 @@ namespace Quinn
 			transform.DOMove(origin, 1f)
 				.SetEase(Ease.OutCubic)
 				.onComplete += () => IsAttacking = false;
-		}
-
-		private async void OnDrop()
-		{
-			if (!IsDragging)
-				return;
-
-			IsDragging = false;
-			IsAnyDragged = false;
-
-			// Can only drop dragged cards on your turn.
-			if (TurnManager.IsHumanTurn)
-			{
-				if (Space is Hand hand)
-				{
-					if (!CanAfford(Human.Instance.Mana))
-					{
-						return;
-					}
-
-					var rank = GetRankAtCursor();
-					if (rank != null && rank.Take(this))
-					{
-						Human.Instance.ConsumeMana(Cost);
-						DOVirtual.DelayedCall(0.1f, () => hand.Layout());
-
-						Audio.Play(PlaySound);
-					}
-				}
-				else if (Space is Rank)
-				{
-					var card = GetCardAtCursor();
-					if (card != null && CanAttack())
-					{
-						await Awaitable.WaitForSecondsAsync(0.5f);
-						await AttackCard(card);
-					}
-				}
-			}
 		}
 
 		private Rank GetRankAtCursor()
@@ -356,6 +398,27 @@ namespace Quinn
 			{
 				IsExausted = false;
 			}
+		}
+
+		private void UpdateStatUI()
+		{
+			HPText.text = HP.ToString();
+			DPText.text = DP.ToString();
+
+			if (HP < BaseHP)
+			{
+				HPText.color = HPHurtColor;
+			}
+			else if (HP == BaseHP)
+			{
+				HPText.color = Color.white;
+			}
+			else
+			{
+				HPText.color = StatBuffedColor;
+			}
+
+			DPText.color = DP > BaseDP ? StatBuffedColor : Color.white;
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using FMODUnity;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ namespace Quinn
 		private Rank AIRank, HumanRank;
 		[SerializeField, Required]
 		private Transform CardOrigin;
+		[SerializeField]
+		private EventReference DragSound;
 		[SerializeField, AssetsOnly]
 		private GameObject[] Deck;
 
@@ -80,6 +83,8 @@ namespace Quinn
 					_mana -= card.Cost;
 					AIRank.Take(SpawnCard(card.gameObject, CardOrigin.position));
 					played.Add(card);
+
+					Audio.Play(DragSound);
 
 					playedAny = true;
 					await Awaitable.WaitForSecondsAsync(0.2f);
