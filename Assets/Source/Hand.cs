@@ -15,6 +15,8 @@ namespace Quinn
 		[SerializeField]
 		private float MaxRotation = 30f;
 
+		public event System.Action OnUpdateLayout;
+
 		public override void Layout()
 		{
 			for (int i = 0; i < transform.childCount; i++)
@@ -35,6 +37,8 @@ namespace Quinn
 
 				child.SetLocalPositionAndRotation(pos, rot);
 			}
+
+			OnUpdateLayout?.Invoke();
 		}
 	}
 }

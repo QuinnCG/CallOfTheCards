@@ -1,6 +1,8 @@
 ﻿using FMODUnity;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Quinn
 {
@@ -27,8 +29,8 @@ namespace Quinn
 		public int MaxMana { get; private set; }
 		public int Mana { get; private set; }
 
-		public event System.Action<bool> OnManaReplenish;
-		public event System.Action<int> OnManaConsume;
+		public event Action<bool> OnManaReplenish;
+		public event Action<int> OnManaConsume;
 
 		private bool _isPassing;
 
@@ -40,6 +42,7 @@ namespace Quinn
 		private async void Start()
 		{
 			TurnManager.OnTurnStart += OnTurnStart;
+			Hand.OnUpdateLayout += OnHandLayoutUpdate;
 
 			Audio.Play(ShuffleSound);
 			await Awaitable.WaitForSecondsAsync(0.5f);
@@ -63,6 +66,14 @@ namespace Quinn
 			if (Input.GetKeyDown(KeyCode.Space) && TurnManager.IsHumanTurn)
 			{
 				Pass();
+			}
+		}
+
+		private void OnHandLayoutUpdate()
+		{
+			foreach (var card in Hand.Cards)
+			{
+				card.SetOutline(card.CanAfford(Mana));
 			}
 		}
 

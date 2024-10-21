@@ -13,6 +13,8 @@ namespace Quinn
 	{
 		[SerializeField, BoxGroup("UI")]
 		private float MoveTime = 0.2f;
+		[SerializeField, BoxGroup("UI"), Required]
+		private GameObject Outline;
 
 		[SerializeField, BoxGroup("Audio")]
 		private EventReference PlaySound, HoverSound;
@@ -84,6 +86,11 @@ namespace Quinn
 				Vector3 pos = transform.localPosition;
 				pos.z = -5f;
 				transform.localPosition = pos;
+			}
+
+			if (Space is Rank)
+			{
+				Outline.SetActive(IsOwnerHuman && TurnManager.IsHumanTurn && !IsExausted);
 			}
 		}
 
@@ -221,6 +228,11 @@ namespace Quinn
 		public bool CanAfford(int mana)
 		{
 			return mana >= Cost;
+		}
+
+		public void SetOutline(bool visible)
+		{
+			Outline.SetActive(visible);
 		}
 
 		private async Awaitable PlayAttackAnimation(Vector2 target)
