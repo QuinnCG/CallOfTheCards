@@ -128,10 +128,13 @@ namespace Quinn
 
 		public void OnPointerEnter(PointerEventData eventData)
 		{
+			if (IsHovered)
+				return;
+
 			IsHovered = true;
 			Audio.Play(HoverSound);
 
-			if (Space is Hand)
+			if (Space is Hand && !IsDragging)
 			{
 				var locPos = Slot.localPosition;
 				locPos.y = 2.6f;
@@ -144,9 +147,12 @@ namespace Quinn
 
 		public void OnPointerExit(PointerEventData eventData)
 		{
+			if (!IsHovered)
+				return;
+
 			IsHovered = false;
 
-			if (Space is Hand)
+			if (Space is Hand && !IsDragging)
 			{
 				Space.Layout();
 				transform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutCubic);
