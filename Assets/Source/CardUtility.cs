@@ -28,7 +28,7 @@ namespace Quinn
 				return;
 			}
 
-            if (_card == null)
+			if (_card == null)
 			{
 				Awake();
 			}

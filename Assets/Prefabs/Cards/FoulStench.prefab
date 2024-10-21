@@ -105,12 +105,32 @@ PrefabInstance:
       value: Foul Stench
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Path
+      value: event:/SFX/Card Special/Foul Stench
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <BaseDP>k__BackingField
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <BaseHP>k__BackingField
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data1
+      value: 463661033
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data2
+      value: 1255612321
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data3
+      value: 1069917061
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data4
+      value: -996714030
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
@@ -122,7 +142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1824729253579824553, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_Name
-      value: Foul Stench
+      value: FoulStench
       objectReference: {fileID: 0}
     - target: {fileID: 4684232503665585183, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
