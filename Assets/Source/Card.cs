@@ -32,6 +32,12 @@ namespace Quinn
 		public bool IsHovered { get; private set; }
 		public bool IsOwnerHuman { get; set; }
 
+		public event Action OnPlay;
+		public event Action<Player> OnAttackPlayer;
+		public event Action<Card> OnAttackCard, OnDamageCard;
+		public event Action<int> OnTakeDamage;
+		public event Action OnDie;
+
 		private Vector3 _moveVel;
 
 		private void Start()
@@ -78,10 +84,13 @@ namespace Quinn
 		public void TakeDamage(int amount)
 		{
 			HP -= amount;
+			OnTakeDamage?.Invoke(amount);
 
 			if (HP <= 0)
 			{
 				Space.Remove(this);
+				OnDie?.Invoke();
+
 				Destroy(Slot.gameObject);
 			}
 		}
@@ -96,6 +105,7 @@ namespace Quinn
 			if (space is Rank)
 			{
 				IsExausted = true;
+				DOVirtual.DelayedCall(MoveTime, () => OnPlay?.Invoke());
 			}
 
 			Space = space;
@@ -135,9 +145,17 @@ namespace Quinn
 		{
 			if (CanAttack() && card.IsOwnerHuman != IsOwnerHuman)
 			{
+				OnAttackCard?.Invoke(card);
+
 				IsExausted = true;
 				await PlayAttackAnimation(card.transform.position);
-				card.TakeDamage(BaseDP);
+
+				if (card != null)
+				{
+					card.TakeDamage(BaseDP);
+				}
+
+				OnDamageCard?.Invoke(card);
 
 				return true;
 			}
@@ -149,6 +167,8 @@ namespace Quinn
 		{
 			if (CanAttack())
 			{
+				OnAttackPlayer?.Invoke(player);
+
 				IsExausted = true;
 				await PlayAttackAnimation(player.AttackPoint.position);
 				player.TakeDamage(BaseDP);

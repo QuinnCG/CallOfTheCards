@@ -77,7 +77,7 @@ namespace Quinn
 			{
 				if (card.CanAfford(_mana))
 				{
-					_maxMana -= card.Cost;
+					_mana -= card.Cost;
 					AIRank.Take(SpawnCard(card.gameObject, CardOrigin.position));
 					played.Add(card);
 
@@ -112,7 +112,7 @@ namespace Quinn
 			{
 				foreach (var card in AIRank.Cards)
 				{
-					int index = Random.Range(0, HumanRank.Cards.Count - 1);
+					int index = Random.Range(0, HumanRank.Cards.Count);
 					var target = HumanRank.Cards[index];
 
 					await card.AttackCard(target);

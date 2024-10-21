@@ -267,7 +267,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3199911094057662635, guid: beb2601fb0d66184bb57f338fc7c1bf3, type: 3}
       propertyPath: m_Name
-      value: ManaCrystal
+      value: Mana Crystal
       objectReference: {fileID: 0}
     - target: {fileID: 5664850451561640315, guid: beb2601fb0d66184bb57f338fc7c1bf3, type: 3}
       propertyPath: m_Pivot.x
@@ -528,7 +528,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3199911094057662635, guid: beb2601fb0d66184bb57f338fc7c1bf3, type: 3}
       propertyPath: m_Name
-      value: ManaCrystal (1)
+      value: Mana Crystal
       objectReference: {fileID: 0}
     - target: {fileID: 5664850451561640315, guid: beb2601fb0d66184bb57f338fc7c1bf3, type: 3}
       propertyPath: m_Pivot.x
@@ -978,6 +978,9 @@ MonoBehaviour:
   Rank: {fileID: 722243854}
   Deck:
   - {fileID: 3369738609977719185, guid: fcc432ab3e8c1a14f8893e5e06461a38, type: 3}
+  - {fileID: 3369738609977719185, guid: fcc432ab3e8c1a14f8893e5e06461a38, type: 3}
+  - {fileID: 3369738609977719185, guid: fcc432ab3e8c1a14f8893e5e06461a38, type: 3}
+  - {fileID: 4279907647332564631, guid: b348b138ef2e1db46a98e13dc7427eaa, type: 3}
 --- !u!1001 &1610580481
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -988,7 +991,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3199911094057662635, guid: beb2601fb0d66184bb57f338fc7c1bf3, type: 3}
       propertyPath: m_Name
-      value: ManaCrystal
+      value: Mana Crystal
       objectReference: {fileID: 0}
     - target: {fileID: 5664850451561640315, guid: beb2601fb0d66184bb57f338fc7c1bf3, type: 3}
       propertyPath: m_Pivot.x
@@ -1239,7 +1242,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3199911094057662635, guid: beb2601fb0d66184bb57f338fc7c1bf3, type: 3}
       propertyPath: m_Name
-      value: ManaCrystal (2)
+      value: Mana Crystal
       objectReference: {fileID: 0}
     - target: {fileID: 5664850451561640315, guid: beb2601fb0d66184bb57f338fc7c1bf3, type: 3}
       propertyPath: m_Pivot.x
@@ -1460,7 +1463,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -100, y: 54.05}
+  m_AnchoredPosition: {x: -100, y: 54.049988}
   m_SizeDelta: {x: 1093.62, y: 96.47}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &2043534879
@@ -1626,6 +1629,18 @@ PrefabInstance:
     - target: {fileID: 7996358892978095735, guid: 0b83cf21af8e0f84499bd4fdfe71888f, type: 3}
       propertyPath: m_text
       value: My Turn
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353486475412763968, guid: 0b83cf21af8e0f84499bd4fdfe71888f, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353486475412763968, guid: 0b83cf21af8e0f84499bd4fdfe71888f, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353486475412763968, guid: 0b83cf21af8e0f84499bd4fdfe71888f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.4482174
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

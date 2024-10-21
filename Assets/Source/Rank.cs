@@ -4,10 +4,25 @@ namespace Quinn
 {
 	public class Rank : Space
 	{
+		public static Rank Human { get; private set; }
+		public static Rank AI { get; private set; }
+
 		[SerializeField]
 		private float Stride = 3f;
 		[field: SerializeField]
 		public bool IsHumanOwner { get; private set; }
+
+		private void Awake()
+		{
+			if (IsHumanOwner)
+			{
+				Human = this;
+			}
+			else
+			{
+				AI = this;
+			}
+		}
 
 		public override void Layout()
 		{

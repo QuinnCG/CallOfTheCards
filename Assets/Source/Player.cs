@@ -31,7 +31,7 @@ namespace Quinn
 
 		protected GameObject GetRandomPrefab(params GameObject[] deck)
 		{
-			return deck[Random.Range(0, deck.Length - 1)];
+			return deck[Random.Range(0, deck.Length)];
 		}
 	}
 }
