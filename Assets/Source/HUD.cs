@@ -40,12 +40,12 @@ namespace Quinn
 		{
 			if (TurnManager.IsHumanTurn)
 			{
-				MyTurn.transform.localScale = Vector3.one * GetSin(1f, 1.1f);
+				MyTurn.transform.localScale = Vector3.one * GetSin(1f, 1.05f);
 				OpponentTurn.transform.localScale = Vector3.one * 0.8f;
 			}
 			else
 			{
-				OpponentTurn.transform.localScale = Vector3.one * GetSin(1f, 1.1f);
+				OpponentTurn.transform.localScale = Vector3.one * GetSin(1f, 1.05f);
 				MyTurn.transform.localScale = Vector3.one * 0.8f;
 			}
 		}

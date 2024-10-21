@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{fc21d261-e950-4de4-923e-a98de57644c7}">
+		<property name="assetPath">
+			<value>SFX/Card Special/Zombie2_03.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.98709750566893428</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{1541a2aa-33f1-48fa-8084-690972966136}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -35,7 +35,7 @@ namespace Quinn
 		[field: SerializeField, BoxGroup("Stats")]
 		public int BaseHP { get; private set; } = 3;
 		[SerializeField, BoxGroup("Stats")]
-		private bool IsRanged;
+		private bool IsRanged, IsLightfooted;
 
 		public Space Space { get; private set; }
 		public Transform Slot { get; private set; }
@@ -253,7 +253,7 @@ namespace Quinn
 
 			if (space is Rank)
 			{
-				IsExausted = true;
+				IsExausted = !IsLightfooted;
 				DOVirtual.DelayedCall(MoveTime, () => OnPlay?.Invoke());
 			}
 
@@ -281,6 +281,7 @@ namespace Quinn
 				if (card != null)
 				{
 					card.TakeDamage(DP);
+					TakeDamage(card.DP);
 				}
 
 				OnDamageCard?.Invoke(card);

@@ -20,7 +20,7 @@ namespace Quinn
 		[SerializeField]
 		private float DrawInterval = 0.05f;
 		[SerializeField]
-		private int DefaultHandSize = 7;
+		private int DefaultHandSize = 6, MaxHandSize = 7;
 		[SerializeField, Required]
 		private Rank Rank;
 		[SerializeField, AssetsOnly]
@@ -92,6 +92,7 @@ namespace Quinn
 
 		private void DrawCard()
 		{
+
 			var card = SpawnCard(GetRandomPrefab(Deck), CardSpawn.position);
 			card.IsOwnerHuman = true;
 
@@ -104,7 +105,11 @@ namespace Quinn
 			if (humanTurn)
 			{
 				UpdateManaPool();
-				DrawCard();
+
+				if (Hand.Cards.Count < MaxHandSize)
+				{
+					DrawCard();
+				}
 			}
 		}
 
