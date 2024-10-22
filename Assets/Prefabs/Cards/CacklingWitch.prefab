@@ -29,6 +29,10 @@ PrefabInstance:
       value: event:/SFX/Card Special/Witch
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: <Types>k__BackingField
+      value: 518
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <BaseDP>k__BackingField
       value: 1
       objectReference: {fileID: 0}
@@ -57,7 +61,7 @@ PrefabInstance:
       value: '<b>Ranged</b>
 
         <color=#999999><i>No one knows exactly what
-        she''s cackling about.</i></color>'
+        she''s so happy about.</i></color>'
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_fontSize

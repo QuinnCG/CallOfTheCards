@@ -26,7 +26,7 @@ namespace Quinn
 		private Color HPHurtColor, StatBuffedColor;
 
 		[SerializeField, BoxGroup("Audio")]
-		private EventReference PlaySound, HoverSound, SpecialPlaySound;
+		private EventReference PlaySound, HoverSound, SpecialPlaySound, AttackSound, HurtSound, DeathSound;
 
 		[field: SerializeField, BoxGroup("Stats")]
 		public int Cost { get; private set; } = 1;
@@ -36,6 +36,8 @@ namespace Quinn
 		public int BaseHP { get; private set; } = 3;
 		[SerializeField, BoxGroup("Stats")]
 		private bool IsRanged, IsLightfooted;
+		[field: SerializeField, BoxGroup("Stats")]
+		public CardType Types { get; private set; }
 
 		public Space Space { get; private set; }
 		public Transform Slot { get; private set; }
@@ -45,6 +47,7 @@ namespace Quinn
 
 		public bool IsAttacking { get; private set; }
 		public bool IsExausted { get; private set; }
+		public bool IsDead => HP == 0;
 
 		public bool IsDragging { get; private set; }
 		public bool IsHovered { get; private set; }
@@ -57,7 +60,7 @@ namespace Quinn
 		public event Action OnDie;
 
 		private Vector3 _moveVel;
-		private float _sinOffset;
+		private float _sineOffset;
 
 		private void Start()
 		{
@@ -65,7 +68,9 @@ namespace Quinn
 			DP = BaseDP;
 
 			TurnManager.OnTurnStart += OnTurnStart;
-			_sinOffset = UnityEngine.Random.value;
+			_sineOffset = UnityEngine.Random.value;
+
+			TurnManager.CanPassTurn += () => !IsAttacking || IsDead;
 		}
 
 		private void Update()
@@ -101,9 +106,9 @@ namespace Quinn
 			{
 				targetRot = Quaternion.Euler(new Vector3()
 				{
-					x = Mathf.Sin(Time.time + _sinOffset) * 10f,
-					y = Mathf.Cos(Time.time + _sinOffset) * 10f,
-					z = Mathf.Sin(Time.time + _sinOffset) * 2f
+					x = Mathf.Sin(Time.time + _sineOffset) * 10f,
+					y = Mathf.Cos(Time.time + _sineOffset) * 10f,
+					z = Mathf.Sin(Time.time + _sineOffset) * 2f
 				});
 			}
 
@@ -228,20 +233,37 @@ namespace Quinn
 			}
 		}
 
-		public void TakeDamage(int amount)
+		public async void TakeDamage(int amount)
 		{
 			HP -= amount;
 			OnTakeDamage?.Invoke(amount);
 
 			UpdateStatUI();
 
+			//static bool BlockTurn() => false;
+			//TurnManager.CanPassTurn += BlockTurn;
+
+			await Awaitable.WaitForSecondsAsync(0.3f);
+
+			Audio.Play(HurtSound);
+			await transform.DOShakePosition(0.5f, 0.5f)
+				.AsyncWaitForCompletion();
+
 			if (HP <= 0)
 			{
 				Space.Remove(this);
 				OnDie?.Invoke();
 
-				Destroy(Slot.gameObject);
+				IsExausted = true;
+				await GetComponentInChildren<CanvasGroup>().DOFade(0f, 0.3f)
+					.SetEase(Ease.OutCubic)
+					.AsyncWaitForCompletion();
+
+				Space.Remove(this);
+				Destroy(gameObject);
 			}
+
+			//TurnManager.CanPassTurn -= BlockTurn;
 		}
 
 		public void SetSpace(Space space, Transform slot)
@@ -276,6 +298,7 @@ namespace Quinn
 				OnAttackCard?.Invoke(card);
 
 				IsExausted = true;
+				Audio.Play(AttackSound);
 				await PlayAttackAnimation(card.transform.position);
 
 				if (card != null)
@@ -299,6 +322,7 @@ namespace Quinn
 				OnAttackPlayer?.Invoke(player);
 
 				IsExausted = true;
+				Audio.Play(AttackSound);
 				await PlayAttackAnimation(player.AttackPoint.position);
 				player.TakeDamage(DP);
 
