@@ -19,7 +19,7 @@ namespace Quinn
 		private GameObject[] Deck;
 
 		// These cards are not instantiated yet.
-		private readonly HashSet<Card> _hand = new();
+		private readonly List<Card> _hand = new();
 
 		private int _mana;
 		private int _maxMana;
@@ -77,10 +77,20 @@ namespace Quinn
 			var played = new HashSet<Card>();
 			bool playedAny = false;
 
-			foreach (var card in _hand)
+			int maxPlays = Random.Range(0, 3);
+			int plays = 0;
+
+			int maxAttempts = 10;
+			int attempts = 0;
+
+			while (attempts < maxAttempts && plays < maxPlays)
 			{
+				var card = GetBestCardToPlay();
+
 				if (card.CanAfford(_mana))
 				{
+					plays++;
+
 					_mana -= card.Cost;
 					AIRank.Take(SpawnCard(card.gameObject, CardOrigin.position));
 					played.Add(card);
@@ -90,6 +100,8 @@ namespace Quinn
 					playedAny = true;
 					await Awaitable.WaitForSecondsAsync(0.2f);
 				}
+
+				attempts++;
 			}
 
 			if (!playedAny)
@@ -146,6 +158,35 @@ namespace Quinn
 			}
 
 			return anyAttacked;
+		}
+
+		private Card GetBestCardToPlay()
+		{
+			Card bestCard = null;
+			int bestScore = -999999;
+
+			foreach (var card in _hand)
+			{
+				int score = card.DP + card.HP - (card.Cost * 2);
+
+				if (card.TryGetComponent(out CardBehavior behavior))
+				{
+					score = behavior.GetAIPlayScore();
+				}
+
+				if (score > bestScore)
+				{
+					bestCard = card;
+					bestScore = score;
+				}
+			}
+
+			if (bestCard == null)
+			{
+				bestCard = _hand[Random.Range(0, _hand.Count - 1)];
+			}
+
+			return bestCard;
 		}
 	}
 }

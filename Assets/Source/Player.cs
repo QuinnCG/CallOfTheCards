@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using FMODUnity;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +16,8 @@ namespace Quinn
 		public Transform AttackPoint { get; private set; }
 		[SerializeField, Required]
 		private LifeUI LifeUI;
+		[SerializeField]
+		private EventReference HurtSound;
 
 		public int Life { get; private set; }
 
@@ -23,19 +26,18 @@ namespace Quinn
 			Life = BaseLife;
 		}
 
-		private void Update()
-		{
-			LifeUI.Value = Life;
-		}
-
-		public void TakeDamage(int amount)
+		public async void TakeDamage(int amount)
 		{
 			Life -= amount;
+			LifeUI.SetLife(Life);
 
 			if (Life <= 0)
 			{
-				SceneManager.GetSceneByBuildIndex(0);
+				Debug.Log("<b>A player has died, reloading scene!");
+				await SceneManager.LoadSceneAsync("GameScene");
 			}
+
+			Audio.Play(HurtSound);
 
 			// TODO: hurt animation, then if life <= 0 win/lose game.
 		}

@@ -93,3 +93,10 @@ MonoBehaviour:
   MaxRotation: 15
   Charged: {fileID: 21300000, guid: 9ea89b531ead0764f94f71b80bd52cdb, type: 3}
   Used: {fileID: 21300000, guid: acc18bd4d522b3840a644ffe51c494dd, type: 3}
+  ReplenishSound:
+    Guid:
+      Data1: -2026904266
+      Data2: 1112656168
+      Data3: -1028940407
+      Data4: 295883647
+    Path: event:/SFX/ManaCrystalReplenish

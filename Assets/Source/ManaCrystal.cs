@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using FMODUnity;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,8 @@ namespace Quinn
 		private Sprite Charged;
 		[SerializeField, Required]
 		private Sprite Used;
+		[SerializeField]
+		private EventReference ReplenishSound;
 
 		public int Index { get; set; }
 		public bool IsConsumed { get; private set; }
@@ -79,6 +82,8 @@ namespace Quinn
 			await transform.DOPunchScale(Vector3.one * MaxScale, 0.2f).AsyncWaitForCompletion();
 
 			_isIdle = true;
+
+			Audio.Play(ReplenishSound);
 		}
 	}
 }

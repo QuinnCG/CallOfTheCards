@@ -17,8 +17,7 @@ namespace Quinn
 		[SerializeField, Required, AssetsOnly]
 		private GameObject ManaCrystalPrefab;
 
-		private readonly List<ManaCrystal> _chargedCrystals = new();
-		private readonly List<ManaCrystal> _usedCrystals = new();
+		private readonly List<ManaCrystal> _manaCrystals = new();
 
 		private void Awake()
 		{
@@ -40,12 +39,12 @@ namespace Quinn
 		{
 			if (TurnManager.IsHumanTurn)
 			{
-				MyTurn.transform.localScale = Vector3.one * GetSin(1f, 1.05f);
+				MyTurn.transform.localScale = Vector3.one * GetSine(1f, 1.05f);
 				OpponentTurn.transform.localScale = Vector3.one * 0.8f;
 			}
 			else
 			{
-				OpponentTurn.transform.localScale = Vector3.one * GetSin(1f, 1.05f);
+				OpponentTurn.transform.localScale = Vector3.one * GetSine(1f, 1.05f);
 				MyTurn.transform.localScale = Vector3.one * 0.8f;
 			}
 		}
@@ -58,45 +57,37 @@ namespace Quinn
 
 		private async void OnManaReplenish(bool maxIncreased)
 		{
-			foreach (var crystal in _usedCrystals)
+			foreach (var crystal in _manaCrystals)
 			{
-				crystal.Replenish();
-				_chargedCrystals.Insert(0, crystal);
+				Destroy(crystal.gameObject);
 			}
 
-			_usedCrystals.Clear();
+			_manaCrystals.Clear();
 
-			await Awaitable.WaitForSecondsAsync(0.1f * (_chargedCrystals.Count - 1));
-
-			// New crystal.
-			if (maxIncreased)
+			for (int i = 0; i < Human.Instance.MaxMana; i++)
 			{
-				var instance = Instantiate(ManaCrystalPrefab).GetComponent<ManaCrystal>();
-				instance.transform.SetParent(Mana.transform, false);
-				_chargedCrystals.Add(instance);
+				var instance = Instantiate(ManaCrystalPrefab, Mana);
+				var c = instance.GetComponent<ManaCrystal>();
 
-				instance.Index = _chargedCrystals.Count - 1;
+				_manaCrystals.Add(c);
+			}
+
+			foreach (var crystal in _manaCrystals)
+			{
+				crystal.Replenish();
+				await Awaitable.WaitForSecondsAsync(0.05f);
 			}
 		}
 
 		private void OnManaConsume(int amount)
 		{
-			var toMove = new List<ManaCrystal>();
-
-			for (int i = _chargedCrystals.Count - 1; i > _chargedCrystals.Count - 1 - amount; i--)
+			for (int i = _manaCrystals.Count - 1; i > _manaCrystals.Count - 1 - amount; i--)
 			{
-				_chargedCrystals[i].Consume();
-				toMove.Add(_chargedCrystals[i]);
-			}
-
-			foreach (var crystal in toMove)
-			{
-				_chargedCrystals.Remove(crystal);
-				_usedCrystals.Add(crystal);
+				_manaCrystals[i].Consume();
 			}
 		}
 
-		private float GetSin(float min, float max)
+		private float GetSine(float min, float max)
 		{
 			float t = Mathf.Sin(Time.time * 2f);
 			t = (t + 1f) / 2f;

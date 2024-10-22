@@ -27,7 +27,7 @@ namespace Quinn
 		protected virtual void OnPlay() { }
 		protected virtual void OnDeath() { }
 
-		protected virtual int GetAIPlayScore() => 0;
+		public virtual int GetAIPlayScore() => 0;
 
 		protected Card[] GetCardsFromBoard(Filter filter)
 		{

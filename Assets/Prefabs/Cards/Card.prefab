@@ -471,18 +471,18 @@ MonoBehaviour:
     Path: 
   AttackSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 2099922865
+      Data2: 1079807218
+      Data3: -304507465
+      Data4: -1558952458
+    Path: event:/SFX/CardAttack
   HurtSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -761117246
+      Data2: 1261626550
+      Data3: 1697690552
+      Data4: 895869036
+    Path: event:/SFX/CardHurt
   DeathSound:
     Guid:
       Data1: 0

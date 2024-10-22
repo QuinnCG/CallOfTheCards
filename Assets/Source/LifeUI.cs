@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -8,6 +9,19 @@ namespace Quinn
 		[SerializeField]
 		private TextMeshProUGUI Text;
 
-		public int Value { set => Text.text = $"{value} Life"; }
+		public async void SetLife(int life)
+		{
+			Text.text = $"{life} Life";
+
+			await transform.DOScale(1.1f, 0.2f)
+				.SetEase(Ease.OutBack)
+				.AsyncWaitForCompletion();
+
+			await transform.DOScale(1f, 0.2f)
+				.SetEase(Ease.OutCubic)
+				.AsyncWaitForCompletion();
+
+
+		}
     }
 }

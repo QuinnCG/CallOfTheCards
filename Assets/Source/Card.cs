@@ -89,7 +89,7 @@ namespace Quinn
 
 			if (IsOwnerHuman && Space is Rank)
 			{
-				Debug.Log(xOffset);
+				//Debug.Log(xOffset);
 			}
 
 			// Use self transform as default.
@@ -124,9 +124,9 @@ namespace Quinn
 			{
 				targetRot = Quaternion.Euler(new Vector3()
 				{
-					x = Mathf.Sin(Time.time + _sineOffset) * 10f,
-					y = Mathf.Cos(Time.time + _sineOffset) * 10f,
-					z = Mathf.Sin(Time.time + _sineOffset) * 2f
+					x = Mathf.Sin(Time.time + _sineOffset) * 12f,
+					y = Mathf.Cos(Time.time + _sineOffset) * 12f,
+					z = Mathf.Sin(Time.time + _sineOffset) * 3f
 				});
 			}
 
@@ -259,8 +259,6 @@ namespace Quinn
 			//TurnManager.CanPassTurn += BlockTurn;
 
 			await Awaitable.WaitForSecondsAsync(0.3f);
-
-			Audio.Play(HurtSound);
 			await transform.DOShakePosition(0.5f, 0.5f)
 				.AsyncWaitForCompletion();
 
@@ -305,13 +303,14 @@ namespace Quinn
 				OnAttack(card);
 
 				IsExausted = true;
-				Audio.Play(AttackSound);
 				await PlayAttackAnimation(card.transform.position);
 
 				if (card != null)
 				{
 					card.TakeDamage(DP);
 					TakeDamage(card.DP);
+
+					Audio.Play(HurtSound);
 				}
 
 				EventManager.OnCardDealDamage?.Invoke(this, DP);
@@ -328,7 +327,6 @@ namespace Quinn
 				OnAttack(null);
 
 				IsExausted = true;
-				Audio.Play(AttackSound);
 				await PlayAttackAnimation(player.AttackPoint.position);
 				player.TakeDamage(DP);
 
@@ -414,14 +412,16 @@ namespace Quinn
 
 			Space.Remove(this);
 			Space.Layout();
-			Destroy(gameObject);
+
+			Destroy(Slot.gameObject);
 		}
 
 		private async Awaitable PlayAttackAnimation(Vector2 target)
 		{
 			IsAttacking = true;
-
 			Vector2 origin = transform.position;
+
+			DOVirtual.DelayedCall(0.05f, () => Audio.Play(AttackSound));
 
 			await transform.DOMove(target, 0.5f)
 				.SetEase(Ease.InBack)
