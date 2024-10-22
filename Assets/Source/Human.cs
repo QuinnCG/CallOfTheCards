@@ -34,8 +34,9 @@ namespace Quinn
 
 		private bool _isPassing;
 
-		private void Awake()
+		protected override void Awake()
 		{
+			base.Awake();
 			Instance = this;
 		}
 

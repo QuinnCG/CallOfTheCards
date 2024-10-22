@@ -57,6 +57,9 @@ namespace Quinn
 		private Vector3 _moveVel;
 		private float _sineOffset;
 
+		private float _xRot;
+		private float _xRotVel;
+
 		private void Awake()
 		{
 			_behaviors = GetComponentsInChildren<CardBehavior>();
@@ -95,8 +98,9 @@ namespace Quinn
 				targetPos.z = -10f;
 
 				Vector2 delta = Input.mousePositionDelta;
-				delta = delta.Clamp(Vector2.one * -1f, Vector2.one);
-				targetRot = Quaternion.Euler(delta.y, delta.x, 0f);
+				var currentRot = transform.localRotation.eulerAngles;
+				_xRot = Mathf.SmoothDamp(_xRot, Mathf.Clamp(delta.x * 2f, -15f, 15f), ref _xRotVel, 0.1f);
+				targetRot = Quaternion.Euler(currentRot.x, currentRot.y, _xRot);
 
 				// If dragging and mouse up occurs, drop the card.
 				if (Input.GetMouseButtonUp(0))
@@ -139,7 +143,7 @@ namespace Quinn
 				Outline.SetActive(IsOwnerHuman && TurnManager.IsHumanTurn && !IsExausted);
 
 				Vector2 offset = new Vector2(0.1f, -0.1f);
-				Shadow.localPosition = (IsHovered && !IsDragging) ? offset : Vector3.zero;
+				Shadow.localPosition = (IsHovered || IsDragging) ? offset : Vector3.zero;
 			}
 		}
 

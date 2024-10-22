@@ -24,8 +24,9 @@ namespace Quinn
 		private int _mana;
 		private int _maxMana;
 
-		private void Awake()
+		protected override void Awake()
 		{
+			base.Awake();
 			Instance = this;
 		}
 

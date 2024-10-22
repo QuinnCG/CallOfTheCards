@@ -17,6 +17,14 @@ namespace Quinn
 
 		public event System.Action OnUpdateLayout;
 
+		private void Awake()
+		{
+			TurnManager.OnTurnStart += _ =>
+			{
+				Layout();
+			};
+		}
+
 		public override void Layout()
 		{
 			for (int i = 0; i < transform.childCount; i++)

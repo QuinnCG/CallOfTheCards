@@ -22,6 +22,11 @@ namespace Quinn
 			{
 				AI = this;
 			}
+
+			TurnManager.OnTurnStart += _ =>
+			{
+				Layout();
+			};
 		}
 
 		public override void Layout()

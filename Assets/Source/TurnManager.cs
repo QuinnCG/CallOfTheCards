@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Quinn
 {
@@ -11,13 +10,6 @@ namespace Quinn
 		public static bool IsHumanTurn { get; private set; } = true;
 		public static event System.Action<bool> OnTurnStart;
 		public static event System.Func<bool> CanPassTurn;
-
-		private static TurnManager _instance;
-
-		private void Awake()
-		{
-			_instance = this;
-		}
 
 		private void Start()
 		{
@@ -44,11 +36,6 @@ namespace Quinn
 			//		return;
 			//	}
 			//}
-
-			foreach (var rank in _instance.Ranks)
-			{
-				rank.Layout();
-			}
 
 			IsHumanTurn = !IsHumanTurn;
 			OnTurnStart?.Invoke(IsHumanTurn);

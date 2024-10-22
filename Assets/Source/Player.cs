@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Quinn
 {
@@ -11,13 +12,31 @@ namespace Quinn
 		[SerializeField]
 		private bool IsHuman;
 		[field: SerializeField, Required]
-		public Transform AttackPoint;
+		public Transform AttackPoint { get; private set; }
+		[SerializeField, Required]
+		private LifeUI LifeUI;
 
 		public int Life { get; private set; }
+
+		protected virtual void Awake()
+		{
+			Life = BaseLife;
+		}
+
+		private void Update()
+		{
+			LifeUI.Value = Life;
+		}
 
 		public void TakeDamage(int amount)
 		{
 			Life -= amount;
+
+			if (Life <= 0)
+			{
+				SceneManager.GetSceneByBuildIndex(0);
+			}
+
 			// TODO: hurt animation, then if life <= 0 win/lose game.
 		}
 
