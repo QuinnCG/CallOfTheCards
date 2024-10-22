@@ -220,7 +220,7 @@ MonoBehaviour:
   OpponentTurn: {fileID: 1865834348}
   MyTurn: {fileID: 392656946}
   OffTurn: {r: 0.25882354, g: 0.25882354, b: 0.25882354, a: 1}
-  OnTurn: {r: 0.4482174, g: 0, b: 1, a: 1}
+  OnTurn: {r: 0.5803922, g: 0.23921569, b: 1, a: 1}
   Mana: {fileID: 2043534878}
   ManaCrystalPrefab: {fileID: 3199911094057662635, guid: beb2601fb0d66184bb57f338fc7c1bf3, type: 3}
 --- !u!1 &240096319
@@ -1726,11 +1726,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8353486475412763968, guid: 0b83cf21af8e0f84499bd4fdfe71888f, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 0.2396226
       objectReference: {fileID: 0}
     - target: {fileID: 8353486475412763968, guid: 0b83cf21af8e0f84499bd4fdfe71888f, type: 3}
       propertyPath: m_Color.r
-      value: 0.4482174
+      value: 0.5795559
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -41,8 +41,8 @@ namespace Quinn
 		public Space Space { get; private set; }
 		public Transform Slot { get; private set; }
 
-		public int HP { get; private set; }
 		public int DP { get; private set; }
+		public int HP { get; private set; }
 
 		public bool IsAttacking { get; private set; }
 		public bool IsExausted { get; private set; }
@@ -237,7 +237,7 @@ namespace Quinn
 		public async void TakeDamage(int amount)
 		{
 			HP -= amount;
-			EventManager.OnCardTakeDamage(this, amount);
+			EventManager.OnCardTakeDamage?.Invoke(this, amount);
 
 			UpdateStatUI();
 
