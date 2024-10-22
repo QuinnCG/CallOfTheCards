@@ -899,7 +899,9 @@ MonoBehaviour:
   Deck:
   - {fileID: 3369738609977719185, guid: fcc432ab3e8c1a14f8893e5e06461a38, type: 3}
   - {fileID: 8394668721770760490, guid: 6c65f9b95cc9d254db35529c1519b877, type: 3}
-  - {fileID: 3369738609977719185, guid: fcc432ab3e8c1a14f8893e5e06461a38, type: 3}
+  - {fileID: 8457659504195766351, guid: c0d284f29aa641f43b981b8963b18f9b, type: 3}
+  - {fileID: 4279907647332564631, guid: b348b138ef2e1db46a98e13dc7427eaa, type: 3}
+  - {fileID: 7780191024049298479, guid: 56abe6005fb957d4c9567eba50884632, type: 3}
 --- !u!1 &1363471610
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,12 +1049,7 @@ MonoBehaviour:
   MaxHandSize: 7
   Rank: {fileID: 722243854}
   Deck:
-  - {fileID: 3369738609977719185, guid: fcc432ab3e8c1a14f8893e5e06461a38, type: 3}
-  - {fileID: 3369738609977719185, guid: fcc432ab3e8c1a14f8893e5e06461a38, type: 3}
   - {fileID: 1824729253579824553, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-  - {fileID: 4279907647332564631, guid: b348b138ef2e1db46a98e13dc7427eaa, type: 3}
-  - {fileID: 8394668721770760490, guid: 6c65f9b95cc9d254db35529c1519b877, type: 3}
-  - {fileID: 8394668721770760490, guid: 6c65f9b95cc9d254db35529c1519b877, type: 3}
 --- !u!1001 &1610580481
 PrefabInstance:
   m_ObjectHideFlags: 0

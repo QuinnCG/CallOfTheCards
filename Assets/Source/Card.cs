@@ -3,7 +3,6 @@ using FMODUnity;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -53,14 +52,19 @@ namespace Quinn
 		public bool IsHovered { get; private set; }
 		public bool IsOwnerHuman { get; set; }
 
-		public event Action OnPlay;
-		public event Action<Player> OnAttackPlayer;
-		public event Action<Card> OnAttackCard, OnDamageCard;
-		public event Action<int> OnTakeDamage;
-		public event Action OnDie;
 
+		private CardBehavior[] _behaviors;
 		private Vector3 _moveVel;
 		private float _sineOffset;
+
+		private void Awake()
+		{
+			_behaviors = GetComponentsInChildren<CardBehavior>();
+			foreach (var behavior in _behaviors)
+			{
+				behavior.Card = this;
+			}
+		}
 
 		private void Start()
 		{
@@ -216,9 +220,6 @@ namespace Quinn
 					{
 						Human.Instance.ConsumeMana(Cost);
 						DOVirtual.DelayedCall(0.1f, () => hand.Layout());
-
-						Audio.Play(PlaySound);
-						Audio.Play(SpecialPlaySound);
 					}
 				}
 				else if (Space is Rank)
@@ -236,7 +237,7 @@ namespace Quinn
 		public async void TakeDamage(int amount)
 		{
 			HP -= amount;
-			OnTakeDamage?.Invoke(amount);
+			EventManager.OnCardTakeDamage(this, amount);
 
 			UpdateStatUI();
 
@@ -252,15 +253,7 @@ namespace Quinn
 			if (HP <= 0)
 			{
 				Space.Remove(this);
-				OnDie?.Invoke();
-
-				IsExausted = true;
-				await GetComponentInChildren<CanvasGroup>().DOFade(0f, 0.3f)
-					.SetEase(Ease.OutCubic)
-					.AsyncWaitForCompletion();
-
-				Space.Remove(this);
-				Destroy(gameObject);
+				OnDeath();
 			}
 
 			//TurnManager.CanPassTurn -= BlockTurn;
@@ -276,7 +269,7 @@ namespace Quinn
 			if (space is Rank)
 			{
 				IsExausted = !IsLightfooted;
-				DOVirtual.DelayedCall(MoveTime, () => OnPlay?.Invoke());
+				DOVirtual.DelayedCall(MoveTime, OnPlay);
 			}
 
 			Space = space;
@@ -295,7 +288,7 @@ namespace Quinn
 		{
 			if (CanAttack() && card.IsOwnerHuman != IsOwnerHuman)
 			{
-				OnAttackCard?.Invoke(card);
+				OnAttack(card);
 
 				IsExausted = true;
 				Audio.Play(AttackSound);
@@ -307,8 +300,7 @@ namespace Quinn
 					TakeDamage(card.DP);
 				}
 
-				OnDamageCard?.Invoke(card);
-
+				EventManager.OnCardDealDamage?.Invoke(this, DP);
 				return true;
 			}
 
@@ -319,7 +311,7 @@ namespace Quinn
 		{
 			if (CanAttackPlayer())
 			{
-				OnAttackPlayer?.Invoke(player);
+				OnAttack(null);
 
 				IsExausted = true;
 				Audio.Play(AttackSound);
@@ -330,6 +322,16 @@ namespace Quinn
 			}
 
 			return false;
+		}
+
+		public void Kill()
+		{
+			TakeDamage(HP);
+		}
+
+		public bool HasType(CardType singleType)
+		{
+			return (Types & singleType) > 0;
 		}
 
 		public bool CanAttack()
@@ -362,6 +364,42 @@ namespace Quinn
 		{
 			HP += amount;
 			UpdateStatUI();
+		}
+
+		private void OnPlay()
+		{
+			Audio.Play(PlaySound);
+			Audio.Play(SpecialPlaySound);
+
+			EventManager.OnCardPlay?.Invoke(this);
+
+			foreach (var behavior in _behaviors)
+			{
+				behavior.Play();
+			}
+		}
+
+		private void OnAttack(Card target)
+		{
+			EventManager.OnCardAttack?.Invoke(this, target);
+		}
+
+		private async void OnDeath()
+		{
+			EventManager.OnCardDie?.Invoke(this);
+
+			IsExausted = true;
+			await GetComponentInChildren<CanvasGroup>().DOFade(0f, 0.3f)
+				.SetEase(Ease.OutCubic)
+				.AsyncWaitForCompletion();
+
+			Space.Remove(this);
+			Destroy(gameObject);
+
+			foreach (var behavior in _behaviors)
+			{
+				behavior.Kill();
+			}
 		}
 
 		private async Awaitable PlayAttackAnimation(Vector2 target)
