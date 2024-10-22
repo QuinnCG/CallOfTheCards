@@ -447,6 +447,7 @@ MonoBehaviour:
   HPText: {fileID: 7310419636431381577}
   HPHurtColor: {r: 1, g: 0.19433957, b: 0.19433957, a: 1}
   StatBuffedColor: {r: 0.1641509, g: 0.4518949, b: 1, a: 1}
+  Art: {fileID: 96819385737907767}
   PlaySound:
     Guid:
       Data1: -1636406020
@@ -890,7 +891,7 @@ GameObject:
   - component: {fileID: 8959180739777225457}
   - component: {fileID: 96819385737907767}
   m_Layer: 5
-  m_Name: Background
+  m_Name: Art
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

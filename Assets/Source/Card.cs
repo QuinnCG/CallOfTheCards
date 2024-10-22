@@ -1,11 +1,11 @@
 ﻿using DG.Tweening;
 using FMODUnity;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities;
-using System;
 using TMPro;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Quinn
 {
@@ -23,6 +23,8 @@ namespace Quinn
 		private TextMeshProUGUI DPText, HPText;
 		[SerializeField, BoxGroup("UI")]
 		private Color HPHurtColor, StatBuffedColor;
+		[SerializeField, BoxGroup("UI"), Required]
+		private Image Art;
 
 		[SerializeField, BoxGroup("Audio")]
 		private EventReference PlaySound, HoverSound, SpecialPlaySound, AttackSound, HurtSound, DeathSound;
@@ -82,6 +84,14 @@ namespace Quinn
 
 		private void Update()
 		{
+			float xOffset = transform.localRotation.eulerAngles.y;
+			Art.material.SetFloat("_XOffset", xOffset);
+
+			if (IsOwnerHuman && Space is Rank)
+			{
+				Debug.Log(xOffset);
+			}
+
 			// Use self transform as default.
 			transform.GetPositionAndRotation(out Vector3 targetPos, out Quaternion targetRot);
 
@@ -391,19 +401,20 @@ namespace Quinn
 		private async void OnDeath()
 		{
 			EventManager.OnCardDie?.Invoke(this);
-
 			IsExausted = true;
-			await GetComponentInChildren<CanvasGroup>().DOFade(0f, 0.3f)
-				.SetEase(Ease.OutCubic)
-				.AsyncWaitForCompletion();
-
-			Space.Remove(this);
-			Destroy(gameObject);
 
 			foreach (var behavior in _behaviors)
 			{
 				behavior.Kill();
 			}
+
+			await GetComponentInChildren<CanvasGroup>().DOFade(0f, 0.3f)
+				.SetEase(Ease.OutCubic)
+				.AsyncWaitForCompletion();
+
+			Space.Remove(this);
+			Space.Layout();
+			Destroy(gameObject);
 		}
 
 		private async Awaitable PlayAttackAnimation(Vector2 target)

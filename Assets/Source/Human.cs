@@ -122,6 +122,7 @@ namespace Quinn
 			Mana = MaxMana;
 
 			OnManaReplenish?.Invoke(maxUp);
+			Hand.Layout();
 		}
 
 		private async void Pass()

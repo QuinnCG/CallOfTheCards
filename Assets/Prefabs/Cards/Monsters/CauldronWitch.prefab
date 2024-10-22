@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1365074730786897149
+--- !u!1001 &7785906907438912998
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 96819385737907767, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1067f89096a948f4ebedf6c7996461b0, type: 3}
+      objectReference: {fileID: 355160633, guid: 91ed00f288b2dff4a8241053792ffa44, type: 3}
     - target: {fileID: 96819385737907767, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -26,11 +26,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103168282111905077, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
-      value: Brooding Witch
+      value: Couldron Witch
       objectReference: {fileID: 0}
     - target: {fileID: 103168282111905077, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_fontSize
       value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 338779953315372747, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: IsRanged
@@ -42,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: SpecialPlaySound.Path
-      value: event:/SFX/Card Special/Witch 3
+      value: event:/SFX/Card Special/Witch 2
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <Types>k__BackingField
@@ -54,27 +58,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <BaseHP>k__BackingField
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: SpecialPlaySound.Guid.Data1
-      value: 378308825
+      value: -3099118
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: SpecialPlaySound.Guid.Data2
-      value: 1193811489
+      value: 1298860494
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: SpecialPlaySound.Guid.Data3
-      value: 607734658
+      value: 1560371643
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: SpecialPlaySound.Guid.Data4
-      value: 92086099
+      value: -1854231891
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
-      value: Whenever a card perishes, Brooding Witch's damage becomes its damage.
+      value: '<b>Ranged</b>
+
+        Whenever a card perishes, Coldron Witch gains<color=#4477ff>
+        +1 damage.'
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_fontSize
@@ -82,7 +89,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1824729253579824553, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_Name
-      value: BroodingWitch
+      value: CauldronWitch
       objectReference: {fileID: 0}
     - target: {fileID: 4684232503665585183, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
@@ -154,7 +161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7310419636431381577, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8470401147029508378, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -179,25 +186,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1824729253579824553, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2654188299814532507}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
---- !u!1 &838520186251878740 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1824729253579824553, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-  m_PrefabInstance: {fileID: 1365074730786897149}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2654188299814532507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838520186251878740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f89b32da63d62e546ad12473414ae67d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

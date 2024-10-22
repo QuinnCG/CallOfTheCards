@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7785906907438912998
+--- !u!1001 &5998519125768557449
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 96819385737907767, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 355160633, guid: 91ed00f288b2dff4a8241053792ffa44, type: 3}
+      objectReference: {fileID: 21300000, guid: 9b972d0f49f4cf74eb6b5735798f73ad, type: 3}
     - target: {fileID: 96819385737907767, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -24,73 +24,41 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 96819385737907767, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 7625143afa2711b4c98cb55c4cbae881, type: 2}
     - target: {fileID: 103168282111905077, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
-      value: Couldron Witch
+      value: Crusader
       objectReference: {fileID: 0}
-    - target: {fileID: 103168282111905077, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: m_fontSize
-      value: 0.45
+    - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_text
+      value: Gold armor isn't cheap you know.
       objectReference: {fileID: 0}
-    - target: {fileID: 338779953315372747, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: IsRanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: <Cost>k__BackingField
+    - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_fontStyle
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: SpecialPlaySound.Path
-      value: event:/SFX/Card Special/Witch 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: <Types>k__BackingField
-      value: 518
-      objectReference: {fileID: 0}
-    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: <BaseDP>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: <BaseHP>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: SpecialPlaySound.Guid.Data1
-      value: -3099118
-      objectReference: {fileID: 0}
-    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: SpecialPlaySound.Guid.Data2
-      value: 1298860494
-      objectReference: {fileID: 0}
-    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: SpecialPlaySound.Guid.Data3
-      value: 1560371643
-      objectReference: {fileID: 0}
-    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: SpecialPlaySound.Guid.Data4
-      value: -1854231891
+    - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.7433963
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: m_text
-      value: Whenever a card perishes, Coldron Witch gains<color=#4477ff> +1 damage.
+      propertyPath: m_fontColor.g
+      value: 0.7433963
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: m_fontSize
-      value: 0.2
+      propertyPath: m_fontColor.r
+      value: 0.7433963
+      objectReference: {fileID: 0}
+    - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4290690750
       objectReference: {fileID: 0}
     - target: {fileID: 1824729253579824553, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_Name
-      value: CauldronWitch
-      objectReference: {fileID: 0}
-    - target: {fileID: 4684232503665585183, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: m_text
-      value: 1
+      value: Crusader
       objectReference: {fileID: 0}
     - target: {fileID: 5295050199362945486, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -133,8 +101,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6672861700185665677, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: m_text
-      value: 2
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672861700185665677, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.41320753
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672861700185665677, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.67609054
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672861700185665677, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294928812
       objectReference: {fileID: 0}
     - target: {fileID: 6770887018441718251, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -156,9 +136,9 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7310419636431381577, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
-      propertyPath: m_text
-      value: 1
+    - target: {fileID: 7005223119035201868, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8470401147029508378, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_AnchorMax.y
