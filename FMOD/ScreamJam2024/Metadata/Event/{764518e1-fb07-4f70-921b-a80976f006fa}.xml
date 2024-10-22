@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{764518e1-fb07-4f70-921b-a80976f006fa}">
 		<property name="name">
-			<value>Witch</value>
+			<value>Witch 1</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -106,7 +106,6 @@
 		<relationship name="sounds">
 			<destination>{b686db81-3a56-485c-822e-4c492a786109}</destination>
 			<destination>{288f58d1-18a6-4b2e-8d83-adc26dd3c60b}</destination>
-			<destination>{a935f737-83a2-400b-916b-9924f24586b8}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{fb570460-1225-42b3-9cca-98a580289200}" />
@@ -119,11 +118,6 @@
 	<object class="SingleSound" id="{288f58d1-18a6-4b2e-8d83-adc26dd3c60b}">
 		<relationship name="audioFile">
 			<destination>{26309644-a51c-499a-9c26-38d19af57959}</destination>
-		</relationship>
-	</object>
-	<object class="SingleSound" id="{a935f737-83a2-400b-916b-9924f24586b8}">
-		<relationship name="audioFile">
-			<destination>{cce84d1a-342c-4d40-bf9b-b4cfab4304a1}</destination>
 		</relationship>
 	</object>
 </objects>

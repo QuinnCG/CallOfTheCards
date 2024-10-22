@@ -113,8 +113,8 @@ namespace Quinn
 
 			bool anyAttacked = false;
 
-			Redo:
-			foreach (var card in AIRank.Cards)
+			var aiCards = new List<Card>(AIRank.Cards);
+			foreach (var card in aiCards)
 			{
 				if (card.CanAttackPlayer())
 				{
@@ -137,9 +137,9 @@ namespace Quinn
 						anyAttacked = true;
 					}
 
-					if (HumanRank.Cards.Count == 0 || card.HP == 0)
+					if (HumanRank.Cards.Count == 0)
 					{
-						goto Redo;
+						break;
 					}
 				}
 			}

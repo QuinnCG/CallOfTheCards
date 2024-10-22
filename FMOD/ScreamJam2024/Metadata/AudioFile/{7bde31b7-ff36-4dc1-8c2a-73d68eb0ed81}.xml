@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{7bde31b7-ff36-4dc1-8c2a-73d68eb0ed81}">
+		<property name="assetPath">
+			<value>SFX/Card Special/Witch2_06.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.92736961451247168</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{1541a2aa-33f1-48fa-8084-690972966136}</destination>
+		</relationship>
+	</object>
+</objects>

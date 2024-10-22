@@ -45,6 +45,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Path
+      value: event:/SFX/Card Special/Witch 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <Types>k__BackingField
       value: 518
       objectReference: {fileID: 0}
@@ -55,6 +59,22 @@ PrefabInstance:
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <BaseHP>k__BackingField
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data1
+      value: -3099118
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data2
+      value: 1298860494
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data3
+      value: 1560371643
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data4
+      value: -1854231891
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
