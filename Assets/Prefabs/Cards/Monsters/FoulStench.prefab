@@ -8,6 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 96819385737907767, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 06e3b0dfcbf999847a9449bf5dc12c2e, type: 3}
+    - target: {fileID: 96819385737907767, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 96819385737907767, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 96819385737907767, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 103168282111905077, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
       value: Foul Stench
@@ -42,11 +58,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
-      value: On play, kill all units; including yours.
+      value: On play, kill all units.
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_fontSize
-      value: 0.25
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1824729253579824553, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_Name
@@ -95,6 +111,10 @@ PrefabInstance:
     - target: {fileID: 5295050199362945486, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463349086160760038, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.997
       objectReference: {fileID: 0}
     - target: {fileID: 6672861700185665677, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text

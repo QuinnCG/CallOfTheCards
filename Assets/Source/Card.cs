@@ -88,9 +88,11 @@ namespace Quinn
 			float xOffset = transform.localRotation.eulerAngles.y;
 			Art.material.SetFloat("_XOffset", xOffset);
 
+			float ret = Art.material.GetFloat("_XOffset");
+
 			if (IsOwnerHuman && Space is Rank)
 			{
-				Debug.Log(xOffset);
+				Debug.Log($"Card ({gameObject.name})'s offset set to {xOffset}. Actual offset is now: {ret}.");
 			}
 
 			// Use self transform as default.

@@ -20,6 +20,7 @@ namespace Quinn
 		}
 
 		public Card Card { get; set; }
+		public bool InPlay => Card.Space is Rank;
 
 		public void Play() => OnPlay();
 		public void Kill() => OnDeath();

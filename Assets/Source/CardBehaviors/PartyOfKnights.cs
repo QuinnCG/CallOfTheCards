@@ -12,6 +12,9 @@ namespace Quinn.CardBehaviors
 
 		private void OnCardPlay(Card card)
 		{
+			if (!InPlay)
+				return;
+
 			if (card != Card && card.IsOwnerHuman == Card.IsOwnerHuman && card.HasType(CardType.Knight))
 			{
 				Card.SetDP(Card.DP + 1);
@@ -21,6 +24,9 @@ namespace Quinn.CardBehaviors
 
 		private void OnCardDie(Card card)
 		{
+			if (!InPlay)
+				return;
+
 			if (card != Card && card.IsOwnerHuman == Card.IsOwnerHuman && card.HasType(CardType.Knight))
 			{
 				Card.SetDP(Card.DP - 1);

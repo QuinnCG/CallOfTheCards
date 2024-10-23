@@ -9,6 +9,9 @@
 
 		private void OnCardDeath(Card card)
 		{
+			if (!InPlay)
+				return;
+
 			if (card != Card)
 			{
 				Card.SetDP(card.DP);

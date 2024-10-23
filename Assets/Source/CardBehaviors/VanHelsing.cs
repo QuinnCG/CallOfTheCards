@@ -6,6 +6,9 @@
 		{
 			EventManager.OnCardPlay += (Card card) =>
 			{
+				if (!InPlay)
+					return;
+
 				if (card.HasType(CardType.Monster))
 				{
 					card.TakeDamage(1);
