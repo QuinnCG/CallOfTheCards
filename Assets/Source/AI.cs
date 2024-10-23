@@ -77,7 +77,7 @@ namespace Quinn
 			var played = new HashSet<Card>();
 			bool playedAny = false;
 
-			int maxPlays = Random.Range(0, 3);
+			int maxPlays = Random.Range(1, 3);
 			int plays = 0;
 
 			int maxAttempts = 10;
@@ -87,14 +87,13 @@ namespace Quinn
 			{
 				var card = GetBestCardToPlay();
 
-				if (card.CanAfford(_mana))
+				if (card != null)
 				{
 					plays++;
-
-					_mana -= card.Cost;
-					AIRank.Take(SpawnCard(card.gameObject, CardOrigin.position));
 					played.Add(card);
+					_mana -= card.Cost;
 
+					AIRank.Take(SpawnCard(card.gameObject, CardOrigin.position));
 					Audio.Play(DragSound);
 
 					playedAny = true;
@@ -167,6 +166,11 @@ namespace Quinn
 
 			foreach (var card in _hand)
 			{
+				if (!card.CanAfford(_mana))
+				{
+					continue;
+				}
+
 				int score = card.DP + card.HP - (card.Cost * 2);
 
 				if (card.TryGetComponent(out CardBehavior behavior))

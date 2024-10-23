@@ -16,11 +16,14 @@ namespace Quinn
 
 		private void Start()
 		{
+			OnTurnStart?.Invoke(IsHumanTurn);
+		}
+
+		private void OnDestroy()
+		{
 			IsHumanTurn = true;
 			OnTurnStart = null;
 			_turnBlockers.Clear();
-
-			OnTurnStart?.Invoke(IsHumanTurn);
 		}
 
 		public static void BlockTurn(object key)
@@ -37,6 +40,7 @@ namespace Quinn
 		{
 			if (_turnBlockers.Any())
 			{
+				Debug.Log($"Failed to pass turn. There are {_turnBlockers.Count} blockers.");
 				return;
 			}
 

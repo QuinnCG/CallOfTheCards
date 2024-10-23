@@ -138,16 +138,21 @@ namespace Quinn
 				}
 
 				_isPassing = true;
+				bool anyAttacked = false;
 
 				foreach (var card in Rank.Cards)
 				{
 					if (await card.AttackPlayer(AI.Instance))
 					{
 						await Awaitable.WaitForSecondsAsync(0.2f);
+						anyAttacked = true;
 					}
 				}
 
-				await Awaitable.WaitForSecondsAsync(0.5f);
+				if (anyAttacked)
+				{
+					await Awaitable.WaitForSecondsAsync(0.5f);
+				}
 
 				TurnManager.Pass();
 				_isPassing = false;

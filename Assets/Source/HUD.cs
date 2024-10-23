@@ -20,7 +20,7 @@ namespace Quinn
 		[SerializeField, Required, AssetsOnly]
 		private GameObject ManaCrystalPrefab;
 		[SerializeField, Required]
-		private TextMeshProUGUI Tutorial;
+		private TextMeshProUGUI Tutorial, PassTurnText;
 
 		private static bool _hasTutorialBeenShown = false;
 
@@ -73,6 +73,12 @@ namespace Quinn
 						Destroy(Tutorial.gameObject);
 					};
 			}
+
+			PassTurnText.gameObject.SetActive(TurnManager.IsHumanTurn);
+			if (TurnManager.IsHumanTurn)
+			{
+				PassTurnText.transform.localScale = Vector3.one * GetSine(1f, 1.05f);
+			}
 		}
 
 		private void OnTurnStart(bool humanTurn)
@@ -110,10 +116,14 @@ namespace Quinn
 
 		private void OnManaConsume(int amount)
 		{
-			for (int i = _manaCrystals.Count - 1; i > _manaCrystals.Count - 1 - amount; i--)
+			_replenishToken.Cancel();
+
+			int missingMana = (Human.Instance.MaxMana - Human.Instance.Mana);
+			int start = _manaCrystals.Count - 1 - missingMana;
+
+			for (int i = start; i > start - amount; i--)
 			{
 				_manaCrystals[i].Consume();
-				_replenishToken.Cancel();
 			}
 		}
 
