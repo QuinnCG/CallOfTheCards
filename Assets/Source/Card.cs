@@ -3,6 +3,7 @@ using FMODUnity;
 using Sirenix.OdinInspector;
 using TMPro;
 using Unity.Burst.Intrinsics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -83,12 +84,13 @@ namespace Quinn
 
 		private void Update()
 		{
+			// Metal shine effect.
 			float xOffset = transform.localRotation.eulerAngles.y;
 			Art.material.SetFloat("_XOffset", xOffset);
 
 			if (IsOwnerHuman && Space is Rank)
 			{
-				//Debug.Log(xOffset);
+				Debug.Log(xOffset);
 			}
 
 			// Use self transform as default.
@@ -247,6 +249,12 @@ namespace Quinn
 			}
 		}
 
+		public void SetHP(int hp)
+		{
+			HP = hp;
+			UpdateStatUI();
+		}
+
 		public async void TakeDamage(int amount)
 		{
 			HP -= amount;
@@ -254,20 +262,15 @@ namespace Quinn
 
 			UpdateStatUI();
 
-			//static bool BlockTurn() => false;
-			//TurnManager.CanPassTurn += BlockTurn;
-
 			await Awaitable.WaitForSecondsAsync(0.3f);
 			await transform.DOShakePosition(0.5f, 0.5f)
 				.AsyncWaitForCompletion();
 
-			if (HP <= 0)
+			if (gameObject != null && HP <= 0)
 			{
 				Space.Remove(this);
 				OnDeath();
 			}
-
-			//TurnManager.CanPassTurn -= BlockTurn;
 		}
 
 		public void SetSpace(Space space, Transform slot)
@@ -306,7 +309,7 @@ namespace Quinn
 				IsExausted = true;
 				await PlayAttackAnimation(card.transform.position);
 
-				if (card != null)
+				if (card != null && !card.IsDead)
 				{
 					card.TakeDamage(DP);
 					TakeDamage(card.DP);
@@ -339,7 +342,8 @@ namespace Quinn
 
 		public void Kill()
 		{
-			TakeDamage(HP);
+			if (gameObject != null && !IsDead)
+				TakeDamage(HP);
 		}
 
 		public bool HasType(CardType singleType)
@@ -364,7 +368,8 @@ namespace Quinn
 
 		public void SetOutline(bool visible)
 		{
-			Outline.SetActive(visible);
+			if (Outline != null)
+				Outline.SetActive(visible);
 		}
 
 		public void SetDP(int dp)
@@ -402,7 +407,7 @@ namespace Quinn
 
 		private async void OnDeath()
 		{
-			if (gameObject == null || IsDead)
+			if (gameObject == null)
 			{
 				return;
 			}
@@ -490,6 +495,11 @@ namespace Quinn
 			if (humanTurn == IsOwnerHuman)
 			{
 				IsExausted = false;
+			}
+
+			if (!humanTurn)
+			{
+				SetOutline(false);
 			}
 		}
 

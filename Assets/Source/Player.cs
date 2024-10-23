@@ -20,10 +20,19 @@ namespace Quinn
 		private EventReference HurtSound;
 
 		public int Life { get; private set; }
+		public bool IsDead { get; private set; }
 
 		protected virtual void Awake()
 		{
 			Life = BaseLife;
+			TurnManager.OnTurnStart += _ =>
+			{
+				if (Life <= 0 && !IsDead)
+				{
+					IsDead = true;
+					OnDeath();
+				}
+			};
 		}
 
 		protected virtual void Start()
@@ -31,16 +40,10 @@ namespace Quinn
 			LifeUI.SetLife(Life);
 		}
 
-		public async void TakeDamage(int amount)
+		public void TakeDamage(int amount)
 		{
 			Life -= amount;
 			LifeUI.SetLife(Life);
-
-			if (Life <= 0)
-			{
-				Debug.Log("<b>A player has died, reloading scene!");
-				await SceneManager.LoadSceneAsync("GameScene");
-			}
 
 			Audio.Play(HurtSound);
 
@@ -58,6 +61,12 @@ namespace Quinn
 		protected GameObject GetRandomPrefab(params GameObject[] deck)
 		{
 			return deck[Random.Range(0, deck.Length)];
+		}
+
+		protected async virtual void OnDeath()
+		{
+			Debug.Log("<b>A player has died, reloading scene!");
+			await SceneManager.LoadSceneAsync("GameScene");
 		}
 	}
 }

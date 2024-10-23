@@ -6,7 +6,10 @@
 		{
 			foreach (var card in GetCardsFromBoard(Filter.All))
 			{
-				card.Kill();
+				if (card != null)
+				{
+					card.Kill();
+				}
 			}
 		}
 	}

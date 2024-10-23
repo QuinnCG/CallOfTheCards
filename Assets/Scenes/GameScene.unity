@@ -1896,6 +1896,8 @@ MonoBehaviour:
   Rank: {fileID: 722243854}
   Deck:
   - {fileID: 5363145915956842016, guid: 5b8f93bb2a496594d91a9bf42aa4bedf, type: 3}
+  - {fileID: 9132676931897840200, guid: 9ce567f8a0e43b94d9529cd08f7fa6a4, type: 3}
+  - {fileID: 8507807578004458634, guid: ea40b8b7e1901644189dbc83ded266b8, type: 3}
 --- !u!224 &1424217873 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4710829012619963008, guid: d69b16b29724b1e48a92238620c6e5dc, type: 3}

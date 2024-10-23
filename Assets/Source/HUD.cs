@@ -25,6 +25,7 @@ namespace Quinn
 		private TextMeshProUGUI Tutorial, PassTurnText, ManaText;
 
 		private static bool _hasTutorialBeenShown = false;
+		private static bool _hasTutorialHidden;
 
 		private readonly List<ManaCrystal> _manaCrystals = new();
 		private CancellationTokenSource _replenishToken;
@@ -69,13 +70,16 @@ namespace Quinn
 				MyTurn.transform.localScale = Vector3.one * 0.8f;
 			}
 
-			if (Input.GetKeyDown(KeyCode.Escape) && Tutorial != null)
+			if (Input.GetKeyDown(KeyCode.Escape) && !_hasTutorialHidden)
 			{
-				Tutorial.DOFade(0f, 0.5f)
-					.onComplete += () =>
-					{
-						Destroy(Tutorial.gameObject);
-					};
+				_hasTutorialHidden = true;
+
+				foreach (var text in Tutorial.GetComponentsInChildren<TextMeshProUGUI>())
+				{
+					text.DOFade(0f, 0.5f);
+				}
+
+				DOVirtual.DelayedCall(0.5f, () => Destroy(Tutorial.gameObject));
 			}
 
 			PassTurnText.gameObject.SetActive(TurnManager.IsHumanTurn);
