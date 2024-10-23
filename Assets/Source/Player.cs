@@ -50,6 +50,12 @@ namespace Quinn
 			// TODO: hurt animation, then if life <= 0 win/lose game.
 		}
 
+		public void Heal(int amount)
+		{
+			Life += amount;
+			LifeUI.SetLife(Life);
+		}
+
 		protected Card SpawnCard(GameObject prefab, Vector2 pos)
 		{
 			var card = Instantiate(prefab).GetComponent<Card>();

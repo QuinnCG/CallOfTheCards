@@ -98,6 +98,7 @@ namespace Quinn
 
 			var card = SpawnCard(GetRandomPrefab(Deck), CardSpawn.position);
 			card.IsOwnerHuman = true;
+			card.Player = this;
 
 			Hand.Take(card);
 			Audio.Play(DrawSound);

@@ -1,6 +1,6 @@
 ﻿namespace Quinn.CardBehaviors
 {
-	public class VanHelsing : CardBehavior
+	public class Marianne : CardBehavior
 	{
 		protected override void OnPlay()
 		{
@@ -9,9 +9,9 @@
 				if (!InPlay)
 					return;
 
-				if (card.HasType(CardType.Monster))
+				if (card != Card && card.HasType(CardType.Vampire))
 				{
-					card.TakeDamage(1);
+					Card.Player.Heal(1);
 				}
 			};
 		}

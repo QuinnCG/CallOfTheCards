@@ -37,12 +37,13 @@ namespace Quinn
 		[field: SerializeField, BoxGroup("Stats")]
 		public int BaseHP { get; private set; } = 3;
 		[SerializeField, BoxGroup("Stats")]
-		private bool IsRanged, IsLightfooted;
+		private bool IsRanged, IsLightfooted, HasLifesteal;
 		[field: SerializeField, BoxGroup("Stats")]
 		public CardType Types { get; private set; }
 
 		public Space Space { get; private set; }
 		public Transform Slot { get; private set; }
+		public Player Player { get; set; }
 
 		public int DP { get; private set; }
 		public int HP { get; private set; }
@@ -319,6 +320,8 @@ namespace Quinn
 					Audio.Play(HurtSound);
 				}
 
+				Heal(DP);
+
 				EventManager.OnCardDealDamage?.Invoke(this, DP);
 				return true;
 			}
@@ -335,6 +338,8 @@ namespace Quinn
 				IsExausted = true;
 				await PlayAttackAnimation(player.AttackPoint.position);
 				player.TakeDamage(DP);
+
+				Heal(DP);
 
 				return true;
 			}

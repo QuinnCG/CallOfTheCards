@@ -82,6 +82,11 @@ namespace Quinn
 			int maxPlays = Random.Range(1, 3);
 			int plays = 0;
 
+			if (Rank.Human.Cards.Count < 3 && Rank.AI.Cards.Count > 3)
+			{
+				maxPlays -= Random.Range(1, 2);
+			}
+
 			int maxAttempts = 10;
 			int attempts = 0;
 
@@ -96,6 +101,7 @@ namespace Quinn
 					_mana -= card.Cost;
 
 					var cardInstance = SpawnCard(card.gameObject, CardOrigin.position);
+					cardInstance.Player = this;
 
 					while (cardInstance.IsPlaying)
 					{
