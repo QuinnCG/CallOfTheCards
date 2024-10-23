@@ -26,6 +26,8 @@ namespace Quinn
 		private Color HPHurtColor, StatBuffedColor;
 		[SerializeField, BoxGroup("UI"), Required]
 		private Image Art;
+		[SerializeField, BoxGroup("UI"), Required]
+		private GameObject Help;
 
 		[SerializeField, BoxGroup("Audio")]
 		private EventReference PlaySound, HoverSound, SpecialPlaySound, AttackSound, HurtSound, DeathSound;
@@ -85,6 +87,8 @@ namespace Quinn
 
 		private void Update()
 		{
+			Help.SetActive(IsHovered && !IsDragging && !IsAttacking && Space is Rank);
+
 			// Metal shine effect.
 			float xOffset = transform.localRotation.eulerAngles.y;
 			Art.material.SetFloat("_XOffset", xOffset);
@@ -266,8 +270,12 @@ namespace Quinn
 			UpdateStatUI();
 
 			await Awaitable.WaitForSecondsAsync(0.3f);
-			await transform.DOShakePosition(0.5f, 0.5f)
-				.AsyncWaitForCompletion();
+
+			if (transform != null)
+			{
+				await transform.DOShakePosition(0.5f, 0.5f)
+					.AsyncWaitForCompletion();
+			}
 
 			if (gameObject != null && HP <= 0)
 			{
@@ -441,6 +449,7 @@ namespace Quinn
 
 			if (Slot != null)
 			{
+				transform.DOKill();
 				Destroy(Slot.gameObject);
 			}
 		}

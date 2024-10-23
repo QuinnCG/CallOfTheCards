@@ -6,7 +6,7 @@
 		{
 			EventManager.OnCardPlay += (Card card) =>
 			{
-				if (!InPlay)
+				if (!InPlay || Card.IsDead)
 					return;
 
 				if (card.HasType(CardType.Monster))

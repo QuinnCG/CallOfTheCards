@@ -289,8 +289,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b><color=white>How to Play (Esc. to Close)</b></color>
-
+  m_text: '<size=150%><b>How to Play (Esc. to Close)</b></size>
 
     Basics:
 
@@ -678,6 +677,7 @@ GameObject:
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
   - component: {fileID: 330585549}
+  - component: {fileID: 330585550}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -825,6 +825,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 32
   m_MaxRayIntersections: 0
+--- !u!114 &330585550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb4a8e74d9a75b548957bfc489e5759a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinScale: 7
+  ScaleRate: 0.5
 --- !u!224 &392656945 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2871407412003845297, guid: 0b83cf21af8e0f84499bd4fdfe71888f, type: 3}
@@ -1001,8 +1015,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278242815
-  m_fontColor: {r: 1, g: 0.80520356, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
