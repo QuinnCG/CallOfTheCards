@@ -1,5 +1,8 @@
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Threading;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,8 +19,11 @@ namespace Quinn
 		private Transform Mana;
 		[SerializeField, Required, AssetsOnly]
 		private GameObject ManaCrystalPrefab;
+		[SerializeField, Required]
+		private TextMeshProUGUI Tutorial;
 
 		private readonly List<ManaCrystal> _manaCrystals = new();
+		private CancellationTokenSource _replenishToken;
 
 		private void Awake()
 		{
@@ -47,12 +53,24 @@ namespace Quinn
 				OpponentTurn.transform.localScale = Vector3.one * GetSine(1f, 1.05f);
 				MyTurn.transform.localScale = Vector3.one * 0.8f;
 			}
+
+			if (Input.GetKeyDown(KeyCode.Escape) && Tutorial != null)
+			{
+				Tutorial.DOFade(0f, 0.5f)
+					.onComplete += () =>
+					{
+						Destroy(Tutorial.gameObject);
+					};
+			}
 		}
 
 		private void OnTurnStart(bool humanTurn)
 		{
 			MyTurn.color = humanTurn ? OnTurn : OffTurn;
 			OpponentTurn.color = humanTurn ? OffTurn : OnTurn;
+
+			_replenishToken?.Dispose();
+			_replenishToken = new();
 		}
 
 		private async void OnManaReplenish(bool maxIncreased)
@@ -75,7 +93,7 @@ namespace Quinn
 			foreach (var crystal in _manaCrystals)
 			{
 				crystal.Replenish();
-				await Awaitable.WaitForSecondsAsync(0.05f);
+				await Awaitable.WaitForSecondsAsync(0.05f, _replenishToken.Token);
 			}
 		}
 
@@ -84,6 +102,7 @@ namespace Quinn
 			for (int i = _manaCrystals.Count - 1; i > _manaCrystals.Count - 1 - amount; i--)
 			{
 				_manaCrystals[i].Consume();
+				_replenishToken.Cancel();
 			}
 		}
 

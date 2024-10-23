@@ -77,9 +77,7 @@ namespace Quinn
 			DP = BaseDP;
 
 			TurnManager.OnTurnStart += OnTurnStart;
-			_sineOffset = UnityEngine.Random.value;
-
-			TurnManager.CanPassTurn += () => !IsAttacking || IsDead;
+			_sineOffset = Random.value;
 		}
 
 		private void Update()
@@ -281,6 +279,7 @@ namespace Quinn
 			if (space is Rank)
 			{
 				IsExausted = !IsLightfooted;
+				TurnManager.BlockTurn(this);
 				DOVirtual.DelayedCall(MoveTime, OnPlay);
 			}
 
@@ -389,6 +388,8 @@ namespace Quinn
 			{
 				behavior.Play();
 			}
+
+			TurnManager.UnblockTurn(this);
 		}
 
 		private void OnAttack(Card target)

@@ -60,7 +60,7 @@ namespace Quinn
 #if UNITY_EDITOR
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				Debug.Break();
+				//Debug.Break();
 			}
 #endif
 

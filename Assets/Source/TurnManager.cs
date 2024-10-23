@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace Quinn
 {
@@ -9,33 +11,34 @@ namespace Quinn
 
 		public static bool IsHumanTurn { get; private set; } = true;
 		public static event System.Action<bool> OnTurnStart;
-		public static event System.Func<bool> CanPassTurn;
+
+		private static readonly HashSet<object> _turnBlockers = new();
 
 		private void Start()
 		{
+			IsHumanTurn = true;
+			OnTurnStart = null;
+			_turnBlockers.Clear();
+
 			OnTurnStart?.Invoke(IsHumanTurn);
+		}
+
+		public static void BlockTurn(object key)
+		{
+			_turnBlockers.Add(key);
+		}
+
+		public static void UnblockTurn(object key)
+		{
+			_turnBlockers.Remove(key);
 		}
 
 		public static void Pass()
 		{
-			//bool anyBlock = false;
-
-			//if (CanPassTurn != null)
-			//{
-			//	var delegates = CanPassTurn.GetInvocationList().Cast<System.Func<bool>>();
-			//	foreach (var callback in delegates)
-			//	{
-			//		if (!callback())
-			//		{
-			//			anyBlock = true;
-			//		}
-			//	}
-
-			//	if (anyBlock)
-			//	{
-			//		return;
-			//	}
-			//}
+			if (_turnBlockers.Any())
+			{
+				return;
+			}
 
 			IsHumanTurn = !IsHumanTurn;
 			OnTurnStart?.Invoke(IsHumanTurn);

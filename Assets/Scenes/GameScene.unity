@@ -196,11 +196,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 143768083}
   - {fileID: 2008156460}
   - {fileID: 2043534878}
   - {fileID: 620172691}
   - {fileID: 1783353142}
-  - {fileID: 143768083}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -226,6 +226,7 @@ MonoBehaviour:
   OnTurn: {r: 0.5803922, g: 0.23921569, b: 1, a: 1}
   Mana: {fileID: 2043534878}
   ManaCrystalPrefab: {fileID: 3199911094057662635, guid: beb2601fb0d66184bb57f338fc7c1bf3, type: 3}
+  Tutorial: {fileID: 143768084}
 --- !u!1 &143768082
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +284,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>How to Play</b>
+  m_text: '<b>How to Play (Esc. to Close)</b>
+
 
     Basics:
 
@@ -330,8 +332,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1063,7 +1065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42257648d367a874882c68afa97ffc3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseLife: 20
+  BaseLife: 30
   IsHuman: 0
   <AttackPoint>k__BackingField: {fileID: 1031411810}
   LifeUI: {fileID: 620172694}
@@ -1213,7 +1215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2bd49d8fd53734cbb65a5879a1a15f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseLife: 20
+  BaseLife: 30
   IsHuman: 1
   <AttackPoint>k__BackingField: {fileID: 1424217873}
   LifeUI: {fileID: 1783353143}
@@ -1652,7 +1654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8065919645632513401, guid: d69b16b29724b1e48a92238620c6e5dc, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4291404211
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
