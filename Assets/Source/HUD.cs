@@ -22,6 +22,8 @@ namespace Quinn
 		[SerializeField, Required]
 		private TextMeshProUGUI Tutorial;
 
+		private static bool _hasTutorialBeenShown = false;
+
 		private readonly List<ManaCrystal> _manaCrystals = new();
 		private CancellationTokenSource _replenishToken;
 
@@ -30,6 +32,15 @@ namespace Quinn
 			for (int i = 0; i < Mana.transform.childCount; i++)
 			{
 				Destroy(Mana.transform.GetChild(i).gameObject);
+			}
+
+			if (!_hasTutorialBeenShown)
+			{
+				_hasTutorialBeenShown = true;
+			}
+			else
+			{
+				Destroy(Tutorial.gameObject);
 			}
 		}
 
