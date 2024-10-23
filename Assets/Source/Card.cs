@@ -357,6 +357,19 @@ namespace Quinn
 			return false;
 		}
 
+		public async void ShowProcEffect()
+		{
+			if (!IsDead && transform != null)
+			{
+				await transform.DOScale(1.2f, 0.2f).SetEase(Ease.OutBack).AsyncWaitForCompletion();
+
+				if (!IsDead && transform != null)
+				{
+					transform.DOScale(1, 0.3f).SetEase(Ease.OutCubic);
+				}
+			}
+		}
+
 		public void Kill()
 		{
 			if (gameObject != null && !IsDead)
@@ -437,9 +450,14 @@ namespace Quinn
 				behavior.Kill();
 			}
 
-			await GetComponentInChildren<CanvasGroup>().DOFade(0f, 0.3f)
-				.SetEase(Ease.OutCubic)
-				.AsyncWaitForCompletion();
+			var canvasGroup = GetComponentInChildren<CanvasGroup>();
+
+			if (canvasGroup != null)
+			{
+				await canvasGroup.DOFade(0f, 0.3f)
+					.SetEase(Ease.OutCubic)
+					.AsyncWaitForCompletion();
+			}
 
 			if (Space != null)
 			{
@@ -450,6 +468,7 @@ namespace Quinn
 			if (Slot != null)
 			{
 				transform.DOKill();
+				canvasGroup.DOKill();
 				Destroy(Slot.gameObject);
 			}
 		}

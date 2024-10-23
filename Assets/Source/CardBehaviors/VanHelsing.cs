@@ -4,16 +4,24 @@
 	{
 		protected override void OnPlay()
 		{
-			EventManager.OnCardPlay += (Card card) =>
-			{
-				if (!InPlay || Card.IsDead)
-					return;
+			EventManager.OnCardPlay += OnCardPlay;
+		}
 
-				if (card.HasType(CardType.Monster))
-				{
-					card.TakeDamage(1);
-				}
-			};
+		protected override void OnDeath()
+		{
+			EventManager.OnCardPlay -= OnCardPlay;
+		}
+
+		private void OnCardPlay(Card card)
+		{
+			if (!InPlay || Card.IsDead)
+				return;
+
+			if (card.HasType(CardType.Monster))
+			{
+				card.TakeDamage(1);
+				Card.ShowProcEffect();
+			}
 		}
 	}
 }
