@@ -61,6 +61,11 @@ namespace Quinn
 			}
 		}
 
+		private void OnDestroy()
+		{
+			transform.DOKill();
+		}
+
 		public async void Consume()
 		{
 			IsConsumed = true;

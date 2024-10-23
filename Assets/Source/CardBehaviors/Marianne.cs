@@ -1,4 +1,6 @@
-﻿namespace Quinn.CardBehaviors
+﻿using System.Linq;
+
+namespace Quinn.CardBehaviors
 {
 	public class Marianne : CardBehavior
 	{
@@ -22,6 +24,16 @@
 				Card.Player.Heal(1);
 				Card.ShowProcEffect();
 			}
+		}
+
+		public override int GetAIPlayScore()
+		{
+			if (GetCardsFromBoard(Filter.AllFriendly).Any(x => x.TryGetComponent(out Marianne _)))
+			{
+				return -5;
+			}
+
+			return 0;
 		}
 	}
 }

@@ -20,7 +20,8 @@ namespace Quinn.CardBehaviors
 				Card.SetDP(Card.DP + 1);
 				Card.SetHP(Card.HP + 1);
 
-				Card.ShowProcEffect();
+				if (Card != null)
+					Card.ShowProcEffect();
 			}
 		}
 
@@ -34,7 +35,8 @@ namespace Quinn.CardBehaviors
 				Card.SetDP(Card.DP - 1);
 				Card.SetHP(Card.HP - 1);
 
-				Card.ShowProcEffect();
+				if (Card != null)
+					Card.ShowProcEffect();
 			}
 		}
 
