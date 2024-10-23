@@ -30,8 +30,10 @@ namespace Quinn
 			Instance = this;
 		}
 
-		private void Start()
+		protected override void Start()
 		{
+			base.Start();
+
 			TurnManager.OnTurnStart += OnTurnStart;
 			_mana = _maxMana;
 
@@ -93,11 +95,18 @@ namespace Quinn
 					played.Add(card);
 					_mana -= card.Cost;
 
-					AIRank.Take(SpawnCard(card.gameObject, CardOrigin.position));
+					var cardInstance = SpawnCard(card.gameObject, CardOrigin.position);
+
+					while (cardInstance.IsPlaying)
+					{
+						await Awaitable.NextFrameAsync();
+					}
+
+					AIRank.Take(cardInstance);
 					Audio.Play(DragSound);
 
 					playedAny = true;
-					await Awaitable.WaitForSecondsAsync(0.2f);
+					await Awaitable.WaitForSecondsAsync(0.5f);
 				}
 
 				attempts++;

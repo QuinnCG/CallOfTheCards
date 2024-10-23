@@ -20,8 +20,11 @@ namespace Quinn
 			await transform.DOScale(1f, 0.2f)
 				.SetEase(Ease.OutCubic)
 				.AsyncWaitForCompletion();
-
-
 		}
-    }
+
+		private void OnDestroy()
+		{
+			transform.DOKill();
+		}
+	}
 }

@@ -17,10 +17,12 @@ namespace Quinn
 
 		[Space, Required, SerializeField]
 		private Transform Mana;
+		[SerializeField]
+		private float ManaCrystalReplenishInterval = 0.1f;
 		[SerializeField, Required, AssetsOnly]
 		private GameObject ManaCrystalPrefab;
 		[SerializeField, Required]
-		private TextMeshProUGUI Tutorial, PassTurnText;
+		private TextMeshProUGUI Tutorial, PassTurnText, ManaText;
 
 		private static bool _hasTutorialBeenShown = false;
 
@@ -54,6 +56,8 @@ namespace Quinn
 
 		private void Update()
 		{
+			ManaText.text = $"Mana: [{Human.Instance.Mana}/{Human.Instance.MaxMana}]";
+
 			if (TurnManager.IsHumanTurn)
 			{
 				MyTurn.transform.localScale = Vector3.one * GetSine(1f, 1.05f);
@@ -110,18 +114,21 @@ namespace Quinn
 			foreach (var crystal in _manaCrystals)
 			{
 				crystal.Replenish();
-				await Awaitable.WaitForSecondsAsync(0.05f, _replenishToken.Token);
+				await Awaitable.WaitForSecondsAsync(ManaCrystalReplenishInterval, _replenishToken.Token);
+
+				if (_replenishToken.Token.IsCancellationRequested)
+				{
+					break;
+				}
 			}
 		}
 
 		private void OnManaConsume(int amount)
 		{
 			_replenishToken.Cancel();
+			int mana = Human.Instance.Mana + amount;
 
-			int missingMana = (Human.Instance.MaxMana - Human.Instance.Mana);
-			int start = _manaCrystals.Count - 1 - missingMana;
-
-			for (int i = start; i > start - amount; i--)
+			for (int i = mana - 1; i > mana - amount - 1; i--)
 			{
 				_manaCrystals[i].Consume();
 			}

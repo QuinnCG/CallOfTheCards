@@ -226,9 +226,11 @@ MonoBehaviour:
   OffTurn: {r: 0.25882354, g: 0.25882354, b: 0.25882354, a: 1}
   OnTurn: {r: 0.5803922, g: 0.23921569, b: 1, a: 1}
   Mana: {fileID: 2043534878}
+  ManaCrystalReplenishInterval: 0.1
   ManaCrystalPrefab: {fileID: 3199911094057662635, guid: beb2601fb0d66184bb57f338fc7c1bf3, type: 3}
   Tutorial: {fileID: 143768084}
   PassTurnText: {fileID: 460085299}
+  ManaText: {fileID: 1284678687}
 --- !u!1 &143768082
 GameObject:
   m_ObjectHideFlags: 0

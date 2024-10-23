@@ -26,7 +26,7 @@ namespace Quinn
 			{
 				_isHovered = true;
 
-				await Awaitable.WaitForSecondsAsync(1f);
+				await Awaitable.WaitForSecondsAsync(0.65f);
 
 				if (_isHovered)
 				{

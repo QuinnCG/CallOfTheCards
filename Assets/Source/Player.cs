@@ -26,6 +26,11 @@ namespace Quinn
 			Life = BaseLife;
 		}
 
+		protected virtual void Start()
+		{
+			LifeUI.SetLife(Life);
+		}
+
 		public async void TakeDamage(int amount)
 		{
 			Life -= amount;

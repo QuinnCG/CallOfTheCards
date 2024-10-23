@@ -40,8 +40,10 @@ namespace Quinn
 			Instance = this;
 		}
 
-		private async void Start()
+		protected override async void Start()
 		{
+			base.Start();
+
 			TurnManager.OnTurnStart += OnTurnStart;
 			Hand.OnUpdateLayout += OnHandLayoutUpdate;
 

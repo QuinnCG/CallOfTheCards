@@ -49,6 +49,7 @@ namespace Quinn
 		public bool IsAttacking { get; private set; }
 		public bool IsExausted { get; private set; }
 		public bool IsDead => HP == 0;
+		public bool IsPlaying { get; private set; }
 
 		public bool IsDragging { get; private set; }
 		public bool IsHovered { get; private set; }
@@ -281,6 +282,7 @@ namespace Quinn
 				IsExausted = !IsLightfooted;
 				TurnManager.BlockTurn(this);
 				DOVirtual.DelayedCall(MoveTime, OnPlay);
+				IsPlaying = true;
 			}
 
 			Space = space;
@@ -390,6 +392,7 @@ namespace Quinn
 			}
 
 			TurnManager.UnblockTurn(this);
+			IsPlaying = false;
 		}
 
 		private void OnAttack(Card target)
@@ -399,6 +402,11 @@ namespace Quinn
 
 		private async void OnDeath()
 		{
+			if (gameObject == null || IsDead)
+			{
+				return;
+			}
+
 			EventManager.OnCardDie?.Invoke(this);
 			IsExausted = true;
 
@@ -411,10 +419,16 @@ namespace Quinn
 				.SetEase(Ease.OutCubic)
 				.AsyncWaitForCompletion();
 
-			Space.Remove(this);
-			Space.Layout();
+			if (Space != null)
+			{
+				Space.Remove(this);
+				Space.Layout();
+			}
 
-			Destroy(Slot.gameObject);
+			if (Slot != null)
+			{
+				Destroy(Slot.gameObject);
+			}
 		}
 
 		private async Awaitable PlayAttackAnimation(Vector2 target)
