@@ -1472,6 +1472,8 @@ MonoBehaviour:
   - {fileID: 8394668721770760490, guid: 6c65f9b95cc9d254db35529c1519b877, type: 3}
   - {fileID: 7780191024049298479, guid: 56abe6005fb957d4c9567eba50884632, type: 3}
   - {fileID: 7780191024049298479, guid: 56abe6005fb957d4c9567eba50884632, type: 3}
+  - {fileID: 5394347630583026571, guid: 7a0f52242baa8334a8c6c23a4a83849d, type: 3}
+  - {fileID: 5394347630583026571, guid: 7a0f52242baa8334a8c6c23a4a83849d, type: 3}
 --- !u!1001 &1264148297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1902,6 +1904,8 @@ MonoBehaviour:
   - {fileID: 5363145915956842016, guid: 5b8f93bb2a496594d91a9bf42aa4bedf, type: 3}
   - {fileID: 9132676931897840200, guid: 9ce567f8a0e43b94d9529cd08f7fa6a4, type: 3}
   - {fileID: 8507807578004458634, guid: ea40b8b7e1901644189dbc83ded266b8, type: 3}
+  - {fileID: 6959417546301438624, guid: a8f354d95a0a7a344ae9ff7215a5b0b1, type: 3}
+  - {fileID: 6959417546301438624, guid: a8f354d95a0a7a344ae9ff7215a5b0b1, type: 3}
 --- !u!224 &1424217873 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4710829012619963008, guid: d69b16b29724b1e48a92238620c6e5dc, type: 3}

@@ -45,6 +45,9 @@ namespace Quinn
 
 		private async void OnTurnStart(bool humanTurn)
 		{
+			if (IsDead)
+				return;
+
 			if (!humanTurn)
 			{
 				_maxMana++;

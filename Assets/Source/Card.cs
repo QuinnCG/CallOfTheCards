@@ -93,7 +93,7 @@ namespace Quinn
 
 			if (IsOwnerHuman && Space is Rank)
 			{
-				Debug.Log($"Card ({gameObject.name})'s offset set to {xOffset}. Actual offset is now: {ret}.");
+				//Debug.Log($"Card ({gameObject.name})'s offset set to {xOffset}. Actual offset is now: {ret}.");
 			}
 
 			// Use self transform as default.
@@ -320,7 +320,8 @@ namespace Quinn
 					Audio.Play(HurtSound);
 				}
 
-				Heal(DP);
+				if (HasLifesteal)
+					Heal(DP);
 
 				EventManager.OnCardDealDamage?.Invoke(this, DP);
 				return true;
@@ -339,7 +340,8 @@ namespace Quinn
 				await PlayAttackAnimation(player.AttackPoint.position);
 				player.TakeDamage(DP);
 
-				Heal(DP);
+				if (HasLifesteal)
+					Heal(DP);
 
 				return true;
 			}
