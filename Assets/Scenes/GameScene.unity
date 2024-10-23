@@ -1466,6 +1466,7 @@ MonoBehaviour:
       Data3: 290517945
       Data4: -2006914070
     Path: event:/SFX/PlayerHurt
+  IsDeathVictory: 1
   AIRank: {fileID: 2107712139}
   HumanRank: {fileID: 722243854}
   CardOrigin: {fileID: 1210509747}
@@ -1894,6 +1895,7 @@ MonoBehaviour:
       Data3: 290517945
       Data4: -2006914070
     Path: event:/SFX/PlayerHurt
+  IsDeathVictory: 0
   DrawSound:
     Guid:
       Data1: -1704065112

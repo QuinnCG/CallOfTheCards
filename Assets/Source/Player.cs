@@ -18,6 +18,10 @@ namespace Quinn
 		private LifeUI LifeUI;
 		[SerializeField]
 		private EventReference HurtSound;
+		[SerializeField]
+		private bool IsDeathVictory;
+
+		public static bool HasHumanWon { get; private set; }
 
 		public int Life { get; private set; }
 		public bool IsDead { get; private set; }
@@ -72,7 +76,9 @@ namespace Quinn
 		protected async virtual void OnDeath()
 		{
 			Debug.Log("<b>A player has died, reloading scene!");
-			await SceneManager.LoadSceneAsync("GameScene");
+
+			HasHumanWon = IsDeathVictory;
+			await SceneManager.LoadSceneAsync("Endgame");
 		}
 	}
 }
