@@ -19,19 +19,26 @@ namespace Quinn
 			OtherHostile,
 		}
 
-		public Card Card { get; set; }
+		public Card Card { get; private set; }
 		public bool InPlay => Card.Space is Rank;
 
 		public void Play() => OnPlay();
 		public void Kill() => OnDeath();
 
-		protected virtual void OnPlay() { }
-		protected virtual void OnDeath() { }
+		public void SetParentCard(Card card) => Card = card;
 
 		public virtual int GetAIPlayScore() => 0;
 
+		protected virtual void OnPlay() { }
+		protected virtual void OnDeath() { }
+
 		protected Card[] GetCardsFromBoard(Filter filter)
 		{
+			if (Card == null)
+			{
+				return Array.Empty<Card>();
+			}
+
 			switch (filter)
 			{
 				case Filter.All:
@@ -40,6 +47,13 @@ namespace Quinn
 				}
 				case Filter.AllFriendly:
 				{
+					Debug.Log(Card);
+					Debug.Log(Card.IsOwnerHuman);
+					Debug.Log(Rank.Human);
+					Debug.Log(Rank.AI);
+					Debug.Log(Rank.Human.Cards);
+					Debug.Log(Rank.AI.Cards);
+
 					return (Card.IsOwnerHuman ? Rank.Human.Cards : Rank.AI.Cards).ToArray();
 				}
 				case Filter.AllHostile:

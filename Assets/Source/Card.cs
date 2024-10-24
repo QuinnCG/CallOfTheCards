@@ -72,7 +72,7 @@ namespace Quinn
 			_behaviors = GetComponentsInChildren<CardBehavior>();
 			foreach (var behavior in _behaviors)
 			{
-				behavior.Card = this;
+				behavior.SetParentCard(this);
 			}
 		}
 

@@ -28,9 +28,14 @@ namespace Quinn.CardBehaviors
 
 		public override int GetAIPlayScore()
 		{
-			if (GetCardsFromBoard(Filter.AllFriendly).Any(x => x.TryGetComponent(out Marianne _)))
+			var cards = GetCardsFromBoard(Filter.AllFriendly);
+
+			if (cards != null && cards.Count() > 0)
 			{
-				return -5;
+				if (cards.Any(x => x.TryGetComponent(out Marianne _)))
+				{
+					return -5;
+				}
 			}
 
 			return 0;
