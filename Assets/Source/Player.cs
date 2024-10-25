@@ -17,7 +17,7 @@ namespace Quinn
 		[SerializeField, Required]
 		private LifeUI LifeUI;
 		[SerializeField]
-		private EventReference HurtSound;
+		private EventReference HurtSound, GainLifeSound;
 		[SerializeField]
 		private bool IsDeathVictory;
 
@@ -58,6 +58,8 @@ namespace Quinn
 		{
 			Life += amount;
 			LifeUI.SetLife(Life);
+
+			Audio.Play(GainLifeSound);
 		}
 
 		protected Card SpawnCard(GameObject prefab, Vector2 pos)

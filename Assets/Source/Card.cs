@@ -260,6 +260,11 @@ namespace Quinn
 		{
 			HP = hp;
 			UpdateStatUI();
+
+			if (hp <= 0)
+			{
+				Kill();
+			}
 		}
 
 		public async void TakeDamage(int amount)
@@ -291,14 +296,6 @@ namespace Quinn
 				return;
 			}
 
-			if (space is Rank)
-			{
-				IsExausted = !IsLightfooted;
-				TurnManager.BlockTurn(this);
-				DOVirtual.DelayedCall(MoveTime, OnPlay);
-				IsPlaying = true;
-			}
-
 			Space = space;
 
 			if (Slot != null)
@@ -309,6 +306,14 @@ namespace Quinn
 
 			Slot = slot;
 			transform.SetParent(slot, true);
+
+			if (space is Rank)
+			{
+				IsExausted = !IsLightfooted;
+				TurnManager.BlockTurn(this);
+				DOVirtual.DelayedCall(MoveTime, OnPlay);
+				IsPlaying = true;
+			}
 		}
 
 		public async Awaitable<bool> AttackCard(Card card)
@@ -357,7 +362,7 @@ namespace Quinn
 			return false;
 		}
 
-		public async void ShowProcEffect()
+		public async void TriggerProcVisuals()
 		{
 			if (!IsDead && transform != null)
 			{
@@ -437,6 +442,8 @@ namespace Quinn
 
 		private async void OnDeath()
 		{
+			var previousSpace = Space;
+
 			if (gameObject == null)
 			{
 				return;
@@ -470,6 +477,11 @@ namespace Quinn
 				transform.DOKill();
 				canvasGroup.DOKill();
 				Destroy(Slot.gameObject);
+			}
+
+			if (previousSpace)
+			{
+				Space.Layout();
 			}
 		}
 

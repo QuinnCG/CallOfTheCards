@@ -22,7 +22,7 @@ namespace Quinn.CardBehaviors
 			if (card != Card && card.HasType(CardType.Vampire))
 			{
 				Card.Player.Heal(1);
-				Card.ShowProcEffect();
+				Card.TriggerProcVisuals();
 			}
 		}
 

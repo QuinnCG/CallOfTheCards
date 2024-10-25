@@ -70,7 +70,7 @@ namespace Quinn
 				MyTurn.transform.localScale = Vector3.one * 0.8f;
 			}
 
-			if (Input.GetKeyDown(KeyCode.Escape) && !_hasTutorialHidden)
+			if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space) || Time.time > 30f) && !_hasTutorialHidden)
 			{
 				_hasTutorialHidden = true;
 

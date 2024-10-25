@@ -30,7 +30,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103168282111905077, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_fontSize
-      value: 0.3
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 103168282111905077, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_fontStyle
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 103168282111905077, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 103168282111905077, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: HasLifesteal
@@ -39,6 +51,10 @@ PrefabInstance:
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <Cost>k__BackingField
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Path
+      value: event:/SFX/Card Special/Marianne
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <Types>k__BackingField
@@ -51,6 +67,22 @@ PrefabInstance:
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <BaseHP>k__BackingField
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data1
+      value: 601680373
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data2
+      value: 1179449990
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data3
+      value: 1131278220
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data4
+      value: -1168507940
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
@@ -69,6 +101,14 @@ PrefabInstance:
     - target: {fileID: 4684232503665585183, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4971705895115490485, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.6198
+      objectReference: {fileID: 0}
+    - target: {fileID: 4971705895115490485, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.7098
       objectReference: {fileID: 0}
     - target: {fileID: 5295050199362945486, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_LocalPosition.x

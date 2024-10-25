@@ -45,27 +45,38 @@ namespace Quinn
 
 		private async void OnTurnStart(bool humanTurn)
 		{
-			if (IsDead)
-				return;
-
-			if (!humanTurn)
+			try
 			{
-				_maxMana++;
-				_mana = _maxMana;
+				if (IsDead)
+					return;
 
-				await Awaitable.WaitForSecondsAsync(0.5f);
-				Draw();
-
-				if (await Play())
+				if (!humanTurn)
 				{
-					await Awaitable.WaitForSecondsAsync(1f);
-				}
+					_maxMana++;
+					_mana = _maxMana;
 
-				if (await Attack())
-				{
-					await Awaitable.WaitForSecondsAsync(1f);
-				}
+					await Awaitable.WaitForSecondsAsync(0.5f);
+					Draw();
 
+					if (await Play())
+					{
+						await Awaitable.WaitForSecondsAsync(1f);
+					}
+
+					AIRank.Layout();
+					HumanRank.Layout();
+
+					if (await Attack())
+					{
+						await Awaitable.WaitForSecondsAsync(1f);
+					}
+
+					await Awaitable.WaitForSecondsAsync(1f);
+					TurnManager.Pass();
+				}
+			}
+			catch
+			{
 				await Awaitable.WaitForSecondsAsync(1f);
 				TurnManager.Pass();
 			}
@@ -148,9 +159,9 @@ namespace Quinn
 			{
 				if (card.CanAttackPlayer())
 				{
-					await card.AttackPlayer(Human.Instance);
+					bool a = await card.AttackPlayer(Human.Instance);
 
-					if (card.IsExausted)
+					if (a)
 					{
 						anyAttacked = true;
 					}
@@ -160,9 +171,9 @@ namespace Quinn
 					int index = Random.Range(0, HumanRank.Cards.Count);
 					var target = HumanRank.Cards[index];
 
-					await card.AttackCard(target);
+					bool a = await card.AttackCard(target);
 
-					if (card.IsExausted)
+					if (a)
 					{
 						anyAttacked = true;
 					}
@@ -191,9 +202,12 @@ namespace Quinn
 
 				int score = card.DP + card.HP - (card.Cost * 2);
 
-				if (card.TryGetComponent(out CardBehavior behavior))
+				if (card != null)
 				{
-					score = behavior.GetAIPlayScore();
+					if (card.TryGetComponent(out CardBehavior behavior))
+					{
+						score = behavior.GetAIPlayScore();
+					}
 				}
 
 				if (score > bestScore)

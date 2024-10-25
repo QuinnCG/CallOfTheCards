@@ -20,7 +20,7 @@
 			if (card.HasType(CardType.Monster))
 			{
 				card.TakeDamage(1);
-				Card.ShowProcEffect();
+				Card.TriggerProcVisuals();
 			}
 		}
 	}

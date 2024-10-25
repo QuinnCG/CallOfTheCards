@@ -12,5 +12,7 @@
 				}
 			}
 		}
+
+		public override int GetAIPlayScore() => -3;
 	}
 }

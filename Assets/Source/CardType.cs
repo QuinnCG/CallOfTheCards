@@ -16,6 +16,7 @@ namespace Quinn
 		Monarch = 1 << 5,
 		Hunter = 1 << 13,
 		Cleric = 1 << 14,
+		Rogue = 1 << 15,
 
 		Vampire = 1 << 6,
 		Werewolf = 1 << 7,

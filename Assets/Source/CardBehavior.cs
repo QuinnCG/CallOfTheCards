@@ -47,13 +47,6 @@ namespace Quinn
 				}
 				case Filter.AllFriendly:
 				{
-					Debug.Log(Card);
-					Debug.Log(Card.IsOwnerHuman);
-					Debug.Log(Rank.Human);
-					Debug.Log(Rank.AI);
-					Debug.Log(Rank.Human.Cards);
-					Debug.Log(Rank.AI.Cards);
-
 					return (Card.IsOwnerHuman ? Rank.Human.Cards : Rank.AI.Cards).ToArray();
 				}
 				case Filter.AllHostile:
