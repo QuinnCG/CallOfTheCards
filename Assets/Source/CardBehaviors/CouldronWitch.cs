@@ -5,6 +5,7 @@
 		protected override void OnPlay()
 		{
 			EventManager.OnCardDie += OnCardDeath;
+			Card.UpdateStatUI();
 		}
 
 		protected override void OnDeath()
@@ -16,7 +17,7 @@
 		{
 			if (card != Card)
 			{
-				card.SetDP(card.DP + 1);
+				Card.SetDP(Card.DP + 1);
 			}
 		}
 

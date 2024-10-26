@@ -1,6 +1,7 @@
 ﻿using FMODUnity;
 using Sirenix.OdinInspector;
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -55,6 +56,17 @@ namespace Quinn
 				DrawCard();
 				await Awaitable.WaitForSecondsAsync(DrawInterval);
 			}
+		}
+
+		public void PassTurnIfNothingLeft()
+		{
+			if (!TurnManager.IsHumanTurn) return;
+
+			if (Rank.Cards.Any(x => !x.IsExausted)) return;
+			if (Hand.Cards.Any(x => x.CanAfford(Mana))) return;
+
+			Debug.Log($"Auto passing human turn. Are any cards to play: {Hand.Cards.Any(x => x.CanAfford(Mana))}; are any cards to command: {Rank.Cards.Any(x => !x.IsExausted)}.");
+			Pass();
 		}
 
 		private void Update()

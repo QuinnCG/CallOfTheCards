@@ -75,26 +75,30 @@ MonoBehaviour:
     Path: event:/SFX/CardDrag
   Deck:
   - Card: {fileID: 1703493011030465994, guid: 7fc65c022b5eb5d4492030b3d1e25022, type: 3}
-    Weight: 100
+    Weight: 90
   - Card: {fileID: 7528007352652920244, guid: 6c65f9b95cc9d254db35529c1519b877, type: 3}
-    Weight: 100
+    Weight: 105
   - Card: {fileID: 7590998551414895825, guid: c0d284f29aa641f43b981b8963b18f9b, type: 3}
-    Weight: 100
+    Weight: 110
   - Card: {fileID: 6782934161008166602, guid: ad8e50262d7f71f4d832375ee886dae7, type: 3}
-    Weight: 100
+    Weight: 110
   - Card: {fileID: 6782934161008166602, guid: 005dd6a13dd059142986286b84011507, type: 3}
     Weight: 100
   - Card: {fileID: 3658250132932953359, guid: fcc432ab3e8c1a14f8893e5e06461a38, type: 3}
-    Weight: 100
+    Weight: 110
   - Card: {fileID: 2837911120606478857, guid: b348b138ef2e1db46a98e13dc7427eaa, type: 3}
-    Weight: 50
+    Weight: 40
   - Card: {fileID: 5564475282314519954, guid: 31b13226dfb1a7244ad0369e5e13d28e, type: 3}
-    Weight: 100
+    Weight: 80
   - Card: {fileID: 7715867633194638406, guid: 227d50c9b19a7bd4aa50ca3ea24e48d2, type: 3}
-    Weight: 100
+    Weight: 110
   - Card: {fileID: 6258757608442851093, guid: 7a0f52242baa8334a8c6c23a4a83849d, type: 3}
     Weight: 100
   - Card: {fileID: 5561915732599129895, guid: 88449b5cf503ab74eb2ddebc04fe6438, type: 3}
-    Weight: 100
+    Weight: 90
   - Card: {fileID: 8646852973801595057, guid: 56abe6005fb957d4c9567eba50884632, type: 3}
+    Weight: 120
+  - Card: {fileID: 604375268059182111, guid: be40154f5f5cde24c813040f4e22954b, type: 3}
+    Weight: 70
+  - Card: {fileID: 7693944969887885649, guid: 68fce39962fed8342a7d3696df50f3fe, type: 3}
     Weight: 100

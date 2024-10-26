@@ -79,7 +79,9 @@ namespace Quinn
 			catch
 			{
 				await Awaitable.WaitForSecondsAsync(1f);
-				TurnManager.Pass();
+
+				if (!TurnManager.IsHumanTurn)
+					TurnManager.Pass();
 			}
 		}
 

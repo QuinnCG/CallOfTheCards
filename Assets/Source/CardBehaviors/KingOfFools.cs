@@ -32,10 +32,13 @@ namespace Quinn.CardBehaviors
 			}
 		}
 
-		private void OnCardPlay(Card playedCard)
+		private async void OnCardPlay(Card playedCard)
 		{
 			Card.TriggerProcVisuals();
 			Audio.Play(AbilityProcSound);
+
+			TurnManager.BlockTurn(this);
+			await Awaitable.WaitForSecondsAsync(0.3f);
 
 			foreach (var boardCard in GetCardsFromBoard(Filter.All))
 			{
@@ -46,6 +49,7 @@ namespace Quinn.CardBehaviors
 			}
 
 			Unsub();
+			TurnManager.UnblockTurn(this);
 		}
 	}
 }

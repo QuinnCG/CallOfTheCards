@@ -424,8 +424,31 @@ namespace Quinn
 			UpdateStatUI();
 		}
 
+		public void UpdateStatUI()
+		{
+			HPText.text = HP.ToString();
+			DPText.text = DP.ToString();
+
+			if (HP < BaseHP)
+			{
+				HPText.color = HPHurtColor;
+			}
+			else if (HP == BaseHP)
+			{
+				HPText.color = Color.white;
+			}
+			else
+			{
+				HPText.color = StatBuffedColor;
+			}
+
+			DPText.color = DP > BaseDP ? StatBuffedColor : Color.white;
+		}
+
 		private void OnPlay()
 		{
+			UpdateStatUI();
+
 			Audio.Play(PlaySound);
 			Audio.Play(SpecialPlaySound);
 
@@ -438,8 +461,12 @@ namespace Quinn
 
 			TurnManager.UnblockTurn(this);
 			IsPlaying = false;
-
 			IsHovered = false;
+
+			if (IsOwnerHuman)
+			{
+				Human.Instance.PassTurnIfNothingLeft();
+			}
 		}
 
 		private void OnAttack(Card target)
@@ -509,7 +536,15 @@ namespace Quinn
 
 			transform.DOMove(origin, 1f)
 				.SetEase(Ease.OutCubic)
-				.onComplete += () => IsAttacking = false;
+				.onComplete += () =>
+				{
+					IsAttacking = false;
+					
+					if (IsOwnerHuman)
+					{
+						Human.Instance.PassTurnIfNothingLeft();
+					}
+				};
 		}
 
 		private Rank GetRankAtCursor()
@@ -561,27 +596,6 @@ namespace Quinn
 			{
 				SetOutline(false);
 			}
-		}
-
-		private void UpdateStatUI()
-		{
-			HPText.text = HP.ToString();
-			DPText.text = DP.ToString();
-
-			if (HP < BaseHP)
-			{
-				HPText.color = HPHurtColor;
-			}
-			else if (HP == BaseHP)
-			{
-				HPText.color = Color.white;
-			}
-			else
-			{
-				HPText.color = StatBuffedColor;
-			}
-
-			DPText.color = DP > BaseDP ? StatBuffedColor : Color.white;
 		}
 	}
 }
