@@ -91,13 +91,15 @@ namespace Quinn
 
 			// Metal shine effect.
 			float xOffset = transform.localRotation.eulerAngles.y;
+			if (xOffset > 180f) xOffset = 360f - xOffset;
+
 			Art.material.SetFloat("_XOffset", xOffset);
 
 			float ret = Art.material.GetFloat("_XOffset");
 
 			if (IsOwnerHuman && Space is Rank)
 			{
-				//Debug.Log($"Card ({gameObject.name})'s offset set to {xOffset}. Actual offset is now: {ret}.");
+				Debug.Log($"Card ({gameObject.name})'s offset set to {xOffset}. Actual offset is now: {ret}.");
 			}
 
 			// Use self transform as default.

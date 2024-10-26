@@ -61,7 +61,7 @@ namespace Quinn
 
 					if (await Play())
 					{
-						await Awaitable.WaitForSecondsAsync(1f);
+						await Awaitable.WaitForSecondsAsync(0.2f);
 					}
 
 					AIRank.Layout();
@@ -72,13 +72,13 @@ namespace Quinn
 						await Awaitable.WaitForSecondsAsync(1f);
 					}
 
-					await Awaitable.WaitForSecondsAsync(1f);
+					await Awaitable.WaitForSecondsAsync(0.2f);
 					TurnManager.Pass();
 				}
 			}
 			catch
 			{
-				await Awaitable.WaitForSecondsAsync(1f);
+				await Awaitable.WaitForSecondsAsync(0.7f);
 
 				if (!TurnManager.IsHumanTurn)
 					TurnManager.Pass();

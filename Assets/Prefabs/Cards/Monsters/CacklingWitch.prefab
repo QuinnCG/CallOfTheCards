@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 96819385737907767, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: fd1bf3dec7763cc4992123aceac9e817, type: 3}
     - target: {fileID: 103168282111905077, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
       value: Cackling Witch

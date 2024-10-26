@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Crusader
+  m_Name: KingOfFools
   m_Shader: {fileID: -6465566751694194690, guid: fd1bf3dec7763cc4992123aceac9e817, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -23,16 +23,20 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_e5c9439bc295415a96bb0d9b3a6d042c_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 9b972d0f49f4cf74eb6b5735798f73ad, type: 3}
+    - _ShineMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _ShineMap:
-        m_Texture: {fileID: 2800000, guid: a3cb195f36f36324da255232586e3dbc, type: 3}
+    - _Texture2DAsset_982837e044a74de28aaa32dd51799b86_Out_0_Texture2D:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -50,8 +54,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
-    - _FoilFactor: 0
-    - _MetalFactor: 1
+    - _EmissionFactor: 0
+    - _FoilFactor: 1
+    - _MetalFactor: 0.228
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -62,6 +67,5 @@ Material:
     - _XOffset: 0
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -53,7 +53,7 @@ PrefabInstance:
       value: '<b>Lifesteal</b>
 
         On play, kill a random monarch in play then
-        you gain life equal to their HP.'
+        you gain <color=#44ff22>life equal to their HP</color>.'
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_fontSize
