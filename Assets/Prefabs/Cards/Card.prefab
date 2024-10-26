@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 4241192014739676017}
   - component: {fileID: 5661546111864967085}
   m_Layer: 0
-  m_Name: Text (TMP) (2)
+  m_Name: HP Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1105,7 +1105,7 @@ GameObject:
   - component: {fileID: 5864114270124114689}
   - component: {fileID: 3966478279553389716}
   m_Layer: 0
-  m_Name: Text (TMP) (1)
+  m_Name: DP Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1577,7 +1577,7 @@ GameObject:
   - component: {fileID: 941673608057281189}
   - component: {fileID: 7143627891489584316}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Mana Help
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1599,7 +1599,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 191.9, y: 194.7}
+  m_AnchoredPosition: {x: 101.9, y: 194.7}
   m_SizeDelta: {x: 200, y: 26.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &941673608057281189
@@ -1664,7 +1664,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 33
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

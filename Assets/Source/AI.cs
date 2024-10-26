@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Quinn
 {
+
 	public class AI : Player
 	{
 		public static AI Instance { get; private set; }
@@ -16,7 +17,7 @@ namespace Quinn
 		[SerializeField]
 		private EventReference DragSound;
 		[SerializeField, AssetsOnly]
-		private GameObject[] Deck;
+		private CardSetEntry[] Deck;
 
 		// These cards are not instantiated yet.
 		private readonly List<Card> _hand = new();
@@ -84,7 +85,7 @@ namespace Quinn
 
 		private void Draw()
 		{
-			var card = GetRandomPrefab(Deck).GetComponent<Card>();
+			var card = GetRandomCard(Deck);
 			_hand.Add(card);
 		}
 
@@ -219,7 +220,22 @@ namespace Quinn
 
 			if (bestCard == null)
 			{
-				bestCard = _hand[Random.Range(0, _hand.Count - 1)];
+				for (int i = 0; i < 10; i++)
+				{
+					bestCard = _hand[Random.Range(0, _hand.Count - 1)];
+
+					if (bestCard == null)
+						return null;
+
+					if (bestCard.CanAfford(_mana))
+					{
+						return bestCard;
+					}
+					else
+					{
+						bestCard = null;
+					}
+				}
 			}
 
 			return bestCard;

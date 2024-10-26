@@ -17,7 +17,7 @@
 			if (!InPlay || Card.IsDead)
 				return;
 
-			if (card.HasType(CardType.Monster))
+			if (card.HasType(CardType.Vampire) || card.HasType(CardType.Werewolf))
 			{
 				card.TakeDamage(1);
 				Card.TriggerProcVisuals();

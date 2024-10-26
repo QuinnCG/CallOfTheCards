@@ -19,7 +19,7 @@ namespace Quinn.CardBehaviors
 
 		private void OnCardDie(Card card)
 		{
-			if (card.HasType(CardType.Zombie))
+			if (card.HasType(CardType.Zombie) && card != Card)
 			{
 				Card.SetDP(Card.DP + 1);
 				Card.SetHP(Card.HP + 1);

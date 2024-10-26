@@ -109,16 +109,30 @@
 		<property name="attackTime">
 			<value>0</value>
 		</property>
+		<property name="decayTime">
+			<value>60000</value>
+		</property>
+		<property name="decayShape">
+			<value>0.199403733</value>
+		</property>
+		<property name="sustainValue">
+			<value>-8.66666794</value>
+		</property>
 		<property name="releaseTime">
-			<value>320</value>
+			<value>3822.30835</value>
+		</property>
+		<property name="releaseShape">
+			<value>0.856403351</value>
 		</property>
 		<property name="finalValue">
-			<value>-80</value>
+			<value>-68.4444427</value>
 		</property>
 	</object>
 	<object class="MixerBusEffectChain" id="{23cd4557-dcf2-4709-9329-cc33e5bdbfa8}">
 		<relationship name="effects">
 			<destination>{baacf4f2-4fa0-4b68-b458-25f6d680b442}</destination>
+			<destination>{5822c4a7-8c2d-4d43-89b0-1989c227bdca}</destination>
+			<destination>{fb04b4e6-cb37-4dcb-870b-0e5729aba00e}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{8023dd82-48d2-4bd6-ae55-118e0fe42e4e}" />
@@ -131,6 +145,22 @@
 	</object>
 	<object class="MixerBusFader" id="{543e370e-7710-4cbd-8dbd-5835438609e2}" />
 	<object class="MixerBusFader" id="{baacf4f2-4fa0-4b68-b458-25f6d680b442}" />
+	<object class="FlangerEffect" id="{5822c4a7-8c2d-4d43-89b0-1989c227bdca}">
+		<property name="rate">
+			<value>0.620000005</value>
+		</property>
+		<property name="mix">
+			<value>29</value>
+		</property>
+	</object>
+	<object class="PitchShifterEffect" id="{fb04b4e6-cb37-4dcb-870b-0e5729aba00e}">
+		<property name="pitch">
+			<value>1.04999995</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{b1f0175e-7bed-411f-9a92-aa0f3f7c59d2}</destination>
+		</relationship>
+	</object>
 	<object class="SingleSound" id="{8915d9fa-02d1-4cce-9d62-73068b8aa186}">
 		<relationship name="audioFile">
 			<destination>{ff49abf4-5543-46b1-81c2-70f403ab1f96}</destination>
@@ -145,5 +175,13 @@
 		<relationship name="audioFile">
 			<destination>{682bc933-aa47-4d22-ab21-6f586dba179e}</destination>
 		</relationship>
+	</object>
+	<object class="RandomizerModulator" id="{b1f0175e-7bed-411f-9a92-aa0f3f7c59d2}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>9</value>
+		</property>
 	</object>
 </objects>

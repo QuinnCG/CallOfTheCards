@@ -46,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: SpecialPlaySound.Path
-      value: event:/SFX/Card Special/Witch 2
+      value: event:/SFX/Card Special/CouldronWitch
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <Types>k__BackingField
@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <BaseHP>k__BackingField
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: SpecialPlaySound.Guid.Data1
@@ -186,5 +186,25 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1824729253579824553, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1863895645895855148}
   m_SourcePrefab: {fileID: 100100000, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+--- !u!1 &8457659504195766351 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1824729253579824553, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+  m_PrefabInstance: {fileID: 7785906907438912998}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1863895645895855148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8457659504195766351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af82866b518e181458d8eb131586971a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

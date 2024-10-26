@@ -52,7 +52,8 @@ PrefabInstance:
       propertyPath: m_text
       value: '<b>Ranged</b>
 
-        Deal 1 damage to any monster that enters play.'
+        Deal 1 damage to any werewolf or vampire that
+        enters play.'
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_fontSize

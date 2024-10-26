@@ -113,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: SpecialPlaySound.Path
-      value: event:/SFX/Card Special/Zombie 3
+      value: event:/SFX/Card Special/FesteringZombie
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <Types>k__BackingField

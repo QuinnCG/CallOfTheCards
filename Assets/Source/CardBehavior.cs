@@ -24,6 +24,7 @@ namespace Quinn
 
 		public void Play() => OnPlay();
 		public void Kill() => OnDeath();
+		public void Attack(Card target) => OnAttack(target);
 
 		public void SetParentCard(Card card) => Card = card;
 
@@ -31,6 +32,7 @@ namespace Quinn
 
 		protected virtual void OnPlay() { }
 		protected virtual void OnDeath() { }
+		protected virtual void OnAttack(Card target) { }
 
 		protected Card[] GetCardsFromBoard(Filter filter)
 		{

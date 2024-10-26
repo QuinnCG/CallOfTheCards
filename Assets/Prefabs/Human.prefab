@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4502184409973848036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5283393422020178149}
+  - component: {fileID: 5291800169733946154}
+  m_Layer: 0
+  m_Name: Human
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5283393422020178149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502184409973848036}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -6.39, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5291800169733946154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502184409973848036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f2bd49d8fd53734cbb65a5879a1a15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BaseLife: 20
+  IsHuman: 1
+  <AttackPoint>k__BackingField: {fileID: 0}
+  LifeUI: {fileID: 0}
+  HurtSound:
+    Guid:
+      Data1: 2135889690
+      Data2: 1279761022
+      Data3: 290517945
+      Data4: -2006914070
+    Path: event:/SFX/PlayerHurt
+  GainLifeSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  IsDeathVictory: 0
+  DrawSound:
+    Guid:
+      Data1: -1704065112
+      Data2: 1283955043
+      Data3: 1357384325
+      Data4: 1106142243
+    Path: event:/SFX/CardDraw
+  ShuffleSound:
+    Guid:
+      Data1: 910470333
+      Data2: 1075969330
+      Data3: 404073351
+      Data4: -182280849
+    Path: event:/SFX/DeckShuffle
+  Hand: {fileID: 0}
+  CardSpawn: {fileID: 0}
+  DrawInterval: 0.07
+  DefaultHandSize: 6
+  MaxHandSize: 7
+  Rank: {fileID: 0}
+  Deck:
+  - {fileID: 5363145915956842016, guid: 5b8f93bb2a496594d91a9bf42aa4bedf, type: 3}
+  - {fileID: 9132676931897840200, guid: 9ce567f8a0e43b94d9529cd08f7fa6a4, type: 3}
+  - {fileID: 8507807578004458634, guid: ea40b8b7e1901644189dbc83ded266b8, type: 3}
+  - {fileID: 6959417546301438624, guid: a8f354d95a0a7a344ae9ff7215a5b0b1, type: 3}
+  - {fileID: 6959417546301438624, guid: a8f354d95a0a7a344ae9ff7215a5b0b1, type: 3}
+  - {fileID: 1603085151103131935, guid: 8ba770349d1526e409b83abad5202bb3, type: 3}
+  - {fileID: 1603085151103131935, guid: 8ba770349d1526e409b83abad5202bb3, type: 3}
+  - {fileID: 1603085151103131935, guid: fdbb61d599433664b919040bd1d5a1c1, type: 3}
+  - {fileID: 9132676931897840200, guid: 9ce567f8a0e43b94d9529cd08f7fa6a4, type: 3}
+  - {fileID: 1603085151103131935, guid: 8ba770349d1526e409b83abad5202bb3, type: 3}
+  - {fileID: 8476686044680912503, guid: c73316fbe63ceb64d8f30fe2faab2dd2, type: 3}
+  - {fileID: 7658460973566522794, guid: 938442d2e8230ff488233a4d376e117b, type: 3}

@@ -1,5 +1,7 @@
 ﻿using FMODUnity;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -73,6 +75,21 @@ namespace Quinn
 		protected GameObject GetRandomPrefab(params GameObject[] deck)
 		{
 			return deck[Random.Range(0, deck.Length)];
+		}
+
+		protected Card GetRandomCard(IEnumerable<CardSetEntry> set)
+		{
+			float sumTotal = set.Sum(x => x.Weight);
+
+			foreach (var entry in set)
+			{
+				if (Random.value < entry.Weight / sumTotal)
+				{
+					return entry.Card;
+				}
+			}
+
+			return set.ElementAt(Random.Range(0, set.Count() - 1)).Card;
 		}
 
 		protected async virtual void OnDeath()

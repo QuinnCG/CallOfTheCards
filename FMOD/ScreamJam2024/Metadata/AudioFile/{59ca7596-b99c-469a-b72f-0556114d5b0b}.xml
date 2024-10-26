@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{59ca7596-b99c-469a-b72f-0556114d5b0b}">
 		<property name="assetPath">
-			<value>Crusader_Play_03.ogg</value>
+			<value>SFX/Card Special/Crusader_Play_03.ogg</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>

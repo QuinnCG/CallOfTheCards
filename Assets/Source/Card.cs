@@ -52,7 +52,7 @@ namespace Quinn
 
 		public bool IsAttacking { get; private set; }
 		public bool IsExausted { get; private set; }
-		public bool IsDead => HP == 0;
+		public bool IsDead { get; private set; }
 		public bool IsPlaying { get; private set; }
 
 		public bool IsDragging { get; private set; }
@@ -269,6 +269,9 @@ namespace Quinn
 
 		public async void TakeDamage(int amount)
 		{
+			if (IsDead)
+				return;
+
 			HP -= amount;
 			EventManager.OnCardTakeDamage?.Invoke(this, amount);
 
@@ -284,6 +287,8 @@ namespace Quinn
 
 			if (gameObject != null && HP <= 0)
 			{
+				IsDead = true;
+
 				Space.Remove(this);
 				OnDeath();
 			}
@@ -333,7 +338,7 @@ namespace Quinn
 					Audio.Play(HurtSound);
 				}
 
-				if (HasLifesteal)
+				if (HasLifesteal && !IsDead)
 					Heal(DP);
 
 				EventManager.OnCardDealDamage?.Invoke(this, DP);
@@ -433,11 +438,18 @@ namespace Quinn
 
 			TurnManager.UnblockTurn(this);
 			IsPlaying = false;
+
+			IsHovered = false;
 		}
 
 		private void OnAttack(Card target)
 		{
 			EventManager.OnCardAttack?.Invoke(this, target);
+
+			foreach (var behaviour in _behaviors)
+			{
+				behaviour.Attack(target);
+			}
 		}
 
 		private async void OnDeath()
@@ -458,7 +470,6 @@ namespace Quinn
 			}
 
 			var canvasGroup = GetComponentInChildren<CanvasGroup>();
-
 			if (canvasGroup != null)
 			{
 				await canvasGroup.DOFade(0f, 0.3f)

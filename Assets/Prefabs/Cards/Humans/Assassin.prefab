@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <Cost>k__BackingField
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <Types>k__BackingField
@@ -42,18 +42,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <BaseDP>k__BackingField
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <BaseHP>k__BackingField
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
       value: '<b>Lifesteal</b>
 
         On play, kill a random monarch in play then
-        gain life equal to their HP.'
+        you gain life equal to their HP.'
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_fontSize
@@ -63,9 +63,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Assassin
       objectReference: {fileID: 0}
+    - target: {fileID: 2455631127239347774, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_Name
+      value: HPHelp
+      objectReference: {fileID: 0}
     - target: {fileID: 4684232503665585183, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
-      value: 4
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288427310737832126, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_Name
+      value: DPHelp
       objectReference: {fileID: 0}
     - target: {fileID: 5295050199362945486, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -111,9 +119,13 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1.048
       objectReference: {fileID: 0}
+    - target: {fileID: 5732328934241942516, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 103.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6672861700185665677, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6770887018441718251, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -135,9 +147,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7143627891489584316, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7310419636431381577, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341332379327107932, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_Name
+      value: ManaHelp
       objectReference: {fileID: 0}
     - target: {fileID: 8470401147029508378, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_AnchorMax.y
