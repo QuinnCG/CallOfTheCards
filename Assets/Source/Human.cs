@@ -65,7 +65,6 @@ namespace Quinn
 			if (Rank.Cards.Any(x => !x.IsExausted)) return;
 			if (Hand.Cards.Any(x => x.CanAfford(Mana))) return;
 
-			Debug.Log($"Auto passing human turn. Are any cards to play: {Hand.Cards.Any(x => x.CanAfford(Mana))}; are any cards to command: {Rank.Cards.Any(x => !x.IsExausted)}.");
 			Pass();
 		}
 

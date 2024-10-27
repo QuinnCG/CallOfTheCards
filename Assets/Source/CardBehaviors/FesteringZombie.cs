@@ -28,5 +28,20 @@ namespace Quinn.CardBehaviors
 				Audio.Play(ProcSound);
 			}
 		}
+
+		public override int GetAIPlayScore()
+		{
+			int score = -2;
+
+			foreach (var card in GetCardsFromBoard(Filter.All))
+			{
+				if (card.HasType(CardType.Zombie))
+				{
+					score += 4;
+				}
+			}
+
+			return score;
+		}
 	}
 }

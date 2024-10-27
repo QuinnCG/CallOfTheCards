@@ -158,7 +158,7 @@ PrefabInstance:
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
       value: 'On play, the very next player to play a card will first kill all their
-        units.
+        units, except for this card.
 
         <i><color=#999999>Not the brightest...</color><i>'
       objectReference: {fileID: 0}
@@ -241,6 +241,14 @@ PrefabInstance:
     - target: {fileID: 5295050199362945486, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463349086160760038, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.1646
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463349086160760038, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.9944
       objectReference: {fileID: 0}
     - target: {fileID: 6672861700185665677, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text

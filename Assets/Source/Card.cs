@@ -87,20 +87,17 @@ namespace Quinn
 
 		private void Update()
 		{
+			// Show help text.
 			Help.SetActive(IsHovered && !IsDragging && !IsAttacking && Space is Rank);
 
-			// Metal shine effect.
+
+			// Metallic effect.
 			float xOffset = transform.localRotation.eulerAngles.y;
 			if (xOffset > 180f) xOffset = 360f - xOffset;
+			//xOffset /= 4f;
 
 			Art.material.SetFloat("_XOffset", xOffset);
 
-			float ret = Art.material.GetFloat("_XOffset");
-
-			if (IsOwnerHuman && Space is Rank)
-			{
-				Debug.Log($"Card ({gameObject.name})'s offset set to {xOffset}. Actual offset is now: {ret}.");
-			}
 
 			// Use self transform as default.
 			transform.GetPositionAndRotation(out Vector3 targetPos, out Quaternion targetRot);
@@ -169,7 +166,7 @@ namespace Quinn
 
 		public void OnPointerEnter(PointerEventData eventData)
 		{
-			if (IsHovered || IsAnyDragged)
+			if (IsHovered || IsAnyDragged || IsDragging)
 				return;
 
 			IsHovered = true;
@@ -207,6 +204,8 @@ namespace Quinn
 		{
 			if (IsAnyDragged)
 				return;
+
+			transform.DOScale(1f, 0.2f).SetEase(Ease.OutCubic);
 
 			// Can only drag cards you own.
 			// You can't drop them if its not your turn but you can still drag them.
@@ -454,12 +453,12 @@ namespace Quinn
 			Audio.Play(PlaySound);
 			Audio.Play(SpecialPlaySound);
 
-			EventManager.OnCardPlay?.Invoke(this);
-
 			foreach (var behavior in _behaviors)
 			{
 				behavior.Play();
 			}
+
+			EventManager.OnCardPlay?.Invoke(this);
 
 			TurnManager.UnblockTurn(this);
 			IsPlaying = false;
@@ -490,13 +489,13 @@ namespace Quinn
 				return;
 			}
 
-			EventManager.OnCardDie?.Invoke(this);
 			IsExausted = true;
 
 			foreach (var behavior in _behaviors)
 			{
 				behavior.Kill();
 			}
+			EventManager.OnCardDie?.Invoke(this);
 
 			var canvasGroup = GetComponentInChildren<CanvasGroup>();
 			if (canvasGroup != null)

@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <Cost>k__BackingField
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: SpecialPlaySound.Path
@@ -88,7 +88,7 @@ PrefabInstance:
       propertyPath: m_text
       value: '<b>Lifesteal</b>
 
-        Gain <color=#44ff22>1 life</color> every
+        Gain <color=#44ff22>5 life</color> every
         time a vampire is played.'
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
@@ -157,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6672861700185665677, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6770887018441718251, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_AnchorMax.y

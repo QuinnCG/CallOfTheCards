@@ -32,24 +32,23 @@ namespace Quinn.CardBehaviors
 			}
 		}
 
-		private async void OnCardPlay(Card playedCard)
+		private void OnCardPlay(Card playedCard)
 		{
+			if (playedCard == Card)
+				return;
+
 			Card.TriggerProcVisuals();
 			Audio.Play(AbilityProcSound);
 
-			TurnManager.BlockTurn(this);
-			await Awaitable.WaitForSecondsAsync(0.3f);
-
 			foreach (var boardCard in GetCardsFromBoard(Filter.All))
 			{
-				if (boardCard != playedCard && boardCard.IsOwnerHuman == playedCard.IsOwnerHuman)
+				if (boardCard != playedCard && boardCard.IsOwnerHuman == playedCard.IsOwnerHuman && boardCard != Card)
 				{
-					playedCard.Kill();
+					boardCard.Kill();
 				}
 			}
 
 			Unsub();
-			TurnManager.UnblockTurn(this);
 		}
 	}
 }
