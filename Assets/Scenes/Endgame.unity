@@ -836,6 +836,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9eadee8d11c90f43b03bca5bbe403e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HoverSound:
+    Guid:
+      Data1: 978762227
+      Data2: 1317166337
+      Data3: -1371742302
+      Data4: -1350376068
+    Path: event:/SFX/ButtonHover
+  ClickSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &1339389287
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,6 +1132,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9eadee8d11c90f43b03bca5bbe403e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HoverSound:
+    Guid:
+      Data1: 978762227
+      Data2: 1317166337
+      Data3: -1371742302
+      Data4: -1350376068
+    Path: event:/SFX/ButtonHover
+  ClickSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &1374393141
 GameObject:
   m_ObjectHideFlags: 0

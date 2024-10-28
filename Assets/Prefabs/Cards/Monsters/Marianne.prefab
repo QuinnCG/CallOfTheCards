@@ -49,12 +49,32 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: DeathSound.Path
+      value: event:/SFX/Card Special/Marianne/Marianne_Death
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <Cost>k__BackingField
-      value: 4
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: DeathSound.Guid.Data1
+      value: -1083052929
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: DeathSound.Guid.Data2
+      value: 1085942346
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: DeathSound.Guid.Data3
+      value: -273741394
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: DeathSound.Guid.Data4
+      value: 504323416
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: SpecialPlaySound.Path
-      value: event:/SFX/Card Special/Marianne
+      value: event:/SFX/Card Special/Marianne/Marianne_Play
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <Types>k__BackingField
@@ -62,27 +82,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <BaseDP>k__BackingField
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <BaseHP>k__BackingField
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: SpecialPlaySound.Guid.Data1
-      value: 601680373
+      value: 1294545467
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: SpecialPlaySound.Guid.Data2
-      value: 1179449990
+      value: 1285893950
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: SpecialPlaySound.Guid.Data3
-      value: 1131278220
+      value: -1476513117
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: SpecialPlaySound.Guid.Data4
-      value: -1168507940
+      value: -850455800
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
@@ -101,7 +121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4684232503665585183, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4971705895115490485, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_SizeDelta.x
@@ -181,7 +201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7310419636431381577, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8470401147029508378, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -228,3 +248,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3244cbcfc2ef74da2841f50a2a2a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ProcSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{4b8e3b87-d3c2-4aea-a80e-d153835921ea}">
+		<property name="assetPath">
+			<value>Marianne_Play_01.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.56922902494331062</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{1541a2aa-33f1-48fa-8084-690972966136}</destination>
+		</relationship>
+	</object>
+</objects>

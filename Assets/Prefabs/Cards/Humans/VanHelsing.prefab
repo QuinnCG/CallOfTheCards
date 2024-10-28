@@ -37,8 +37,32 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: DeathSound.Path
+      value: event:/SFX/Card Special/Van Helsing/VanHelsing_Death
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <Cost>k__BackingField
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: DeathSound.Guid.Data1
+      value: -1484371151
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: DeathSound.Guid.Data2
+      value: 1249668133
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: DeathSound.Guid.Data3
+      value: 1047570825
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: DeathSound.Guid.Data4
+      value: -209855365
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Path
+      value: event:/SFX/Card Special/Van Helsing/VanHelsing_Play
       objectReference: {fileID: 0}
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <Types>k__BackingField
@@ -47,6 +71,22 @@ PrefabInstance:
     - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: <BaseDP>k__BackingField
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data1
+      value: 1060032110
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data2
+      value: 1300892591
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data3
+      value: -2056951113
+      objectReference: {fileID: 0}
+    - target: {fileID: 384422121633145143, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
+      propertyPath: SpecialPlaySound.Guid.Data4
+      value: 231151916
       objectReference: {fileID: 0}
     - target: {fileID: 768877427130131037, guid: e1d7d82a45a76c64d9265f10b56746f2, type: 3}
       propertyPath: m_text
@@ -172,3 +212,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4385a5310c03a6842a2f902c7dfa7225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ProcSound:
+    Guid:
+      Data1: -679635560
+      Data2: 1300005248
+      Data3: 673244859
+      Data4: 1229480877
+    Path: event:/SFX/Card Special/Van Helsing/VanHelsing_Proc

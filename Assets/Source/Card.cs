@@ -291,6 +291,7 @@ namespace Quinn
 				IsDead = true;
 
 				Space.Remove(this);
+				Audio.Play(DeathSound);
 				OnDeath();
 			}
 		}
@@ -496,8 +497,6 @@ namespace Quinn
 				behavior.Kill();
 			}
 			EventManager.OnCardDie?.Invoke(this);
-
-			Audio.Play(DeathSound);
 
 			var canvasGroup = GetComponentInChildren<CanvasGroup>();
 			if (canvasGroup != null)

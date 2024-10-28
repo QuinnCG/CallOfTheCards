@@ -1,7 +1,12 @@
-﻿namespace Quinn.CardBehaviors
+﻿using FMODUnity;
+
+namespace Quinn.CardBehaviors
 {
 	public class VanHelsing : CardBehavior
 	{
+		[UnityEngine.SerializeField]
+		private EventReference ProcSound;
+
 		protected override void OnPlay()
 		{
 			EventManager.OnCardPlay += OnCardPlay;
@@ -21,6 +26,8 @@
 			{
 				card.TakeDamage(1);
 				Card.TriggerProcVisuals();
+
+				Audio.Play(ProcSound);
 			}
 		}
 	}

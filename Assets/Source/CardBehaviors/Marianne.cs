@@ -1,9 +1,13 @@
-﻿using System.Linq;
+﻿using FMODUnity;
+using System.Linq;
 
 namespace Quinn.CardBehaviors
 {
 	public class Marianne : CardBehavior
 	{
+		[UnityEngine.SerializeField]
+		private EventReference ProcSound;
+
 		protected override void OnPlay()
 		{
 			EventManager.OnCardPlay += OnCardPlay;
@@ -23,6 +27,8 @@ namespace Quinn.CardBehaviors
 			{
 				Card.Player.Heal(5);
 				Card.TriggerProcVisuals();
+
+				Audio.Play(ProcSound);
 			}
 		}
 
