@@ -28,7 +28,7 @@ namespace Quinn
 		private static bool _hasTutorialHidden;
 
 		private readonly List<ManaCrystal> _manaCrystals = new();
-		private CancellationTokenSource _replenishToken;
+		private CancellationTokenSource _replenishToken = new();
 
 		private void Awake()
 		{

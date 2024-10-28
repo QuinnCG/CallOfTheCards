@@ -1,4 +1,6 @@
-﻿using FMODUnity;
+﻿using DG.Tweening;
+using FMODUnity;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Quinn.CardBehaviors
@@ -7,6 +9,8 @@ namespace Quinn.CardBehaviors
 	{
 		[SerializeField]
 		private EventReference AbilityProcSound;
+		[SerializeField, Required]
+		private Transform Turkey;
 
 		private bool _isSubbed;
 
@@ -14,11 +18,13 @@ namespace Quinn.CardBehaviors
 		{
 			EventManager.OnCardPlay += OnCardPlay;
 			_isSubbed = true;
+			AnimateTurkey();
 		}
 
 		protected override void OnDeath()
 		{
 			Unsub();
+			AnimateTurkey();
 		}
 
 		public override int GetAIPlayScore() => 8;
@@ -39,6 +45,7 @@ namespace Quinn.CardBehaviors
 
 			Card.TriggerProcVisuals();
 			Audio.Play(AbilityProcSound);
+			AnimateTurkey();
 
 			foreach (var boardCard in GetCardsFromBoard(Filter.All))
 			{
@@ -48,7 +55,15 @@ namespace Quinn.CardBehaviors
 				}
 			}
 
+			Rank.AI.Layout();
+			Rank.Human.Layout();
+
 			Unsub();
+		}
+
+		private void AnimateTurkey()
+		{
+			Turkey.DOPunchScale(Vector3.one * 1.2f, 0.2f).SetLoops(3);
 		}
 	}
 }

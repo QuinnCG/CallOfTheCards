@@ -497,6 +497,8 @@ namespace Quinn
 			}
 			EventManager.OnCardDie?.Invoke(this);
 
+			Audio.Play(DeathSound);
+
 			var canvasGroup = GetComponentInChildren<CanvasGroup>();
 			if (canvasGroup != null)
 			{
