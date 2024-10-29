@@ -839,7 +839,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinScale: 7
-  ScaleRate: 0.5
+  ScaleRate: 0.8
+  SmoothTime: 0.7
 --- !u!224 &392656945 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2871407412003845297, guid: 0b83cf21af8e0f84499bd4fdfe71888f, type: 3}
@@ -1606,7 +1607,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 30, y: 40.51001}
-  m_SizeDelta: {x: 236.06, y: 42.99}
+  m_SizeDelta: {x: 396.79, y: 42.99}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1284678687
 MonoBehaviour:
@@ -2199,6 +2200,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e2247ff786d3574f8fd4be533afaa9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TurnPassSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  LayoutInterval: 0.1
   Ranks:
   - {fileID: 2107712139}
   - {fileID: 722243854}
@@ -2977,6 +2986,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 576218140}
     - target: {fileID: 5291800169733946154, guid: c968a5e472e39ad4d828d9388d69ae00, type: 3}
+      propertyPath: GainLifeSound.Path
+      value: event:/SFX/PlayerHeal
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291800169733946154, guid: c968a5e472e39ad4d828d9388d69ae00, type: 3}
+      propertyPath: GainLifeSound.Guid.Data1
+      value: 600308693
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291800169733946154, guid: c968a5e472e39ad4d828d9388d69ae00, type: 3}
+      propertyPath: GainLifeSound.Guid.Data2
+      value: 1215446029
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291800169733946154, guid: c968a5e472e39ad4d828d9388d69ae00, type: 3}
+      propertyPath: GainLifeSound.Guid.Data3
+      value: 1450607549
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291800169733946154, guid: c968a5e472e39ad4d828d9388d69ae00, type: 3}
+      propertyPath: GainLifeSound.Guid.Data4
+      value: -1634699627
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291800169733946154, guid: c968a5e472e39ad4d828d9388d69ae00, type: 3}
       propertyPath: <AttackPoint>k__BackingField
       value: 
       objectReference: {fileID: 1424217873}
@@ -3319,6 +3348,26 @@ PrefabInstance:
       propertyPath: HumanRank
       value: 
       objectReference: {fileID: 722243854}
+    - target: {fileID: 6769780910239789942, guid: 62f514d21d7e2834884ee8cb2ee9d3eb, type: 3}
+      propertyPath: GainLifeSound.Path
+      value: event:/SFX/PlayerHeal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769780910239789942, guid: 62f514d21d7e2834884ee8cb2ee9d3eb, type: 3}
+      propertyPath: GainLifeSound.Guid.Data1
+      value: 600308693
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769780910239789942, guid: 62f514d21d7e2834884ee8cb2ee9d3eb, type: 3}
+      propertyPath: GainLifeSound.Guid.Data2
+      value: 1215446029
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769780910239789942, guid: 62f514d21d7e2834884ee8cb2ee9d3eb, type: 3}
+      propertyPath: GainLifeSound.Guid.Data3
+      value: 1450607549
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769780910239789942, guid: 62f514d21d7e2834884ee8cb2ee9d3eb, type: 3}
+      propertyPath: GainLifeSound.Guid.Data4
+      value: -1634699627
+      objectReference: {fileID: 0}
     - target: {fileID: 6769780910239789942, guid: 62f514d21d7e2834884ee8cb2ee9d3eb, type: 3}
       propertyPath: <AttackPoint>k__BackingField
       value: 

@@ -49,14 +49,11 @@ namespace Quinn.CardBehaviors
 
 			foreach (var boardCard in GetCardsFromBoard(Filter.All))
 			{
-				if (boardCard != playedCard && boardCard.IsOwnerHuman == playedCard.IsOwnerHuman && boardCard != Card)
+				if (boardCard != playedCard && boardCard.IsOwnerHuman == playedCard.IsOwnerHuman)
 				{
 					boardCard.Kill();
 				}
 			}
-
-			Rank.AI.Layout();
-			Rank.Human.Layout();
 
 			Unsub();
 		}

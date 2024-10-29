@@ -72,6 +72,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{23196c0f-9ed7-48da-9f4b-3773cdcb4caa}">
+		<property name="volume">
+			<value>-2</value>
+		</property>
 		<relationship name="modulators">
 			<destination>{2ed2b08c-8659-49b1-8f0b-3434b0b615b7}</destination>
 		</relationship>
@@ -101,7 +104,7 @@
 			<value>volume</value>
 		</property>
 		<property name="amount">
-			<value>6</value>
+			<value>4</value>
 		</property>
 	</object>
 	<object class="MixerBusEffectChain" id="{07969d2d-9db9-43bb-83c6-702920a54384}">

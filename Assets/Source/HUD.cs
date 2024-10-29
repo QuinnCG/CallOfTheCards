@@ -100,31 +100,35 @@ namespace Quinn
 
 		private async void OnManaReplenish(bool maxIncreased)
 		{
-			foreach (var crystal in _manaCrystals)
+			try
 			{
-				Destroy(crystal.gameObject);
-			}
-
-			_manaCrystals.Clear();
-
-			for (int i = 0; i < Human.Instance.MaxMana; i++)
-			{
-				var instance = Instantiate(ManaCrystalPrefab, Mana);
-				var c = instance.GetComponent<ManaCrystal>();
-
-				_manaCrystals.Add(c);
-			}
-
-			foreach (var crystal in _manaCrystals)
-			{
-				crystal.Replenish();
-				await Awaitable.WaitForSecondsAsync(ManaCrystalReplenishInterval, _replenishToken.Token);
-
-				if (_replenishToken.Token.IsCancellationRequested)
+				foreach (var crystal in _manaCrystals)
 				{
-					break;
+					Destroy(crystal.gameObject);
+				}
+
+				_manaCrystals.Clear();
+
+				for (int i = 0; i < Human.Instance.MaxMana; i++)
+				{
+					var instance = Instantiate(ManaCrystalPrefab, Mana);
+					var c = instance.GetComponent<ManaCrystal>();
+
+					_manaCrystals.Add(c);
+				}
+
+				foreach (var crystal in _manaCrystals)
+				{
+					crystal.Replenish();
+					await Awaitable.WaitForSecondsAsync(ManaCrystalReplenishInterval, _replenishToken.Token);
+
+					if (_replenishToken.Token.IsCancellationRequested)
+					{
+						break;
+					}
 				}
 			}
+			catch { }
 		}
 
 		private void OnManaConsume(int amount)

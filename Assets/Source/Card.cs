@@ -67,6 +67,8 @@ namespace Quinn
 		private float _xRot;
 		private float _xRotVel;
 
+		private bool _executedDeathSequence;
+
 		private void Awake()
 		{
 			_behaviors = GetComponentsInChildren<CardBehavior>();
@@ -499,11 +501,16 @@ namespace Quinn
 			EventManager.OnCardDie?.Invoke(this);
 
 			var canvasGroup = GetComponentInChildren<CanvasGroup>();
-			if (canvasGroup != null)
+			if (!_executedDeathSequence)
 			{
-				await canvasGroup.DOFade(0f, 0.3f)
-					.SetEase(Ease.OutCubic)
-					.AsyncWaitForCompletion();
+				_executedDeathSequence = true;
+
+				if (canvasGroup != null)
+				{
+					await canvasGroup.DOFade(0f, 0.3f)
+						.SetEase(Ease.OutCubic)
+						.AsyncWaitForCompletion();
+				}
 			}
 
 			if (Space != null)

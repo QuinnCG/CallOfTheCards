@@ -84,7 +84,9 @@ namespace Quinn
 			_isIdle = false;
 
 			_image.sprite = Charged;
-			await transform.DOPunchScale(Vector3.one * MaxScale, 0.2f).AsyncWaitForCompletion();
+			var tween = transform.DOPunchScale(Vector3.one * MaxScale, 0.2f);
+			tween.onUpdate += () => { if (transform != null) tween.Kill(); };
+			await tween.AsyncWaitForCompletion();
 
 			_isIdle = true;
 

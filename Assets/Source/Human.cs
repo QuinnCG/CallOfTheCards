@@ -27,7 +27,7 @@ namespace Quinn
 		[SerializeField, AssetsOnly]
 		private GameObject[] Deck;
 
-		public int MaxMana { get; private set; }
+		public int MaxMana { get; private set; } = 1;
 		public int Mana { get; private set; }
 
 		public event Action<bool> OnManaReplenish;

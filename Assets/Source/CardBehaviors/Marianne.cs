@@ -20,10 +20,7 @@ namespace Quinn.CardBehaviors
 
 		private void OnCardPlay(Card card)
 		{
-			if (!InPlay)
-				return;
-
-			if (card != Card && card.HasType(CardType.Vampire))
+			if (card != Card && card != Card && card.HasType(CardType.Vampire))
 			{
 				Card.Player.Heal(5);
 				Card.TriggerProcVisuals();

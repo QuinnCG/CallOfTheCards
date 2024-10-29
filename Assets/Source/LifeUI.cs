@@ -25,6 +25,7 @@ namespace Quinn
 		private void OnDestroy()
 		{
 			transform.DOKill();
+			DOTween.Kill(transform);
 		}
 	}
 }

@@ -61,7 +61,7 @@ namespace Quinn
 
 					if (await Play())
 					{
-						await Awaitable.WaitForSecondsAsync(0.2f);
+						await Awaitable.WaitForSecondsAsync(0.7f);
 					}
 
 					AIRank.Layout();
@@ -203,7 +203,7 @@ namespace Quinn
 					continue;
 				}
 
-				int score = card.DP + card.HP - (card.Cost * 2);
+				int score = card.DP + card.HP - card.Cost;
 
 				if (card != null)
 				{
